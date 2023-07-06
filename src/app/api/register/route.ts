@@ -21,12 +21,19 @@ export async function POST(
             return new NextResponse('The password confirmation does not match', { status: 400})
         }
 
-        if (password.length || confirmPassword.length > 6) {
-            
+        if (password.length < 8 || confirmPassword.length < 8) {
+            return new NextResponse('The password is too weak', { status: 400})
         }
 
+        const validateEmail = () => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        };        
+
+        if (email )
+
         if (body.password === confirmPassword) {
-            const hashedPassword = await bcrypt.hash(password, 10);
+            const hashedPassword = await bcrypt.hash(password, 12);
         
         const user = await prisma?.user.create({
             data: {
