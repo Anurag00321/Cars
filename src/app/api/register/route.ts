@@ -2,52 +2,80 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from 'next/server';
+import { z, ZodError } from 'zod';
 
 const prisma = new PrismaClient()
 
-export async function POST(
+export async function POST( 
     request: Request
-    )    {
-        try {
-        const body = await request.json()
+    ) {
+  try {
+    const body = await request.json()
 
-        const { email, username, password, confirmPassword} = body;
+    const { email, username, password, confirmPassword } = body;
 
-        if (!email || !username || !password || !confirmPassword ) {
-            return new NextResponse('Missing credentials', { status: 400})
-        }
-
-        if (password !== confirmPassword) {
-            return new NextResponse('The password confirmation does not match', { status: 400})
-        }
-
-        if (password.length < 8 || confirmPassword.length < 8) {
-            return new NextResponse('The password is too weak', { status: 400})
-        }
-
-        const validateEmail = () => {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        };        
-
-        if (email )
-
-        if (body.password === confirmPassword) {
-            const hashedPassword = await bcrypt.hash(password, 12);
-        
-        const user = await prisma?.user.create({
-            data: {
-                email,
-                username,
-                hashedPassword
-            }
-        })
+    const schema = z.object({
+        email: z.string().email({ message: "Invalid email address" })
+      });
     
-    return NextResponse.json(user)
-    // res.status(200).json(user)
-    
-    }} catch (error) {
-        console.log(error)
-        return NextResponse.error
+    let errorMessage = '';
+    let errorPassword = '';
+    let errorEmail = '';
+      
+    const isValid = schema.safeParse({email})
+    if(isValid.success == false) {
+      errorEmail = 'Invalid email address.'
     }
+    console.log('results', isValid.success)
+
+    if (!email || !username || !password || !confirmPassword) {
+        errorMessage += 'Missing required credentials.'
+        // return new NextResponse('Missing credentials', { status: 400})
+    }
+
+    if (!email) {
+      errorEmail += 'Invalid/missing email address.'
+    }
+
+    if (password !== confirmPassword) {
+      errorPassword += 'The password confirmation does not match.';
+    }
+
+    if (password.length < 8 || confirmPassword.length < 8) {
+      errorPassword += 'The password has to be at least 8 characters.';
+    }
+
+    if (
+      errorPassword ===
+      "The password confirmation does not match.The password has to be at least 8 characters." ||
+      errorPassword ===
+      "The password has to be at least 8 characters.The password confirmation does not match. "
+    ) {
+      errorPassword = "";
+      errorPassword = "The password has to be at least 8 characters and match the password confirmation.";
+    }
+
+    if (errorPassword.length > 0 || errorMessage.length > 0 || errorEmail.length > 0) {
+      return await NextResponse.json(
+        { error: errorMessage, data: { password: errorPassword, email: errorEmail } },
+        { status: 400 }
+      );
+    }
+
+    if (body.password === body.confirmPassword) {
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+    const user = await prisma?.user.create({
+      data: {
+        email,
+        username,
+        hashedPassword
+      }
+    });
+
+    return NextResponse.json(user);
+    }} catch (error) {
+    console.log(error);
+    return NextResponse.error;
+  }
 }

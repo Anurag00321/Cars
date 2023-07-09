@@ -3,6 +3,8 @@ import { useCallback, useState } from "react";
 // import { XCircleIcon } from '@heroicons/react/20/solid'
 import axios from "axios"
 import { NextResponse } from 'next/server';
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export const Register = () => {
 
@@ -18,10 +20,20 @@ export const Register = () => {
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
+
+  const router = useRouter();
+
+  const resetState = () => {
+    setError(""),
+    setEmailError(""),
+    setPasswordError(""),
+    setPasswordConfirmError("")
+  };
   
   const handleRegister = useCallback(async () => {
-    setIsLoading(true)
     try {
+      resetState()
+      setIsLoading(true)
         await axios.post('/api/register', {
         email,
         username,
@@ -29,9 +41,29 @@ export const Register = () => {
         confirmPassword
     })
     } catch (error: any) {
-      console.log(NextResponse)
-      return NextResponse.error
-      setError(error)
+    setIsLoading(false)
+    const { errorData } = error.response
+    const { data } = error.response.data;
+    setError(errorData)
+    setEmailError(data.email)
+    setPasswordError(data.password)
+    if(data.password.includes('confirmation')) {
+      setPasswordConfirmError(data.password)
+    }
+    console.log(error.response.data)
+    console.log(error.response.data.data)
+    console.log(data.email)
+    console.log(Response)
+    return NextResponse
+    } finally {
+      if (isLoading == true) {
+      const data = {email, username, password, confirmPassword};
+      signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
+      router.push('/')
+    }
     }
   }, [email, username, password, confirmPassword])
 
@@ -41,7 +73,7 @@ export const Register = () => {
     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up</h2>
   </div>
   <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-  {(emailError || passwordError) && (
+  {(emailError || passwordError || error) && (
     <div className="rounded-md bg-red-50 p-4">
       <div className="flex">
         <div className="flex-shrink-0">
@@ -128,9 +160,7 @@ export const Register = () => {
           </div>
       </div>
       <div>
-        {(isLoading)} && (
         <button onClick={handleRegister} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
-        )
       </div>
     </div>
     {/* <p className="mt-10 text-center text-sm text-gray-500">
