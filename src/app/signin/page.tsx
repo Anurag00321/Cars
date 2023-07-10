@@ -1,39 +1,58 @@
 'use client'
-import { SessionProvider, signIn, signOut, useSession  } from "next-auth/react";
+import { SessionProvider, signIn, signOut, useSession, SignInResponse  } from "next-auth/react";
 import { redirect } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import { useEffect, useState, FC } from "react";
-// import { XCircleIcon, ExclamationCircleIcon } from '@heroicons/react/20/solid'
+import { XCircleIcon, ExclamationCircleIcon } from '@heroicons/react/20/solid'
 
 export const SignIn: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false)
   
   const [username, setUsername] = useState("");
 
   const session = useSession()
   const router = useRouter();
-  
-  const handleLogin = async () => {
-        signIn('credentials', {
-            email,
-            password
-        })
-        if (session.status == "authenticated") {
-            try {
-            console.log('Signed in!')
-            return <p>Signed in as {session.data.user?.name}</p>
-            } catch (error) {
-                console.log(error)
-            } finally {
-                // redirect("http://localhost:3000")
-                router.push('/')
-            }
-        }        
-    };
 
+  const resetState = () => {
+    setError(""),
+    setEmailError(""),
+    setPasswordError("")
+  };
+
+  const handleLogin = async () => {
+    setIsLoading(true)
+    resetState();
+      signIn('credentials', {
+          email,
+          password,
+          redirect: false
+      }).then((callback) => {
+          if (callback?.error) {
+            if(callback.error.includes('credentials')) {
+              setError(callback.error)
+            }
+            if(callback.error.includes('Email')){
+              setEmailError(callback.error)
+            }
+            if(callback.error.includes('password')){
+              setPasswordError(callback.error)
+            }
+            console.log('SignIn Error:', callback.error)
+          }
+          else if (callback?.ok) {
+            console.log('Logged in:', callback.ok)
+            router.push('/')
+          }
+        })
+        .finally(() => setIsLoading(false))
+      }
+  
   const handleSignOut = () => {
     signOut;
     router.push('/')
@@ -41,21 +60,22 @@ export const SignIn: FC = () => {
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-white">
-      <h1>Hi, {username}!</h1>
+    {username  &&<h1>Hi, {username}!</h1>}
   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-    {(emailError || passwordError) && (
+    {(emailError || passwordError || error) && (
     <div className="rounded-md bg-red-50 p-4">
       <div className="flex">
         <div className="flex-shrink-0">
-          {/* <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" /> */}
+          <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
         </div>
         <div className="ml-3">
           <h3 className="text-sm font-medium text-red-800">There were errors with your submission</h3>
           <div className="mt-2 text-sm text-red-700">
             <ul role="list" className="list-disc pl-5 space-y-1">
+              {error && <li>{error}</li>}
               {emailError && <li>{emailError}</li>}
               {passwordError && <li>{passwordError}</li>}
-            </ul>
+            </ul> 
           </div>
         </div>
       </div>

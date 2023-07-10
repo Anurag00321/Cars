@@ -1,6 +1,6 @@
 'use client'
 import { useCallback, useState } from "react";
-// import { XCircleIcon } from '@heroicons/react/20/solid'
+import { XCircleIcon } from '@heroicons/react/20/solid'
 import axios from "axios"
 import { NextResponse } from 'next/server';
 import { useRouter } from "next/navigation";
@@ -49,13 +49,7 @@ export const Register = () => {
     setPasswordError(data.password)
     if(data.password.includes('confirmation')) {
       setPasswordConfirmError(data.password)
-    }
-    console.log(error.response.data)
-    console.log(error.response.data.data)
-    console.log(data.email)
-    console.log(Response)
-    return NextResponse
-    } finally {
+    }} finally {
       if (isLoading == true) {
       const data = {email, username, password, confirmPassword};
       signIn('credentials', {
@@ -77,7 +71,7 @@ export const Register = () => {
     <div className="rounded-md bg-red-50 p-4">
       <div className="flex">
         <div className="flex-shrink-0">
-          {/* <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" /> */}
+          <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
         </div>
         <div className="ml-3">
           <h3 className="text-sm font-medium text-red-800">There were errors with your submission</h3>

@@ -18,7 +18,7 @@ export const authOptions: AuthOptions = ({
     },
     async authorize(credentials) {
         if (!credentials?.email || !credentials.password) {
-            throw new Error('Wrong email/password')
+            throw new Error('Invalid or missing credentials.')
         }
 
         const user = await prisma.user.findUnique({
@@ -27,8 +27,8 @@ export const authOptions: AuthOptions = ({
             }
         });
 
-        if(!user || !user?.hashedPassword) {
-            throw new Error('Invalid credentials')
+        if(!user) {
+          throw new Error('Email address not found. Please check your email or sign up for a new account.')
         }
 
         const isPasswordCorrect = await bcrypt.compare(
@@ -37,7 +37,7 @@ export const authOptions: AuthOptions = ({
         )
 
         if (!isPasswordCorrect) {
-            throw new Error('Wrong password')
+            throw new Error('Invalid password. Please make sure you entered the correct password for your account.')
         }
 
         return user
