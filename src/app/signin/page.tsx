@@ -25,7 +25,9 @@ export const SignIn: FC = () => {
     setPasswordError("")
   };
 
-  const handleLogin = async () => {
+
+  // make it async once possible
+  const handleLogin = () => {
     setIsLoading(true)
     resetState();
       signIn('credentials', {

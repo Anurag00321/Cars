@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import AuthContext from './context/AuthContext'
 import Navbar from '../../components/navbar'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
