@@ -10,14 +10,19 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 export const Navbar = () => {
 
-  const { data: session, status } = useSession()
+  const { data: session, status: status } = useSession()
   const sessionEmail = session?.user?.email as string
   const router = useRouter();
 
-  // const username = getUsername()
+  const [sessionStatus, setSessionStatus] = useState(false)
 
-//   const username = localStorage.getItem('username');
-//   const isUser = useSelector((state: RootState) => state.user.isUser);
+  useEffect(() => {
+    if (status === 'authenticated') {
+      setSessionStatus(true);
+    }
+  }, [status]);
+
+  // const username = getUsername()
   
   const handleLogout = () => {
     signOut()
@@ -32,32 +37,31 @@ export const Navbar = () => {
     </a> */}
     <div className="flex md:order-2">
     {/* <p className="text-white justify-items-center	pr-4">Welcome, {username}!</p> */}
-      {/* {!isUser */}
+      {!sessionStatus &&
           <button 
-          type="button" 
+          type="button"
+          onClick={() => router.push('/register')}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-4 md:mr-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >Sign up
           </button>
-        {/* } */}
-        {/* {!isUser && */}
-        
+        }
+        {!sessionStatus &&
         <button 
         type="button"
         onClick={() => router.push('/signin')}
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >Login
         </button>
-        
-        {/* } */}
-        {/* {isUser && */}
-        <div className="flex flex-row items-center">
-          <button onClick={handleLogout} 
-          type="button" 
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >Log out
-          </button>
-        </div>
-        {/* } */}
+        }
+        {sessionStatus &&
+          <div className="flex flex-row items-center">
+            <button onClick={handleLogout} 
+            type="button" 
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >Log out
+            </button>
+          </div>
+        }
         <button data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
           <span className="sr-only">Open main menu</span>
           <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>

@@ -12,7 +12,7 @@ export const Listings = async () => {
     return (
         <div>
             <ListingsList initialItems={listings} />
-            <ListingsFilter initialItems={listings}/>
+            {/* <ListingsFilter initialItems={listings}/> */}
             {/* <SelectMenu data={listings} field="model"/>
             <SelectMenu data={listings} field="title"/> */}
         </div>
