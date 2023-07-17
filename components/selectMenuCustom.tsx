@@ -3,6 +3,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
 interface Option {
+  // placeholder: string;
   id: string;
   label: string;
 }
@@ -18,8 +19,8 @@ export const SelectMenuCustom: React.FC<SelectMenuProps> = ({ options, field, va
   const [selected, setSelected] = useState(value || options[0].id);
 
   const handleItemClick = (option: Option) => {
-    setSelected(option.id);
-    onChange(option.id);
+    setSelected(option.label);
+    onChange(option.label);
   };
 
   return (

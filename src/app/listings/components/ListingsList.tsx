@@ -34,14 +34,23 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems}) => {
 
   const make = searchParams.get(`make`)
   const model = searchParams.get(`model`)
+  const year = searchParams.get(`year`)
   const price = searchParams.get(`price`)
+  const fuel = searchParams.get(`fuel`)
+  const transmission = searchParams.get(`transmission`)
 
   useEffect(() => {
     const filteredMake = items?.filter(item => item.make == make);
     const filteredModel = items?.filter(item => item.model == model);
+    const filteredFuel = items?.filter(item => item.fuel == fuel);
+    const filteredTransmission = items?.filter(item => item.transmission == transmission);
+    const filteredYear = items?.filter(item => Number(item.year) >= Number(year));
     const filteredPrice = items?.filter(item => Number(item.price) <= Number(price));
     make ? setFilteredItems(filteredMake) : ''
     model ? setFilteredItems(filteredModel) : ""
+    fuel ? setFilteredItems(filteredFuel) : ""
+    transmission ? setFilteredItems(filteredTransmission) : ""
+    year ? setFilteredItems(filteredYear) : ""
     price ? setFilteredItems(filteredPrice) : ""
   }, [items]);
 
@@ -60,6 +69,14 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems}) => {
     // console.log('query', query)
     // console.log('test', test)
     console.log(filteredItems)
+  }
+
+  if(filteredItems.length <= 0) {
+    return (
+      <div>
+        <p>No items found</p>
+      </div>
+    )
   }
 
   return (
@@ -82,8 +99,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems}) => {
   </div>
   </>
   )
- 
-  }
+}
 
 
 export default ListingsList

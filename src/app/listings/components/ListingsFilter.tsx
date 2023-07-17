@@ -11,6 +11,12 @@ interface ListingsFilterProps {
   initialItems: Listing[];
 }
 
+interface Option {
+  // placeholder: string;
+  id: string;
+  label: string;
+}
+
 export const FilterContext = createContext<Listing[]>([]);
 
 export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) => {
@@ -30,7 +36,6 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
   useEffect(() => {
     const filtered = items?.filter(item => item.make === make);
     setFilteredItems(filtered);
-    console.log(filteredItems)
   }, [make, items]);
 
   const handleMakeChange = (value: string) => {
@@ -38,42 +43,46 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
     setModel('')
     console.log(make)
     setFilteredItems(filteredItems.filter(item => item.make === value));
-    console.log(filteredItems)
   };
   
   const handleModelChange = (value: string) => {
     setModel('')
     setFilteredItems(items.filter(item => item.model === value));
     setModel(value);
-    // console.log(filteredItems)
-  };
-
-  const handleYearChange = (value: string) => {
-    setFilteredItems(filteredItems.filter(item => item.year === value));
-    setYear(value);
   };
 
   const handleFuelChange = (value: string) => {
+    if (value == "Fuel.."){
+      return null
+    }
     setFilteredItems(filteredItems.filter(item => item.fuel === value));
     setFuel(value);
+    console.log(value)
   };
 
-  const handleTransmissionChange = (value: string) => {
+  const handleTransmissionChange = (value: any) => {
+    if (value == "Transmission.."){
+      return null
+    }
     setFilteredItems(filteredItems.filter(item => item.transmission === value));
     setTransmission(value);
+    console.log(value)
+  };
+
+  const handleYearChange = (value: string) => {
+    if (value == "Year.."){
+      return null
+    }
+    setFilteredItems(filteredItems.filter(item => item.year === value));
+    setYear(value);
   };
 
   const handlePriceChange = (event: any) => {
     setPrice(event.target.value)
     setFilteredItems(filteredItems.filter(item => item.price === price));
-    // setPrice(value);
-    // console.log(event.target.value)
-    console.log(price)
   };
 
   const handleSubmit = () => {
-    // const filteredItemsStorage = localStorage.setItem('filteredItems', (filteredItems))
-    // console.log(filteredItems)
     const queryParams = new URLSearchParams('=');
     queryParams.append('make', make);
     queryParams.append('model', model);
@@ -85,35 +94,54 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
     router.push(`/listings?${queryParams.toString()}`);
   };  
 
-  const priceRange = [
-    { price: `0-5000`, id: '1'},
-    { price: `5001-10000`, id: '2'},
-    { price: `10001-20000`, id: '3'},
-    { price: `20001-50000`, id: '4'},
-    { price: `50001+`, id: '5'},
+  const transmissionType = [
+      // placeholder
+    { label: 'Transmission..', id: '0' },
+    { label: 'Manual', id: '1' },
+    { label: 'Automatic', id: '2' },
   ]
 
-  const years = [
-    { label: '1992', id: '1'},
-    { label: '1993', id: '2'},
-    { label: '1994', id: '3'},
+  const fuelType = [
+     // placeholder
+    { label: 'Fuel..', id: '0' },
+    { label: 'Petrol', id: '1' },
+    { label: 'Diesel', id: '2' },
+    { label: 'Electric', id: '3' },
+    { label: 'Hybrid', id: '4' },
   ]
 
+  const currentYear = new Date().getFullYear();
+  const yearsArr = Array.from({ length: 90 }, (_, index) => currentYear - index);
+
+  const yearsMap: Option[] = [
+    { id: '', label: 'Year..' }, // Placeholder
+    ...yearsArr.map((year, index) => ({
+      id: (year).toString(),
+      label: year.toString(),
+    })),
+  ];
+  
   return (
     <FilterContext.Provider value={filteredItems}>
     <div>
       <div className="bg-slate-950">
-        <div className="absolute inset-0 flex mx-auto max-w-5xl bg-slate-950 bg-opacity-50">
+        <div className="absolute inset-0 flex mx-auto max-w-5xl bg-slate-950 bg-opacity-50 rounded-2xl">
           <div className="flex flex-col flex-wrap gap-y-12 gap-x-10 justify-center max-w-3xl max-h-md px-16">
             <SelectMenu items={items} data={items} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange}/>
             <SelectMenu items={filteredItems} data={filteredItems} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange}/>
-            <SelectMenu items={items || filteredItems} data={items || filteredItems} field="year" value={year} onChange={handleYearChange} onClick={handleYearChange}/>
-            <SelectMenu items={items || filteredItems} data={items || filteredItems} field="fuel" value={fuel} onChange={handleFuelChange} onClick={handleFuelChange}/>
-            <SelectMenu items={items || filteredItems} data={items || filteredItems} field="transmission" value={transmission} onChange={handleTransmissionChange} onClick={handleTransmissionChange}/>
-            <SelectMenuCustom options={years} field="transmission" value={year} onChange={handleYearChange}/>
+            {/* <SelectMenu items={items || filteredItems} data={items || filteredItems} field="year" value={year} onChange={handleYearChange} onClick={handleYearChange}/> */}
+            {/* <SelectMenu items={items || filteredItems} data={items || filteredItems} field="fuel" value={fuel} onChange={handleFuelChange} onClick={handleFuelChange}/> */}
+            <SelectMenuCustom options={fuelType} field="fuel" value={fuel} onChange={handleFuelChange}/>
+            {/* <SelectMenu items={items || filteredItems} data={items || filteredItems} field="transmission" value={transmission} onChange={handleTransmissionChange} onClick={handleTransmissionChange}/> */}
+            <SelectMenuCustom options={transmissionType} field="transmission" value={transmission} onChange={handleTransmissionChange}/>
+            <SelectMenuCustom options={yearsMap} field="year" value={year} onChange={handleYearChange}/>
             {/* <SelectMenuPrice data={priceRange} field="price" value={price} onChange={handlePriceChange} onClick={handlePriceChange}/>
             <SelectMenu data={items || filteredItems} field="price" value={price} onChange={handlePriceChange} onClick={handlePriceChange}/> */}
-            <input placeholder="Max price.." value={price} onChange={handlePriceChange}></input>
+            <input
+            value={price}
+            onChange={handlePriceChange}
+            className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm sm:leading-6`}
+            />
             </div>
             <button className="bg-white my-60 px-4" onClick={handleSubmit}>Submit</button>
         </div>
