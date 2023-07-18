@@ -1,36 +1,90 @@
 'use client'
 
-import { XCircleIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from 'react';
 import SelectMenuCustom from '../../../../components/selectMenuCustom'
+import SelectMenu from "../../../../components/selectMenu";
+import InputField from "../../../../components/inputField";
 import GetOptions from '@/app/actions/getOptions'
-import { useState } from 'react';
+import { XCircleIcon } from '@heroicons/react/20/solid'
 
 export const CreateListing = () => {
 
     const options = GetOptions()
 
-    const [make, setMake] = useState('');
-    const [model, setModel] = useState('');
-    const [year, setYear] = useState('');
-    const [fuel, setFuel] = useState('');
-    const [transmission, setTransmission] = useState('');
-    const [price, setPrice] = useState('');
+    const carMakesData = options.carMakes
+    const carModelsData = options.carModels
+    const transmissionData = options.transmissionType
+    const fuelData = options.fuelType
+    const yearsData = options.yearsMap
 
+    const carModelId = carModelsData[0].id
+
+    const [selectedMakeId, setSelectedMakeId] = useState(carMakesData[0].id || '');
+    const [selectedTransmission, setSelectedTransmission] = useState(transmissionData[0].id || '');
+    const [selectedFuel, setSelectedFuel] = useState(fuelData[0].id || '');
+    const [selectedYear, setSelectedYear] = useState(yearsData[0].id || '');
+    const [selectedModel, setSelectedModel] = useState();
+
+    const [filteredCarModels, setFilteredCarModels] = useState();
+  
     const handleMakeChange = (value: string) => {
-        setMake(value);
-      };    
-    const handleModelChange = (value: string) => {
-        setModel(value);
-        console.log(model)
-      };    
+      const makeId = value;
+      setSelectedMakeId(makeId);
+      const filteredModels = carModelsData.filter((model) => model.make === makeId);
+      setFilteredCarModels(filteredModels as any);
+      console.log('make', value)
+    };
+    
+    const handleModelChange = (value: any) => {
+      setSelectedModel(value)
+      console.log('model', value)
+    }
+    const handleTransmissionChange = (value: any) => {
+      setSelectedTransmission(value)
+      console.log('trans', value)
+    }
+    const handleFuelChange = (value: any) => {
+      setSelectedFuel(value)
+      console.log('fuel', value)
+    }
+    const handleYearChange = (value: any) => {
+      setSelectedYear(value)
+      console.log('year', value)
+    }
 
     return (
-        <div>
-            <SelectMenuCustom options={options.makeOptions} field="make" value={make} onChange={handleMakeChange}/>
-            <SelectMenuCustom options={options.modelOptions} field="model" value={model} onChange={handleModelChange}/>
-        </div>
-    )
-
+<div className="flex justify-center mx-auto max-w-4xl mt-20">
+  <div className="grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16">
+        <SelectMenuCustom
+          options={carMakesData}
+          value={selectedMakeId}
+          onChange={handleMakeChange}
+        />
+        <SelectMenuCustom
+          options={filteredCarModels || []}
+          value={selectedModel || ''}
+          onChange={handleModelChange}
+        />
+        <SelectMenuCustom
+          options={transmissionData}
+          value={selectedTransmission}
+          onChange={handleTransmissionChange}
+        />
+        <SelectMenuCustom
+          options={fuelData}
+          value={selectedFuel}
+          onChange={handleFuelChange}
+        />
+        <SelectMenuCustom
+          options={yearsData}
+          value={selectedYear}
+          onChange={handleYearChange}
+        />
+        <InputField label='Price' value='Price' placeholder='Price..'/>
+      </div>
+      </div>
+    )};
+      
     // return (
     //       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-white">
     //       <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Log in to your account</h2>
@@ -72,6 +126,6 @@ export const CreateListing = () => {
     //         </div>
     //       </div>
     //         )
-}
+
 
 export default CreateListing
