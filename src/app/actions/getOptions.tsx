@@ -32,9 +32,9 @@ export const GetOptions = () => {
       })),
     ];
 
-    const coupeType = [
+    const categoryType = [
             // placeholder
-       { label: 'Coupe..', id: '0' },
+       { label: 'Category..', id: '0' },
        { label: 'Wagon', id: '1' },
        { label: 'Sedan', id: '2' },
        { label: 'Hatchback', id: '3' },
@@ -58,7 +58,7 @@ export const GetOptions = () => {
         {label: 'Brand new', id: '2'}
     ];
 
-    const color = [
+    const colors = [
             // placeholder
         { label: 'Color..', id: '0' },
         { label: 'White', id: '1' },
@@ -263,7 +263,7 @@ export const GetOptions = () => {
         { label: 'Cee`d', id: '143', make: 'Kia' },
     ]);
 
-    return {carMakes, carModels, yearsMap, fuelType, transmissionType}
+    return {carMakes, carModels, yearsMap, fuelType, transmissionType, categoryType, numDoors, condition, colors}
 
 }
 

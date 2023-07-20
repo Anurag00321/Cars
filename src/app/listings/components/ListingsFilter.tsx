@@ -129,14 +129,9 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
           <div className="flex flex-col flex-wrap gap-y-12 gap-x-10 justify-center max-w-3xl max-h-md px-16">
             <SelectMenu items={items} data={items} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange}/>
             <SelectMenu items={filteredItems} data={filteredItems} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange}/>
-            {/* <SelectMenu items={items || filteredItems} data={items || filteredItems} field="year" value={year} onChange={handleYearChange} onClick={handleYearChange}/> */}
-            {/* <SelectMenu items={items || filteredItems} data={items || filteredItems} field="fuel" value={fuel} onChange={handleFuelChange} onClick={handleFuelChange}/> */}
             <SelectMenuCustom options={fuelType} field="fuel" value={fuel} onChange={handleFuelChange}/>
-            {/* <SelectMenu items={items || filteredItems} data={items || filteredItems} field="transmission" value={transmission} onChange={handleTransmissionChange} onClick={handleTransmissionChange}/> */}
             <SelectMenuCustom options={transmissionType} field="transmission" value={transmission} onChange={handleTransmissionChange}/>
             <SelectMenuCustom options={yearsMap} field="year" value={year} onChange={handleYearChange}/>
-            {/* <SelectMenuPrice data={priceRange} field="price" value={price} onChange={handlePriceChange} onClick={handlePriceChange}/>
-            <SelectMenu data={items || filteredItems} field="price" value={price} onChange={handlePriceChange} onClick={handlePriceChange}/> */}
             <input
             value={price}
             onChange={handlePriceChange}

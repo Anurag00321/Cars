@@ -38,6 +38,12 @@ export const Navbar = () => {
     </a> */}
     <div className="flex md:order-2">
     {/* <p className="text-white justify-items-center	pr-4">Welcome, {username}!</p> */}
+        <button 
+        type="button"
+        onClick={() => router.push('/listings/create')}
+        className="text-white bg-transparent hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >Add a listing
+        </button>
       {!sessionStatus &&
           <button 
           type="button"
