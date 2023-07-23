@@ -71,6 +71,7 @@ export const GetOptions = () => {
         { label: 'Blue', id: '8' }, 
         { label: 'Purple', id: '9' }, 
         { label: 'Pink', id: '10' }, 
+        { label: 'Gray', id: '11' }, 
     ];
 
     const [carMakes, setCarMakes] = useState([

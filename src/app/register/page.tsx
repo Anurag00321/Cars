@@ -102,7 +102,7 @@ export const Register = () => {
               id="email"
               className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
                 emailError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
             />
           </div>
         </div>
@@ -118,7 +118,7 @@ export const Register = () => {
               required
               className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
                 nameError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
             />
           </div>
         </div>
@@ -134,7 +134,7 @@ export const Register = () => {
               required
               className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
                 passwordError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
             />
           </div>
         </div>
@@ -149,20 +149,22 @@ export const Register = () => {
               required
               className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
                 passwordConfirmError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
             />
           </div>
       </div>
       <div>
-        <button onClick={handleRegister} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
+        <button onClick={handleRegister} className="flex w-full justify-center rounded-md bg-british-green-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-british-green-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
       </div>
     </div>
-    {/* <p className="mt-10 text-center text-sm text-gray-500">
+    <p className="mt-10 text-center text-sm text-gray-500"
+      onClick={() => router.push('/signin')}
+      >
       Already a member?
-      <Link to='/login'>
-      <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Log in now</a>
-      </Link>
-    </p> */}
+      <a className="cursor-pointer font-semibold leading-6 px-1 text-british-green-2 hover:british-green-0">
+        Log in now
+        </a>
+    </p>
   </div>
 </div> 
 )

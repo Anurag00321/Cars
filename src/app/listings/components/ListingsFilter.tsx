@@ -6,6 +6,7 @@ import SelectMenu from "../../../../components/selectMenu";
 import { useRouter } from 'next/navigation';
 import SelectMenuPrice from "../../../../components/selectMenuPrice";
 import SelectMenuCustom from "../../../../components/selectMenuCustom";
+import { InputField } from "../../../../components/inputField";
 
 interface ListingsFilterProps {
   initialItems: Listing[];
@@ -60,7 +61,7 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
     console.log(value)
   };
 
-  const handleTransmissionChange = (value: any) => {
+  const handleTransmissionChange = (value: string) => {
     if (value == "Transmission.."){
       return null
     }
@@ -77,7 +78,7 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
     setYear(value);
   };
 
-  const handlePriceChange = (event: any) => {
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrice(event.target.value)
     setFilteredItems(filteredItems.filter(item => item.price === price));
   };
@@ -125,20 +126,27 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
     <FilterContext.Provider value={filteredItems}>
     <div>
       <div className="bg-slate-950">
-        <div className="absolute inset-0 flex mx-auto max-w-5xl bg-slate-950 bg-opacity-50 rounded-2xl">
-          <div className="flex flex-col flex-wrap gap-y-12 gap-x-10 justify-center max-w-3xl max-h-md px-16">
+        <div className="flex absolute inset-0 mx-auto max-w-5xl justify-center max-h-lg bg-slate-950 bg-opacity-50 rounded-2xl">
+        <div className="grid grid-cols-2 gap-x-12 max-w-3xl max-h-md px-16 py-8 pt-24 max-h-lg">
             <SelectMenu items={items} data={items} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange}/>
             <SelectMenu items={filteredItems} data={filteredItems} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange}/>
             <SelectMenuCustom options={fuelType} field="fuel" value={fuel} onChange={handleFuelChange}/>
             <SelectMenuCustom options={transmissionType} field="transmission" value={transmission} onChange={handleTransmissionChange}/>
             <SelectMenuCustom options={yearsMap} field="year" value={year} onChange={handleYearChange}/>
-            <input
+            <InputField label='Price' value={price} placeholder='Price..' onChange={handlePriceChange}/>
+            {/* <input
             value={price}
             onChange={handlePriceChange}
             className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm sm:leading-6`}
-            />
+            /> */}
+
+            <button 
+            type="button"
+            onClick={handleSubmit}
+            className="text-white focus:ring-4 focus:outline-none max-h-10 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-4 md:mr-4 bg-british-green-2 hover:bg-british-green-4 dark:focus:ring-british-green-0"
+            >Submit
+            </button>
             </div>
-            <button className="bg-white my-60 px-4" onClick={handleSubmit}>Submit</button>
         </div>
       </div>
     </div>

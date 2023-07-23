@@ -5,10 +5,9 @@ import SelectMenuCustom from '../../../../components/selectMenuCustom'
 import SelectMenu from "../../../../components/selectMenu";
 import InputField from "../../../../components/inputField";
 import GetOptions from '@/app/actions/getOptions'
-import { XCircleIcon } from '@heroicons/react/20/solid'
+import { XCircleIcon, ArrowUpOnSquareIcon } from '@heroicons/react/20/solid'
 import { CldUploadButton } from 'next-cloudinary';
 import axios from 'axios';
-import { PrismaClient } from '@prisma/client';
 
 export const CreateListing = () => {
 
@@ -45,7 +44,7 @@ export const CreateListing = () => {
     const [variant, setVariant] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [photo, setPhoto] = useState();
+    const [photos, setPhotos] = useState<string[]>([]);
 
     const [filteredCarModels, setFilteredCarModels] = useState();
   
@@ -57,12 +56,12 @@ export const CreateListing = () => {
       console.log('make', value)
     };
     
-    const handleModelChange = (value: any) => {
+    const handleModelChange = (value: string) => {
       setModel(value)
       console.log('model', value)
     }
 
-    const handleTransmissionChange = (value: any) => {
+    const handleTransmissionChange = (value: string) => {
       if (value == "Transmission.."){
         return null
       }
@@ -70,7 +69,7 @@ export const CreateListing = () => {
       console.log('trans', value)
     }
 
-    const handleFuelChange = (value: any) => {
+    const handleFuelChange = (value: string) => {
       if (value == "Fuel.."){
         return null
       } 
@@ -78,7 +77,7 @@ export const CreateListing = () => {
       console.log('fuel', value)
     }
 
-    const handleYearChange = (value: any) => {
+    const handleYearChange = (value: string) => {
       if (value == "Year.."){
         return null
       } 
@@ -86,7 +85,7 @@ export const CreateListing = () => {
       console.log('year', value)
     }
 
-    const handleCategoryChange = (value: any) => {
+    const handleCategoryChange = (value: string) => {
       if (value == "Category.."){
         return null
       }
@@ -94,7 +93,7 @@ export const CreateListing = () => {
       console.log('category', value)
     }
 
-    const handleDoorsChange = (value: any) => {
+    const handleDoorsChange = (value: string) => {
       if (value == "Number of doors.."){
         return null
       }
@@ -102,7 +101,7 @@ export const CreateListing = () => {
       console.log('doors', value)
     }
 
-    const handleConditionChange = (value: any) => {
+    const handleConditionChange = (value: string) => {
       if (value == "Condition.."){
         return null
       }
@@ -110,7 +109,7 @@ export const CreateListing = () => {
       console.log('condition', value)
     }
 
-    const handleColorChange = (value: any) => {
+    const handleColorChange = (value: string) => {
       if (value == "Color.."){
         return null
       }
@@ -118,41 +117,52 @@ export const CreateListing = () => {
       console.log('color', value)
     }
 
-    const handleMileageChange = (event: any) => {
+    const handleMileageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setMileage(event.target.value)
       console.log('miles', mileage)
     }
 
-    const handlePowerChange = (event: any) => {
+    const handlePowerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setPower(event.target.value)
       console.log('power', power)
     }
     
-    const handlePriceChange = (event: any) => {
+    const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setPrice(event.target.value)
       console.log('price', price)
     }
 
-    const handleVariantChange = (event: any) => {
+    const handleVariantChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setVariant(event.target.value)
       console.log('variant', variant)
     }
 
-    const handleTitleChange = (event: any) => {
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setTitle(event.target.value)
       console.log('title', title)
     }
 
-    const handleDescriptionChange = (event: any) => {
+    const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       setDescription(event.target.value)
       console.log('desc', event.target.value)
     }
 
-    const handleUpload = (result: any) => {
-      setPhoto(result?.info?.secure_url)
+    const handleUpload = (result: string) => {
+      const check = photos.includes(result)
+      if (check) {
+        const id = photos.indexOf(result)
+          let newArr = photos
+          newArr.splice(id, 1)
+            setPhotos([...newArr])
+      } else {
+        photos.push(result)
+        setPhotos([...photos])
+      }
     }
+  
 
     const handleSubmit = useCallback(async () => {
+      console.log(photos)
       try {
        await axios.post('/api/listings', {
         title: `${title}`,
@@ -172,7 +182,7 @@ export const CreateListing = () => {
         variant: `${variant}`,
         color: `${color}`,
         description: '',
-        photo: `${photo}`,
+        photos: photos,
        })
       } catch (error: any) {
         console.log(error)
@@ -180,7 +190,7 @@ export const CreateListing = () => {
       }, [title, description, make, model,
         year, coupe_type, number_doors, condition,
         price, fuel, transmission, mileage, power,
-        color, photo])
+        color, photos])
 
     return (
   <div className="flex justify-center mx-auto max-w-4xl mt-20">
@@ -191,11 +201,11 @@ export const CreateListing = () => {
           onChange={handleMakeChange}
         />
         <SelectMenuCustom
-          // options={modelPlaceholder || filteredCarModels}
           options={filteredCarModels || []}
           value={model || ''}
           onChange={handleModelChange}
         />
+                <InputField label='Variant' value={variant} placeholder='Variant..(M3, GTI)' onChange={handleVariantChange}/>
         <SelectMenuCustom
           options={transmissionData}
           value={transmission}
@@ -234,19 +244,33 @@ export const CreateListing = () => {
         <InputField label='Mileage' value={mileage} placeholder='Mileage..' onChange={handleMileageChange}/>
         <InputField label='Power' value={power} placeholder='Power..' onChange={handlePowerChange}/>
         <InputField label='Price' value={price} placeholder='Price..' onChange={handlePriceChange}/>
-        <InputField label='Variant' value={variant} placeholder='Variant..(M3, GTI)' onChange={handleVariantChange}/>
-          <div className="sm:col-span-2 md:col-span-2 lg:col-span-3 space-y-8">
-            <InputField label='Title' value={title} placeholder='Listing title..' onChange={handleTitleChange}/>
-            <InputField label='Description' value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger/>
-            <CldUploadButton
-              options={{ maxFiles: 1 }}
-              onUpload={handleUpload}
-              uploadPreset="yghyzh2p"
-            >
-            <p className="px-6 pr">Upload image</p>
-            </CldUploadButton>
-            <button onClick={handleSubmit}>Submit</button>
-          </div>
+        <div className="sm:col-span-2 md:col-span-2 lg:col-span-3 space-y-8">
+  <InputField label='Title' value={title} placeholder='Listing title..' onChange={handleTitleChange} />
+  <InputField label='Description' value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger />
+  <div className="w-full">
+    <CldUploadButton
+      options={{ maxFiles: 6 }}
+      onUpload={handleUpload}
+      uploadPreset="yghyzh2p"
+    >
+      <button
+        type="button" 
+        className=" text-white flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        <ArrowUpOnSquareIcon className="h-8 w-8 mr-2 mb-1" aria-hidden="true" />
+        Upload
+      </button>
+    </CldUploadButton>
+  </div>
+  <button
+    onClick={handleSubmit}
+    type="button" 
+    className="w-full text-white flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  >
+    Submit
+  </button>
+</div>
+            {/* <button onClick={handleSubmit}>Submit</button> */}
         </div>
       </div>
     )};

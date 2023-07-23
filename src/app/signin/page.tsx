@@ -98,7 +98,7 @@ export const SignIn: FC = () => {
             required
             className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
               emailError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-            } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+            } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
             />
             </div>
           </div>
@@ -106,9 +106,6 @@ export const SignIn: FC = () => {
       <div>
         <div className="flex items-center justify-between">
           <label className="block text-sm font-medium leading-6 text-gray-900">Password</label>
-          <div className="text-sm">
-            <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-          </div>
         </div>
         <div className="mt-2">
           <div>
@@ -117,24 +114,24 @@ export const SignIn: FC = () => {
               required
               className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
                 passwordError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
             />
           </div>
         </div>
       </div>
       <div>
-        <button onClick={handleLogin} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <button onClick={handleLogin} className="flex w-full justify-center rounded-md bg-british-green-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-british-green-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           Log in
         </button>
-        {/* test button */}
-        <button onClick={handleSignOut} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            Sign out
-        </button>
       </div>
-    <p className="mt-10 text-center text-sm text-gray-500">
-      Not a member?
-      <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Sign up now</a>
-    </p>
+        <p className="mt-10 text-center text-sm text-gray-500">
+          Not a member?
+          <a className="cursor-pointer font-semibold leading-6 px-1 text-british-green-2 hover:british-green-0"
+            onClick={() => router.push('/register')}
+          >
+            Sign up now
+          </a>
+        </p>
     </div>
     </div>
   </div>
