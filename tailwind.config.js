@@ -20,6 +20,7 @@ module.exports = {
         'british-green-2': '#005F36',
         'british-green-3': '#165E3F',
         'british-green-4': '#1A704B',
+        'british-green-5': '#7DD181',
         'light-green': '#AAAE7F',
         'beige': '#D0D6B3',
         'orange-1': '#FF6B35',

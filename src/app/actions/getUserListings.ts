@@ -8,15 +8,22 @@ const getUserListings = async () => {
 
     const currentUser = await getCurrentUser();
 
+    if (!currentUser?.id) {
+        return [];
+      }    
+
     try {
         const listings = await prisma.listing.findMany({
-            where: {
-                id: currentUser?.id
-            },
             orderBy: {
                 createdAt: 'asc'
-            }
+            },
+            where: {
+                userId: {
+                    equals: currentUser.id
+                }
+            },
         });
+
         return listings;
     } catch (error: any) {
         console.log(error)

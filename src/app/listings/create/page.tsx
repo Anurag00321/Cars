@@ -193,7 +193,7 @@ export const CreateListing = () => {
         color, photos])
 
     return (
-  <div className="flex justify-center mx-auto max-w-4xl mt-20">
+  <div className="flex justify-center mx-auto max-w-4xl mt-20 mb-16">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-16">
         <SelectMenuCustom
           options={carMakesData}
@@ -265,7 +265,7 @@ export const CreateListing = () => {
   <button
     onClick={handleSubmit}
     type="button" 
-    className="w-full text-white flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    className="w-full text-white flex items-center justify-center bg-british-green-0 hover:bg-british-green-3 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:focus:ring-blue-800"
   >
     Submit
   </button>
