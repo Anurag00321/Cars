@@ -47,6 +47,7 @@ export const Register = () => {
     setError(errorData)
     setEmailError(data.email)
     setPasswordError(data.password)
+    setNameError(data.name)
     if(data.password.includes('confirmation')) {
       setPasswordConfirmError(data.password)
     }} finally {

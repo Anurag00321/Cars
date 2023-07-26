@@ -21,20 +21,24 @@ export async function POST(
     let errorMessage = '';
     let errorPassword = '';
     let errorEmail = '';
+    let errorUsername = '';
       
     const isValid = schema.safeParse({email})
     if(isValid.success == false) {
       errorEmail = 'Invalid email address.'
     }
-    console.log('results', isValid.success)
 
     if (!email || !username || !password || !confirmPassword) {
         errorMessage += 'Missing required credentials.'
         // return new NextResponse('Missing credentials', { status: 400})
     }
 
-    if (!email) {
-      errorEmail += 'Invalid/missing email address.'
+    // if (!email) {
+    //   errorEmail += 'Invalid/missing email address.'
+    // }
+
+    if (!username) {
+      errorUsername += 'Please enter a username.'
     }
 
     if (password !== confirmPassword) {
@@ -55,9 +59,10 @@ export async function POST(
       errorPassword = "The password has to be at least 8 characters and match the password confirmation.";
     }
 
-    if (errorPassword.length > 0 || errorMessage.length > 0 || errorEmail.length > 0) {
+    if (errorPassword.length > 0 || errorMessage.length > 0 || 
+        errorEmail.length > 0 || errorUsername.length > 0) {
       return await NextResponse.json(
-        { error: errorMessage, data: { password: errorPassword, email: errorEmail } },
+        { error: errorMessage, data: { password: errorPassword, email: errorEmail, name: errorUsername } },
         { status: 400 }
       );
     }

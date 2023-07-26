@@ -25,7 +25,7 @@ export const GetOptions = () => {
     const yearsArr = Array.from({ length: 90 }, (_, index) => currentYear - index);
   
     const yearsMap = [
-      { id: '', label: 'Year..' }, // Placeholder
+      { id: '0', label: 'Year..' }, // Placeholder
       ...yearsArr.map((year, index) => ({
         id: (year).toString(),
         label: year.toString(),

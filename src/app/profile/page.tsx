@@ -11,7 +11,7 @@ export const Profile = async () => {
         <button className="border bg-british-green-4">
             My listings
         </button>
-        <ListingsList initialItems={currentUserListings} />
+        <ListingsList initialItems={currentUserListings} profile={true}/>
         </div>
     )
 };

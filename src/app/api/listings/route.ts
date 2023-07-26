@@ -30,9 +30,70 @@ export async function POST(
 
     const currentUser = await getCurrentUser();
 
+    let inputFieldsError = "";
+    let selectMenusError = "";
+    let titleDescriptionError = "";
+
     if (!currentUser?.id || !currentUser?.email) {
-      console.log(currentUser)
-      return new NextResponse(`Unauthorized -${currentUser}`, { status: 400 });
+      return new NextResponse('Please sign in to create a new listing.', { status: 400 });
+    };
+
+    if (!title) {
+      titleDescriptionError += "Please provide a title for your listing."
+      // return new NextResponse('Please provide a title for your listing.', {status: 400})
+      // throw new Error('Please provide a title for your listing.')
+    };
+
+    if (!description) {
+      titleDescriptionError += "Please provide a description for your listing."
+      // return new NextResponse('Please provide a description for your listing.', {status: 400})
+    };
+
+    if (!make || !model || !transmission || !fuel || !year || 
+        !coupe_type || !number_doors || !condition || !color) {
+        selectMenusError += "Please fill out all required fields."
+    };
+
+
+    if (!mileage) {
+      inputFieldsError += "Please enter the mileage of the vehicle."
+      // return new NextResponse('Please enter the mileage of the vehicle.', {status: 400})
+    };
+
+    if (!power) {
+      inputFieldsError += "Please enter the power of the vehicle."
+      // return new NextResponse('Please enter the power of the vehicle.', {status: 400})
+    };
+
+    if (!price) {
+      inputFieldsError += "Please enter the price of the vehicle."
+      // return new NextResponse('Please enter the price of the vehicle.', {status: 400})
+      // throw new Error('Please enter the price of the vehicle.')
+    };
+
+    // check if two or more of the errors are true
+    const dotCount = (value: any) => {
+      return value.split('.').length - 1;
+    }
+
+    if(dotCount(titleDescriptionError) >= 2) {
+        titleDescriptionError = "";
+        titleDescriptionError = "Please provide a title and description for your listing."
+       }
+
+    if(dotCount(inputFieldsError) >= 2) {
+        inputFieldsError = "";
+        inputFieldsError = "Please enter the mileage, power, and price of the vehicle."
+       }
+
+    if (inputFieldsError.trim().length > 0 ||
+    selectMenusError.trim().length > 0 ||
+    titleDescriptionError.trim().length > 0
+  ) {
+    return await NextResponse.json(
+      { data: { inputField: inputFieldsError, selectMenu: selectMenusError, titleDescription: titleDescriptionError } },
+      { status: 400 }
+    );
     }
 
     const user = await prisma.user.findUnique({
