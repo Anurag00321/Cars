@@ -46,8 +46,6 @@ export const ListingCreate = () => {
       { label: 'Model..', id: '0'}
     ]
 
-    // test bez id-tata w state 
-
     const [make, setMake] = useState('');
     const [model, setModel] = useState('');
     const [transmission, setTransmission] = useState('');
@@ -59,14 +57,6 @@ export const ListingCreate = () => {
     const [color, setColor] = useState('');
 
     // const [make, setMake] = useState(carMakesData[0].id || '');
-    // const [model, setModel] = useState(carModelsData[0].id || '');
-    // const [transmission, setTransmission] = useState(transmissionData[0].id || '');
-    // const [fuel, setFuel] = useState(fuelData[0].id || '');
-    // const [year, setYear] = useState(yearsData[0].id || '');
-    // const [coupe_type, setCoupe_type] = useState(categoryData[0].id || '');
-    // const [number_doors, setNumber_doors] = useState(numDoorsData[0].id || '');
-    // const [condition, setCondition] = useState(conditionData[0].id || '');
-    // const [color, setColor] = useState(colorsData[0].id || '');
 
     const [mileage, setMileage] = useState('');
     const [power, setPower] = useState('');
@@ -74,8 +64,8 @@ export const ListingCreate = () => {
     const [variant, setVariant] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [photos, setPhotos] = useState<string[]>([]);
-
+    const [photos, setPhotos] = useState<any[]>([]);
+    
     const [filteredCarModels, setFilteredCarModels] = useState<Option[]>([carModelsData[0]]);
 
     const [inputFieldsError, setInputFieldsError] = useState("")
@@ -203,63 +193,30 @@ export const ListingCreate = () => {
       } else {
         photos.push(result)
         setPhotos([...photos])
+        console.log(photos)
+
+        const stringPhotos = photos.toString
+        setPhotos([stringPhotos])
       }
     }
-    
+      
     const resetState = () => {
       setInputFieldsError("");
       setSelectMenusError("");
       setTitleDescriptionError("");
     };
 
-    // const handleSubmit = useCallback (async() => {
-    //   setIsLoading(true)
-    //   resetState();
-    //   await axios.post('/api/listings', {
-    //         title: `${title}`,
-    //         body: `${description}`,
-    //         make: `${make}`,
-    //         model: `${model}`,
-    //         year: `${year}`,
-    //         coupe_type: `${coupe_type}`,
-    //         number_doors: `${number_doors}`,
-    //         condition: `${condition}`,
-    //         price: `${price}`,
-    //         fuel: `${fuel}`,
-    //         transmission: `${transmission}`,
-    //         mileage: `${mileage}`,
-    //         power: `${power}`,
-    //         slug: '',
-    //         variant: `${variant}`,
-    //         color: `${color}`,
-    //         description: '',
-    //         photos: photos,          
-    //       }).then((response) => {
-    //         console.log('response',response.data)
-    //         // if (callback.data.error) {
-    //         //   if(callback.data.error.includes('title')) {
-    //         //     setTitleError(callback.data.error)
-    //         //   }
-    //         // }
-    //         if (response?.data.ok) {
-    //           console.log('created:', response?.data.ok)
-    //         }
-    //       // }).catch((error) => {
-    //       //   console.log('error console.log', error)
-    //       })
-    //       .finally(() => setIsLoading(false))    
-    //     }, [title, description, make, model,
-    //   year, coupe_type, number_doors, condition,
-    //   price, fuel, transmission, mileage, power,
-    //   color, photos])
 
     const handleSubmit = useCallback (async() => {
-        console.log('make',make)
+        console.log('photos', photos)
         setIsLoading(true)
         resetState();
+
+        const photosUrls = photos.map((photo) => photo.info.secure_url);
+
         await axios.post('/api/listings', {
               title: `${title}`,
-              body: `${description}`,
+              body: ``,
               make: `${make}`,
               model: `${model}`,
               year: `${year}`,
@@ -274,8 +231,8 @@ export const ListingCreate = () => {
               slug: '',
               variant: `${variant}`,
               color: `${color}`,
-              description: '',
-              photos: photos,          
+              description: `${description}`,
+              photos: photosUrls,          
             }).then((callback) => {
               console.log(callback)
                 if(callback.data.ok) {
@@ -298,57 +255,6 @@ export const ListingCreate = () => {
         price, fuel, transmission, mileage, power,
         color, photos])
 
-    // const handleSubmit = useCallback(async () => {
-    //   console.log(photos)
-    //   try {
-    //    await axios.post('/api/listings', {
-    //     title: `${title}`,
-    //     body: `${description}`,
-    //     make: `${make}`,
-    //     model: `${model}`,
-    //     year: `${year}`,
-    //     coupe_type: `${coupe_type}`,
-    //     number_doors: `${number_doors}`,
-    //     condition: `${condition}`,
-    //     price: `${price}`,
-    //     fuel: `${fuel}`,
-    //     transmission: `${transmission}`,
-    //     mileage: `${mileage}`,
-    //     power: `${power}`,
-    //     slug: '',
-    //     variant: `${variant}`,
-    //     color: `${color}`,
-    //     description: '',
-    //     photos: photos,
-    //    })
-    //   } catch (error: any) {
-    //     console.log(error.response.data)
-    //     if(error.message.includes('sign in')) {
-    //       setUserError(error.message)
-    //     }
-    //     if(error.message.includes('title')) {
-    //       setTitleError(error.message)
-    //     }
-    //     if(error.message.includes('description')) {
-    //       setDescriptionError(error.message)
-    //     }
-    //     if(error.message.includes('fields')) {
-    //       setSelectMenuError(error.message)
-    //     }
-    //     if(error.message.includes('mileage')) {
-    //       setMileageError(error.message)
-    //     }
-    //     if(error.message.includes('power')) {
-    //       setPowerError(error.message)
-    //     }
-    //     if(error.message.includes('price')) {
-    //       setPriceError(error.message)
-    //     }
-    //   }
-    //   }, [title, description, make, model,
-    //     year, coupe_type, number_doors, condition,
-    //     price, fuel, transmission, mileage, power,
-    //     color, photos])
 
     const isValidOption = (selectedValue: string, options: OptionsProps[], targetId: string) => {
       return options.find(option => option.id === selectedValue)?.id === targetId || '';
@@ -436,12 +342,12 @@ export const ListingCreate = () => {
           onChange={handleColorChange}
           error={(color === '0' || color === '') ? !!selectMenusError : false}
         />
-        <InputField label='Mileage' value={mileage} placeholder='Mileage..' onChange={handleMileageChange}/>
-        <InputField label='Power' value={power} placeholder='Power..' onChange={handlePowerChange}/>
-        <InputField label='Price' value={price} placeholder='Price..' onChange={handlePriceChange}/>
+        <InputField label='Mileage' type="number" value={mileage} placeholder='Mileage..' onChange={handleMileageChange} error={(mileage === '') ? !!inputFieldsError : false}/>
+        <InputField label='Power' type="number" value={power} placeholder='Power..' onChange={handlePowerChange} error={(power === '') ? !!inputFieldsError : false}/>
+        <InputField label='Price' type="number" value={price} placeholder='Price..' onChange={handlePriceChange} error={(price === '') ? !!inputFieldsError : false}/>
         <div className="sm:col-span-2 md:col-span-2 lg:col-span-3 space-y-8">
-        <InputField label='Title' value={title} placeholder='Listing title..' onChange={handleTitleChange} />
-        <InputField label='Description' value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger />
+        <InputField label='Title' type="text" value={title} placeholder='Listing title..' onChange={handleTitleChange} error={(title === '') ? !!inputFieldsError : false}/>
+        <InputField label='Description' type="text" value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger error={(description === '') ? !!inputFieldsError : false}/>
         <div className="w-full">
           <CldUploadButton
           options={{ maxFiles: 6 }}

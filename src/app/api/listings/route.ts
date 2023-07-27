@@ -40,13 +40,10 @@ export async function POST(
 
     if (!title) {
       titleDescriptionError += "Please provide a title for your listing."
-      // return new NextResponse('Please provide a title for your listing.', {status: 400})
-      // throw new Error('Please provide a title for your listing.')
     };
 
-    if (!description) {
+    if (!body) {
       titleDescriptionError += "Please provide a description for your listing."
-      // return new NextResponse('Please provide a description for your listing.', {status: 400})
     };
 
     if (!make || !model || !transmission || !fuel || !year || 
@@ -57,12 +54,10 @@ export async function POST(
 
     if (!mileage) {
       inputFieldsError += "Please enter the mileage of the vehicle."
-      // return new NextResponse('Please enter the mileage of the vehicle.', {status: 400})
     };
 
     if (!power) {
       inputFieldsError += "Please enter the power of the vehicle."
-      // return new NextResponse('Please enter the power of the vehicle.', {status: 400})
     };
 
     if (!price) {
