@@ -8,10 +8,11 @@ export const Listings = async () => {
 
     const listings = await getListings();
     // console.log(listings)
+    
 
     return (
         <div>
-            <ListingsList initialItems={listings} />
+            <ListingsList initialItems={listings}/>
             {/* <ListingsFilter initialItems={listings}/> */}
             {/* <SelectMenu data={listings} field="model"/>
             <SelectMenu data={listings} field="title"/> */}

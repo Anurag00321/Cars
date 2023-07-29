@@ -1,5 +1,6 @@
 import getListingBySlug from "@/app/actions/getListingBySlug"
-import ListingCreate from "../../components/ListingCreate"
+import ListingEditForm from "./components/ListingEditForm"
+// import ListingCreate from "../../components/ListingCreate"
 
 interface Params {
     slug: string
@@ -7,10 +8,11 @@ interface Params {
 
 export const EditListing = async ({ params }: { params: Params }) => {
 
-    const listingOptions = getListingBySlug(params.slug)
+    const listingOptions = await getListingBySlug(params.slug)
 
     return (
         <div>
+            <ListingEditForm initialItems={listingOptions as any}/>
             {/* <ListingCreate options={listingOptions}/> */}
         </div>
     )

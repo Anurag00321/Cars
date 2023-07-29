@@ -26,6 +26,7 @@ export async function POST(
             color,
             variant,
             photos,
+            slug
         } = body;
 
     const currentUser = await getCurrentUser();
@@ -97,43 +98,44 @@ export async function POST(
     },
     });
     
-    const generateUniqueSlug = async () => {
-      let slug = `${make.toLowerCase()}-${model.toLowerCase()}`;
+    // const generateUniqueSlug = async () => {
+    //   let slug = `${make.toLowerCase()}-${model.toLowerCase()}`;
     
-      if (variant) {
-        slug += `-${variant.toLowerCase()}`;
-      }
-      
-      slug = slug.replace(/\s+/g, '-');
-
-      let id = 0;
-      let isUnique = false;
-
-      while (!isUnique) {
-        const existingListing = await prisma.listing.findFirst({
-          where: {
-            slug,
-          },
-        });
-        
-        if (!existingListing) {
-          isUnique = true;
-        } else {
-          id++;
-          if (variant) {
-            slug = `${make.toLowerCase()}-${model.toLowerCase()}-${variant.toLowerCase()}-${id}`;
-          } else {
-            slug = `${make.toLowerCase()}-${model.toLowerCase()}-${id}`;
-          }
-        }
-      }
+    //   if (variant) {
+    //     slug += `-${variant.toLowerCase()}`;
+    //   }
     
-      return slug;
-    };
+    //   let id = 0;
+    //   let isUnique = false;
+    
+    //   while (!isUnique) {
+    //     const existingListing = await prisma.listing.findFirst({
+    //       where: {
+    //         slug,
+    //       },
+    //     });
+    
+    //     if (!existingListing) {
+    //       isUnique = true;
+    //     } else {
+    //       id++;
+    //       if (variant) {
+    //         slug = `${make.toLowerCase()}-${model.toLowerCase()}-${variant.toLowerCase()}-${id}`;
+    //       } else {
+    //         slug = `${make.toLowerCase()}-${model.toLowerCase()}-${id}`;
+    //       }
+    //     }
+    //   }
+    
+    //   return slug;
+    // };
 
-    const slug = await generateUniqueSlug();
-
-    const listing = await prisma.listing.create({
+    // const slug = await generateUniqueSlug();
+    
+    const listing = await prisma.listing.update({
+      where: {
+          slug: slug
+      },
         data: {
             title: title,
             description: '',
@@ -160,7 +162,7 @@ export async function POST(
         
     })
 
-    console.log('listing created:', listing)
+    console.log('listing updated:', listing)
     // console.log('nextresp:',NextResponse.json(listing))
     return NextResponse.json(listing)
     } catch (error) {

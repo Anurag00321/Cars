@@ -11,14 +11,15 @@ interface Option {
 
 interface SelectMenuProps {
   options: Option[];
+  dynamicId?: number;
   field?: string;
   error?: boolean;
   value: string;
   onChange: (value: string) => void;
 }
 
-export const SelectMenuCustom: React.FC<SelectMenuProps> = ({ options, field, value, onChange, error }) => {
-  const [selected, setSelected] = useState(value || options[0]?.id);
+export const SelectMenuCustom: React.FC<SelectMenuProps> = ({ options, dynamicId, field, value, onChange, error }) => {
+  const [selected, setSelected] = useState(value || options[dynamicId! || 0]?.id);
 
   const handleItemClick = (option: Option) => {
     setSelected(option.label);
@@ -35,8 +36,7 @@ export const SelectMenuCustom: React.FC<SelectMenuProps> = ({ options, field, va
             <span className="block truncate">
                 {
                 options.find((option) => option.id === selected)?.label
-                //  ||
-                //   options.find((option) => option.id === selected)?.id
+                 || options.find((option) => option.id === selected)?.id
                   }
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">

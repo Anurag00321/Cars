@@ -1,18 +1,15 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react';
-import SelectMenuCustom from '../../../../components/selectMenuCustom'
-import SelectMenu from "../../../../components/selectMenu";
-import InputField from "../../../../components/inputField";
+import { useCallback, useEffect, useRef, useState } from 'react';
 import GetOptions from '@/app/actions/getOptions'
 import { XCircleIcon, ArrowUpOnSquareIcon } from '@heroicons/react/20/solid'
 import { CldUploadButton } from 'next-cloudinary';
 import axios from 'axios';
 import { Listing } from '@prisma/client';
+import SelectMenuCustom from '../../../../../../components/selectMenuCustom';
+import InputField from '../../../../../../components/inputField';
+import getListingBySlug from '@/app/actions/getListingBySlug';
 
-interface ListingCreateProps {
-    options: Listing[]
-}
 
 interface OptionsProps {
   label: string;
@@ -26,9 +23,22 @@ interface Option {
   make?: string;
 }
 
-export const ListingCreate = () => {
+interface EditFormProps {
+    initialItems: Listing[];
+}
+
+export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
+
+    const [items, setItems] = useState(initialItems)
+    const item = initialItems[0];
 
     const options = GetOptions()
+
+    // const [itemColor, setItemColors] = useState('')
+
+    // const itemColors = () => {
+    //     items.map((item) => setItemColors(item.color))
+    // }
 
     const carMakesData = options.carMakes
     const carModelsData = options.carModels
@@ -40,6 +50,14 @@ export const ListingCreate = () => {
     const conditionData = options.condition
     const colorsData = options.colors
 
+
+    // function getColorIdByLabel(itemColor: string) {
+    //   const colorMatch = colorsData.find((color) => color.label === itemColor);
+    //   return colorMatch ? colorMatch.id : ''
+    // }
+
+    // const [make, setMake] = useState(carMakesData[0].id || '');
+
     const [make, setMake] = useState('');
     const [model, setModel] = useState('');
     const [transmission, setTransmission] = useState('');
@@ -49,9 +67,6 @@ export const ListingCreate = () => {
     const [number_doors, setNumber_doors] = useState('');
     const [condition, setCondition] = useState('');
     const [color, setColor] = useState('');
-
-    // const [make, setMake] = useState(carMakesData[0].id || '');
-
     const [mileage, setMileage] = useState('');
     const [power, setPower] = useState('');
     const [price, setPrice] = useState('');
@@ -60,28 +75,98 @@ export const ListingCreate = () => {
     const [description, setDescription] = useState('');
     const [photos, setPhotos] = useState<any[]>([]);
     
-    const [filteredCarModels, setFilteredCarModels] = useState<Option[]>([carModelsData[0]]);
+    const [modelIdState, setModelIdState] = useState<number>()
+    
+    const [filteredCarModels, setFilteredCarModels] = useState<Option[]>([carModelsData[modelIdState || 0]] || '');
 
     const [inputFieldsError, setInputFieldsError] = useState("")
     const [selectMenusError, setSelectMenusError] = useState("")
     const [titleDescriptionError, setTitleDescriptionError] = useState("")
 
     const [isLoading, setIsLoading] = useState(false)
-  
+    
+    const getIdByLabel = (optionsData: any, prop: string) => {
+      const labelMatch = optionsData.find((field: any) => field.label === prop)
+      return labelMatch ? +labelMatch.id : 0;
+    }
+    
+    const getIdByLabelModel = (optionsData: any, prop: string) => {
+      const labelMatch = optionsData.find((field: any) => field.label === prop)
+      return labelMatch ? +labelMatch.id : 0;
+    }
+
+        // old variant for testing
+          // useEffect(() => {
+          //   if(initialItems) {
+          //     const item = initialItems[0];
+          //     const colorId = getColorIdByLabel(item.color);
+          //     const colorIdNum = +colorId;
+          
+          //     console.log('colorId:', colorId);
+          //     console.log('colorIdNum:', colorIdNum);
+          
+          //     // setColor(`colorsData[${[colorIdNum]}].id`);
+          //     setColor(item.color)
+          //     const doorId = getIdByLabel(numDoorsData, item.number_doors)
+          //     console.log('color:', color)
+          //     setNumber_doors(item.number_doors)
+          //     console.log(number_doors)
+          //   }
+          // }, [title, description, make, model,
+          //   year, coupe_type, number_doors, condition,
+          //   price, fuel, transmission, mileage, power,
+          //   color, photos, initialItems]);    
+    
+    useEffect(() => {
+      if (initialItems && initialItems.length > 0) {
+        const item = initialItems[0];
+        setModel(item.model);
+        setMake(item.make);
+        setTransmission(item.transmission);
+        setFuel(item.fuel);
+        setYear(item.year);
+        setCoupe_type(item.coupe_type);
+        setNumber_doors(item.number_doors);
+        setCondition(item.condition);
+        setColor(item.color);
+        setMileage(item.mileage);
+        setPower(item.power);
+        setPrice(item.price);
+        setVariant(item.variant);
+        setTitle(item.title);
+        setDescription(item.body);
+        setPhotos([...item.photos]);
+      }
+    }, [initialItems]);
+    
+    useEffect(() => {
+      if (make) {
+        const filteredModels = carModelsData.filter((model) => model.make === make);
+        setFilteredCarModels(filteredModels as any);
+        setModelIdState(modelId)
+      }
+    }, [make, carModelsData]);
+      
+    
+    const makeId = getIdByLabel(carMakesData, item.make)
+    const modelId = getIdByLabel(filteredCarModels, item.model)
+    const transmissionId = getIdByLabel(transmissionData, item.transmission)
+    const fuelId = getIdByLabel(fuelData, item.fuel)
+    const yearId = getIdByLabel(yearsData, item.year)
+    const coupeId = getIdByLabel(categoryData, item.coupe_type)
+    const numDoorsId = getIdByLabel(numDoorsData, item.number_doors)
+    const conditionId = getIdByLabel(conditionData, item.condition)
+    const colorId = getIdByLabel(colorsData, item.color)
+
     const handleMakeChange = (value: string) => {
-      if(value == "Make..") {
-        setMake(carMakesData[0].id)
-        setFilteredCarModels([carModelsData[0]])
+      if (value === "Make..") {
+        setMake(carMakesData[0].id);
+        setFilteredCarModels([carModelsData[0]]);
       } else {
         setMake(value);
       }
     };
-
-    useEffect(() => {
-      const filteredModels = carModelsData.filter((model) => model.make === make);
-      setFilteredCarModels(filteredModels as any);
-    }, [carModelsData, make])
-    
+        
     const handleModelChange = (value: string) => {
       setModel(value)
       console.log('model', value)
@@ -141,6 +226,7 @@ export const ListingCreate = () => {
       }
     }
 
+
     const handleColorChange = (value: string) => {
       if (value == "Color.."){
         setColor(colorsData[0].id)
@@ -192,24 +278,21 @@ export const ListingCreate = () => {
         setPhotos([...photos])
       }
     }
-
+      
     const resetState = () => {
       setInputFieldsError("");
       setSelectMenusError("");
       setTitleDescriptionError("");
     };
 
+    const slug = item.slug
 
     const handleSubmit = useCallback (async() => {
         console.log('photos', photos)
         setIsLoading(true)
         resetState();
 
-        // const photosUrls = photos.map((photo) => photo.info.secure_url);
-
-        // const photosToString = JSON.stringify(photosUrls);
-
-        await axios.post('/api/listings', {
+        await axios.post('/api/listings/edit', {
               title: `${title}`,
               body: ``,
               make: `${make}`,
@@ -223,11 +306,10 @@ export const ListingCreate = () => {
               transmission: `${transmission}`,
               mileage: `${mileage}`,
               power: `${power}`,
-              slug: '',
+              slug: slug,
               variant: `${variant}`,
               color: `${color}`,
               description: `${description}`,
-              // photos: photosUrls as string[],
               photos: photos,
             }).then((callback) => {
               console.log(callback)
@@ -241,9 +323,9 @@ export const ListingCreate = () => {
                 const { data } = callback.response.data
                 // resetState();
                 console.log(callback)
-                setInputFieldsError(data?.inputField)
-                setSelectMenusError(data?.selectMenu)
-                setTitleDescriptionError(data?.titleDescription)
+                setInputFieldsError(data.inputField)
+                setSelectMenusError(data.selectMenu)
+                setTitleDescriptionError(data.titleDescription)
             })
             .finally(() => setIsLoading(false))    
           }, [title, description, make, model,
@@ -251,10 +333,9 @@ export const ListingCreate = () => {
         price, fuel, transmission, mileage, power,
         color, photos])
 
-
-    const isValidOption = (selectedValue: string, options: OptionsProps[], targetId: string) => {
-      return options.find(option => option.id === selectedValue)?.id === targetId || '';
-    };
+    // const isValidOption = (selectedValue: string, options: OptionsProps[], targetId: string) => {
+    //   return options.find(option => option.id === selectedValue)?.id === targetId || '';
+    // };
     
     return (
       <div>
@@ -284,12 +365,14 @@ export const ListingCreate = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-16">
         <SelectMenuCustom
           options={carMakesData}
+          dynamicId={makeId}
           value={make}
           onChange={handleMakeChange}
           error={(make === '0' || make === '') ? !!selectMenusError : false}
           />
         <SelectMenuCustom
           options={filteredCarModels}
+          dynamicId={modelId}
           value={model}
           onChange={handleModelChange}
           error={(model === '0' || model === '') ? !!selectMenusError : false}
@@ -297,6 +380,7 @@ export const ListingCreate = () => {
         <InputField label='Variant' value={variant} placeholder='Variant..(M3, GTI)' onChange={handleVariantChange}/>
         <SelectMenuCustom
           options={transmissionData}
+          dynamicId={transmissionId}
           value={transmission}
           onChange={handleTransmissionChange}
           error={(transmission === '0' || transmission === '') ? !!selectMenusError : false}
@@ -304,36 +388,42 @@ export const ListingCreate = () => {
           />
         <SelectMenuCustom
           options={fuelData}
+          dynamicId={fuelId}
           value={fuel}
           onChange={handleFuelChange}
           error={(fuel === '0' || fuel === '') ? !!selectMenusError : false}
           />
         <SelectMenuCustom
           options={yearsData}
+          dynamicId={yearId}
           value={year}
           onChange={handleYearChange}
           error={(year === '0' || year === '') ? !!selectMenusError : false}
         />
         <SelectMenuCustom
           options={categoryData}
+          dynamicId={coupeId}
           value={coupe_type}
           onChange={handleCategoryChange}
           error={(coupe_type === '0' || coupe_type === '') ? !!selectMenusError : false}
         />
         <SelectMenuCustom
           options={numDoorsData}
+          dynamicId={numDoorsId}
           value={number_doors}
           onChange={handleDoorsChange}
           error={(number_doors === '0' || number_doors === '') ? !!selectMenusError : false}
         />
         <SelectMenuCustom
           options={conditionData}
+          dynamicId={conditionId}
           value={condition}
           onChange={handleConditionChange}
           error={(condition === '0' || condition === '') ? !!selectMenusError : false}
         />
         <SelectMenuCustom
           options={colorsData}
+          dynamicId={colorId}
           value={color}
           onChange={handleColorChange}
           error={(color === '0' || color === '') ? !!selectMenusError : false}
@@ -372,4 +462,4 @@ export const ListingCreate = () => {
       </div>
     )};
 
-export default ListingCreate
+export default ListingEditForm

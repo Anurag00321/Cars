@@ -8,9 +8,6 @@ export const Profile = async () => {
 
     return (
         <div>
-        <button className="border bg-british-green-4">
-            My listings
-        </button>
         <ListingsList initialItems={currentUserListings} profile={true}/>
         </div>
     )

@@ -1,7 +1,7 @@
 import getListingBySlug from "@/app/actions/getListingBySlug"
 import SlugListingComp from "./components/SlugListing"
 import ListingsList from "../components/ListingsList"
-import ListingPage from "../components/ListingPage"
+import ListingPage from "./components/ListingPage"
 
 interface Params {
     slug: string
