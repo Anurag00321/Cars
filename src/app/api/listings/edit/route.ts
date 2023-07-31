@@ -154,10 +154,7 @@ export async function POST(
             slug: slug,
             variant: variant,
             body: description,
-            photos: photos,
-            user: {
-                connect: { id: currentUser.id },
-            }
+            photos: photos
         },
         
     })

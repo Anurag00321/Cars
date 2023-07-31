@@ -108,7 +108,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile}) => {
           <p className="mb-2 text-base dark:text-gray-300 text-gray-700">{item.body}</p>
           <div className="flex items-center">
             <p className="mr-2 text-lg font-semibold text-gray-900 dark:text-white">€{item.price}</p>
-            <button onClick={() => handleOnClickEdit(item.slug)}  className="ml-2 px-2 py-2 border-2 bg-white border-red-950">Edit</button>
+            <button onClick={() => handleOnClickEdit(item.slug)}  className="text-white ml-40 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 dark:bg-light-green dark:hover:bg-british-green-4 dark:focus:ring-british-green-2">Edit</button>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile}) => {
   <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
   {items?.map((item) => (
     <div 
-    // onClick={async () => (await setSelectedSlug(item.slug), handleOnClick())} 
+    onClick={() => handleOnClick(item.slug)} 
     key={item.id} className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
       <img className="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1599076311391-28adf17fade5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product Image" />
       <div className="p-4">

@@ -55,9 +55,10 @@ export const Register = () => {
       const data = {email, username, password, confirmPassword};
       signIn('credentials', {
         ...data,
-        redirect: false,
+        // redirect: false,
       });
       router.push('/')
+      setIsLoading(false)
     }
     }
   }, [email, username, password, confirmPassword])

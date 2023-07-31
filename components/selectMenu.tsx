@@ -28,8 +28,8 @@ interface SelectMenuProps {
 }
 
 export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, value, onChange, onClick }) => {
-  const [selected, setSelected] = useState(value as any || Placeholders?.[0]);
-  const [itemsData, setItemsData] = useState(data?.[0] || undefined)
+  const [selected, setSelected] = useState(value as any || Placeholders?.[0] || data?.[0].id);
+  // const [itemsData, setItemsData] = useState(data?.[0] || undefined)
 
   const getFieldContent = (item: Listing, field: keyof Listing) => {
     const fieldValue = item?.[field];
@@ -44,16 +44,16 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
   const handleItemClick = (item: Listing | string) => {
     const selectedValue = typeof item === 'string' ? item : getFieldContent(item as Listing, field);
     setSelected(selectedValue);
-    onChange(selectedValue);
-    onClick(selectedValue);
+    onChange(selectedValue as string);
+    onClick(selectedValue as string);
   };
 
   return (
-    <Listbox value={itemsData} onChange={setSelected}>
+    <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
           <div className="mt-1 relative">
-            <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-british-green-4 focus:border-british-green-4 sm:text-sm">
               <span className="block truncate">{getFieldContent(selected, field)}</span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -73,7 +73,7 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
                     key={item.id}
                     className={({ active }) =>
                       classNames(
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        active ? 'text-white bg-british-green-0' : 'text-gray-900',
                         'cursor-default select-none relative py-2 pl-3 pr-9'
                       )
                     }
@@ -89,7 +89,7 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
                         {selected ? (
                           <span
                             className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
+                              active ? 'text-white' : 'text-british-green-0',
                               'absolute inset-y-0 right-0 flex items-center pr-4'
                             )}
                           >

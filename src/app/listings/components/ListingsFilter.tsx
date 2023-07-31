@@ -93,7 +93,7 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
     queryParams.append('price', price);
   
     router.push(`/listings?${queryParams.toString()}`);
-  };  
+  };
 
   const transmissionType = [
       // placeholder
@@ -125,15 +125,20 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
   return (
     <FilterContext.Provider value={filteredItems}>
     <div>
-      <div className="bg-slate-950">
-        <div className="flex absolute inset-0 mx-auto max-w-5xl justify-center max-h-lg bg-slate-950 bg-opacity-50 rounded-2xl">
+      <div className="z-0 relative bg-slate-950">
+        <img
+        className="w-full max-h-[32rem] object-cover opacity-100"
+        src="https://images.unsplash.com/photo-1584125630041-90db781c7068?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+        alt="Cover Image"
+      />
+      <div className="flex absolute inset-0 mx-auto max-w-5xl justify-center max-h-lg bg-slate-950 bg-opacity-50 rounded-2xl">
         <div className="grid grid-cols-2 gap-x-12 max-w-3xl max-h-md px-16 py-8 pt-24 max-h-lg">
             <SelectMenu items={items} data={items} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange}/>
             <SelectMenu items={filteredItems} data={filteredItems} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange}/>
             <SelectMenuCustom options={fuelType} field="fuel" value={fuel} onChange={handleFuelChange}/>
             <SelectMenuCustom options={transmissionType} field="transmission" value={transmission} onChange={handleTransmissionChange}/>
             <SelectMenuCustom options={yearsMap} field="year" value={year} onChange={handleYearChange}/>
-            <InputField label='Price' value={price} placeholder='Price..' onChange={handlePriceChange}/>
+            <InputField type="text" label='Price' value={price} placeholder='Price..' onChange={handlePriceChange}/>
             {/* <input
             value={price}
             onChange={handlePriceChange}

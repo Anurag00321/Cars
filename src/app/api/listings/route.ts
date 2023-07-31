@@ -160,6 +160,17 @@ export async function POST(
         
     })
 
+    // const listingField = await prisma.user.update({
+    //   where: {
+    //     id: currentUser.id,
+    //   },
+    //   data: {
+    //     listings: {
+    //       connect: { id: listing.id },
+    //     },
+    //   },
+    // });
+            
     console.log('listing created:', listing)
     // console.log('nextresp:',NextResponse.json(listing))
     return NextResponse.json(listing)

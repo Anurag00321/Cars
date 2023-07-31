@@ -21,11 +21,11 @@ const Home: React.FC<ListingsListProps> = async ({initialItems}) => {
 
   return (
   <main className="relative w-full h-full">
-    <img
-      className="w-full max-h-[32rem] object-cover opacity-80"
+    {/* <img
+      className="static w-full max-h-[32rem] object-cover opacity-80"
       src="https://images.unsplash.com/photo-1584125630041-90db781c7068?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
       alt="Cover Image"
-    />
+    /> */}
   <ListingsFilter initialItems={listings}/>
   </main>
   )

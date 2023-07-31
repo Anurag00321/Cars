@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, UserRole } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from 'next/server';
@@ -69,12 +69,13 @@ export async function POST(
 
     if (body.password === body.confirmPassword) {
         const hashedPassword = await bcrypt.hash(password, 12);
-
+    
     const user = await prisma?.user.create({
       data: {
         email,
         username,
-        hashedPassword
+        hashedPassword,
+        role: "USER"
       }
     });
 

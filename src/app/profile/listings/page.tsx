@@ -1,6 +1,6 @@
-import getCurrentUser from "../actions/getCurrentUser";
-import getUserListings from "../actions/getUserListings";
-import ListingsList from "../listings/components/ListingsList";
+import getCurrentUser from "../../actions/getCurrentUser";
+import getUserListings from "../../actions/getUserListings";
+import ListingsList from "../../listings/components/ListingsList";
 
 export const Profile = async () => {
     
