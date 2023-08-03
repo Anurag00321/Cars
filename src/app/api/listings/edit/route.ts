@@ -97,41 +97,7 @@ export async function POST(
       email: currentUser.email,
     },
     });
-    
-    // const generateUniqueSlug = async () => {
-    //   let slug = `${make.toLowerCase()}-${model.toLowerCase()}`;
-    
-    //   if (variant) {
-    //     slug += `-${variant.toLowerCase()}`;
-    //   }
-    
-    //   let id = 0;
-    //   let isUnique = false;
-    
-    //   while (!isUnique) {
-    //     const existingListing = await prisma.listing.findFirst({
-    //       where: {
-    //         slug,
-    //       },
-    //     });
-    
-    //     if (!existingListing) {
-    //       isUnique = true;
-    //     } else {
-    //       id++;
-    //       if (variant) {
-    //         slug = `${make.toLowerCase()}-${model.toLowerCase()}-${variant.toLowerCase()}-${id}`;
-    //       } else {
-    //         slug = `${make.toLowerCase()}-${model.toLowerCase()}-${id}`;
-    //       }
-    //     }
-    //   }
-    
-    //   return slug;
-    // };
-
-    // const slug = await generateUniqueSlug();
-    
+        
     const listing = await prisma.listing.update({
       where: {
           slug: slug

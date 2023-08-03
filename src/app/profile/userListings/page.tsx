@@ -8,9 +8,6 @@ import ProfileButtons from "../dashboard/components/profileButtons";
 export const Profile = async () => {
     
     const listings = await getListings()
-    // const searchParams = useSearchParams()
-
-    // const params = searchParams.get(`dashboard`)
 
     return (
         <div>

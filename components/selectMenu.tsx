@@ -70,7 +70,7 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
               <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                 {data?.map((item) => (
                   <Listbox.Option
-                    key={item.id}
+                    key={item?.id}
                     className={({ active }) =>
                       classNames(
                         active ? 'text-white bg-british-green-0' : 'text-gray-900',

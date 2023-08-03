@@ -2,13 +2,9 @@
 
 import { ArrowSmallDownIcon, ArrowSmallUpIcon } from '@heroicons/react/24/solid'
 import { Listing } from '@prisma/client';
-import { useState } from 'react' 
+import { createContext, useEffect, useState } from 'react' 
+import { useRouter } from 'next/navigation';
 
-// const stats = [
-//   { name: 'Total Subscribers', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
-//   { name: 'Avg. Open Rate', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
-//   { name: 'Avg. Click Rate', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
-// ]
 
 function classNames(...className: any) {
   return className.filter(Boolean).join(' ')
@@ -16,26 +12,34 @@ function classNames(...className: any) {
 
 interface ReportCardsProps {
     initialItems: Listing[];
-    totalListings: number
+    totalListings: number;
+    totalUsers: number;
+    popularMake: any;
 }
 
-export const ReportCards: React.FC<ReportCardsProps> = ({initialItems, totalListings}) => {
-    
-    const [items, setItems] = useState(initialItems)
-    const [total, setTotal] = useState(totalListings)
 
-    const item = initialItems[0]
+export const ReportCards: React.FC<ReportCardsProps>  = ({initialItems, totalListings, totalUsers, popularMake}) => {
+  
 
-    const stats = [
-        { name: 'Total listings', stat: `${total}`, previousStat: '70,946', change: '12%', changeType: 'increase' },
-        { name: 'Avg. Open Rate', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
-        { name: 'Avg. Click Rate', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
-    ]
-      
+  const [items, setItems] = useState(initialItems)
+  const [listingsCount, setListingsCount] = useState(totalListings)
+  const [usersCount, setUsersCount] = useState(totalUsers)
+  const [topMake, setTopMake] = useState(popularMake)
+
+  // console.log(dateItems)
+
+  const item = initialItems[0]
+
+  const stats = [
+      { name: 'Total listings', stat: `${listingsCount}`, previousStat: '70,946', change: '12%', changeType: 'increase' },
+      { name: 'Total users', stat: `${usersCount}`, previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
+      { name: 'Top Make', stat: `${topMake}`, previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
+      // { name: 'Listings created', stat: `${dateItems}`, previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
+  ]
 
     return (
-    <div>
-      <h3 className="text-lg leading-6 font-medium text-gray-900">Last 30 days</h3>
+      <div>
+      <h3 className="text-lg leading-6 font-medium text-gray-900">Since start</h3>
       <dl className="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
         {stats.map((item) => (
           <div key={item.name} className="px-4 py-5 sm:p-6">
@@ -43,7 +47,7 @@ export const ReportCards: React.FC<ReportCardsProps> = ({initialItems, totalList
             <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
               <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                 {item.stat}
-                <span className="ml-2 text-sm font-medium text-gray-500">from {item.previousStat}</span>
+                {/* <span className="ml-2 text-sm font-medium text-gray-500">from {item.previousStat}</span> */}
               </div>
 
               {/* <div
