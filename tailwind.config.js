@@ -25,9 +25,10 @@ module.exports = {
         'beige': '#D0D6B3',
         'orange-1': '#FF6B35',
         'orange-2': '#DF6B35',
+        'orange-3': '#f5a105',
+        'orange-4': '#DE9204',
         'light-purple': '#DECDF5',
         'light-purple-2': '#6A5B6E',
-        'test': '#f5a105'
       },  
     },
   },

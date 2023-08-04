@@ -37,8 +37,9 @@ export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
       setIsAdmin(true)
     } else {
       setIsAdmin(false)
-    }  
-  }, [status]);
+    }
+    router.prefetch('/')
+  }, [status, router]);
 
   const [isAdmin, setIsAdmin] = useState(false)
   
@@ -47,10 +48,14 @@ export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
     router.push('/')
   };
   
+  const handleLogoClick = () => {
+    router.push('/')
+  }
+
   return (
     <nav className="z-10 relative border-gray-200 bg-british-green-1">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="/" className="flex items-center">
+    <a href="/" onClick={handleLogoClick} className="flex items-center">
         {/* <img src="" className="h-8 mr-3" alt="Logo" /> */}
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">flatSix</span>
     </a>

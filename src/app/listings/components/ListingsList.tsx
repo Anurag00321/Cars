@@ -9,7 +9,7 @@ import InputField from "../../../../components/inputField";
 // import { getUserEmailData } from "@/app/actions/_actions";
 import getUserListingsAdmin from "@/app/actions/getUserEmail";
 import axios from "axios";
-import { searchUserListings } from "@/app/actions/_actions";
+// import { searchUserListings } from "@/app/actions/_actions";
 
 interface ListingsListProps {
     initialItems: Listing[];

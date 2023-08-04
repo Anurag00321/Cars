@@ -261,7 +261,7 @@ export const GetOptions = () => {
         { label: 'Besta', id: '140', make: 'Kia' },
         { label: 'Carens', id: '141', make: 'Kia' },
         { label: 'Carnival', id: '142', make: 'Kia' },
-        { label: 'Cee`d', id: '143', make: 'Kia' },
+        { label: 'Ceed', id: '143', make: 'Kia' },
     ]);
 
     return {carMakes, carModels, yearsMap, fuelType, transmissionType, categoryType, numDoors, condition, colors}

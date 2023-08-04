@@ -31,10 +31,12 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({currentUser}) => {
   useEffect(() => {
     if(userRole === "ADMIN") {
       setIsAdmin(true)
+      router.prefetch('/profile/userListings');
+      router.prefetch('/profile/reports');  
     } else {
       setIsAdmin(false)
+      router.prefetch("/profile/listings");
     }
-    console.log(username)
   }, []);
 
   const handleLogout = () => {
