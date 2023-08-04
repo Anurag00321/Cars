@@ -18,7 +18,6 @@ export const Reports = async () => {
     const totalListings = await getListingsCount()
     const totalUsers = await getUsersCount()
     const popularMake = await GetPopularMake()
-    // const getDate = await GetDateFilter()
     
     const GetDateFilter = async (formData: FormData) => {
         "use server"
@@ -30,12 +29,7 @@ export const Reports = async () => {
 
         const currentDate = new Date();
         const dateSub = await subDays(currentDate, +searchQuery!);
-        
-        // const twoWeeksAgo = currentDate.setDate(currentDate.getDate() - daysAgo)
-        // const twoWeeksAgoString = new Date(twoWeeksAgo)
-      
-        // console.log('twotweeksstr', twoWeeksAgoString)
-      
+              
         const date = await prisma.listing.findMany({
           select: {
             createdAt: true,
