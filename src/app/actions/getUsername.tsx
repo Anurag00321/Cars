@@ -20,7 +20,7 @@ export const getUsername = async () => {
       const username = user?.name
     
     return (
-        <p>{username}</p>
+        username
     )
 
 }}

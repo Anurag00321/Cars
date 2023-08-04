@@ -21,6 +21,8 @@ export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
 
   const router = useRouter();
 
+  const user = currentUser
+
   const userRole = currentUser?.role
 
   const [sessionStatus, setSessionStatus] = useState(false)

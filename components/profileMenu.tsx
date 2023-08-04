@@ -6,6 +6,7 @@ import { UserCircleIcon } from '@heroicons/react/24/outline'
 import { User } from '@prisma/client'
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import getUsername from '@/app/actions/getUsername'
 
 
 function classNames(...className: any) {
@@ -14,6 +15,7 @@ function classNames(...className: any) {
 
 interface ProfileMenuProps {
   currentUser: User
+  username?: string
 }
 
 export const ProfileMenu: React.FC<ProfileMenuProps> = ({currentUser}) => {
@@ -22,14 +24,17 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({currentUser}) => {
 
   const [isAdmin, setIsAdmin] = useState(false)
 
-  const userRole = currentUser.role
+  const userRole = currentUser?.role
+
+  const username = currentUser?.username
 
   useEffect(() => {
     if(userRole === "ADMIN") {
       setIsAdmin(true)
     } else {
       setIsAdmin(false)
-    }  
+    }
+    console.log(username)
   }, []);
 
   const handleLogout = () => {
@@ -71,6 +76,21 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({currentUser}) => {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+          <div className="py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  onClick={handleMyListingsClick}
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm cursor-pointer'
+                  )}
+                >
+                  Logged in as {username}
+                </a>
+              )}
+            </Menu.Item>
+            </div>
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (

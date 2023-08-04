@@ -3,12 +3,13 @@
 import { Listing } from "@prisma/client";
 import { useContext, useState, useEffect, useCallback } from 'react';
 import { ListingsFilter, FilterContext } from "./ListingsFilter";
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import getListingBySlug from "@/app/actions/getListingBySlug";
 import InputField from "../../../../components/inputField";
 // import { getUserEmailData } from "@/app/actions/_actions";
 import getUserListingsAdmin from "@/app/actions/getUserEmail";
 import axios from "axios";
+import { searchUserListings } from "@/app/actions/_actions";
 
 interface ListingsListProps {
     initialItems: Listing[];
@@ -40,23 +41,6 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   const price = searchParams.get(`price`)
   const fuel = searchParams.get(`fuel`)
   const transmission = searchParams.get(`transmission`)
-
-
-  // useEffect(() => {
-  //   const filteredMake = items?.filter(item => item.make === make);
-  //   const filteredModel = items?.filter(item => item.model === model);
-  //   const filteredFuel = items?.filter(item => item.fuel === fuel);
-  //   const filteredTransmission = items?.filter(item => item.transmission === transmission);
-  //   const filteredYear = items?.filter(item => Number(item.year) >= Number(year));
-  //   const filteredPrice = items?.filter(item => Number(item.price) <= Number(price));
-  //   make ? setFilteredItems(filteredMake) : ""
-  //   model ? setFilteredItems(filteredModel) : ""
-  //   fuel ? setFilteredItems(filteredFuel) : ""
-  //   transmission ? setFilteredItems(filteredTransmission) : ""
-  //   year ? setFilteredItems(filteredYear) : ""
-  //   price ? setFilteredItems(filteredPrice) : ""
-  //   // console.log(filteredItems)
-  // }, [items]);
 
   useEffect(() => {
     const filterData = items?.filter((item) => {
@@ -98,6 +82,24 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
     setSelectedSlugEdit(slug);
   };
   
+  const [slug, setSlug] = useState('')
+
+  const handleDelete = async (slug: string) => {
+    setSlug(slug)
+    await axios.delete('/api/listings/delete', {
+      data: { slug }
+    }).then((callback) => {
+      if (callback.data.error) {
+        console.log('Error while trying to delete listing:', callback)
+      }
+      else if (callback) {
+        console.log('done', callback)
+        // router.push('/')
+      }
+    })
+    .finally(() => console.log('Listing deleted successfully!'))
+  }
+
   useEffect(() => {
     if (selectedSlug !== '') {
       router.push(`/listings/${selectedSlug}`);
@@ -105,56 +107,13 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
     if (selectedSlugEdit !== '') {
       router.push(`/listings/${selectedSlugEdit}/edit`);
     }
-    console.log(filteredItems)
   }, [selectedSlug, selectedSlugEdit, filteredItems]);  
 
-  const [email, setEmail] = useState('')  
-  const [emailListing, setEmailListings] = useState<Listing[]>([])
-
-
-    // const handleSubmit = async () => {
-    //   await axios.get(`/api/profile/userListings?email=${email}`, {
-    //       //  data: email      
-    //   }).then((callback) => {
-    //         if (callback.data.error) {
-    //           console.log('Email listings error:', callback.data.error)
-    //         }
-    //         else if (callback.data) {
-    //           console.log('done', callback.data)
-    //           // router.push('/')
-    //         }
-    //       })
-    //       .finally(() => console.log('finally'))
-    //     }  
-
-    const [slug, setSlug] = useState('')
-
-      const handleDelete = async (slug: string) => {
-        setSlug(slug)
-    await axios.delete('/api/listings/delete', {
-      data: { slug }
-    }).then((callback) => {
-          if (callback.data.error) {
-            console.log('Error while trying to delete listing:', callback)
-          }
-          else if (callback) {
-            console.log('done', callback)
-            // router.push('/')
-          }
-        })
-        .finally(() => console.log('Listing deleted successfully!'))
-      }
-
+  
 
     if(profile == true) {
       return (
       <>
-      {/* <form 
-      // action={getUserEmailData}
-      >
-      <input placeholder="User email.." name="email" onChange={(e) => setEmail(e.target.value)}></input>
-      <button onClick={handleSubmit}>Submit email</button>
-      </form> */}
       <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
       {items?.map((item) => (
         <div 
