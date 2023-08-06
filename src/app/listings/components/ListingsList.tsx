@@ -9,6 +9,8 @@ import InputField from "../../../../components/inputField";
 // import { getUserEmailData } from "@/app/actions/_actions";
 import getUserListingsAdmin from "@/app/actions/getUserEmail";
 import axios from "axios";
+import Link from "next/link";
+import Pagination from "../../../../components/pagination";
 // import { searchUserListings } from "@/app/actions/_actions";
 
 interface ListingsListProps {
@@ -16,11 +18,25 @@ interface ListingsListProps {
     updatedItems?: Listing[];
     profile?: boolean;
     featured?: boolean;
+    searchParams: { page: string}
+    total?: Listing[]
+    filteredListings: Listing[]
 }
 
-const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updatedItems, featured}) => {
+const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updatedItems, featured, searchParams: { page }, total, filteredListings}) => {
+
+  const currentPage = parseInt(page)
+
+  const pageSize = 6
+
+  const totalItemCount = total
+
+  const itemsTest = useContext(FilterContext)
+
+  // const totalPages = Math.ceil(totalItemCount / pageSize)
 
   const [items, setItems] = useState(initialItems)
+  const [totalItems, setTotalItems] = useState(total || [])
   const [updatedItemsState, setUpdatedItemsState] = useState(updatedItems)
   
   const initialFilters = useContext(FilterContext)
@@ -28,6 +44,8 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   const [filteredState, setFilteredState] = useState(initialFilters || [])
 
   const [filteredItems, setFilteredItems] = useState(filteredState || []);
+
+  const [filteredPagination, setFilteredPagination] = useState(filteredListings || []);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -53,8 +71,12 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   
       return isMakeMatch && isModelMatch && isFuelMatch && isTransmissionMatch && isYearMatch && isPriceMatch;
     });
-  
+    if(totalItems) {
+    if(totalItems?.length > 0) {
+      setTotalItems(filterData)
+    }} else {
     setFilteredItems(filterData);
+    }
   }, [items, make, model, fuel, transmission, year, price]);  
 
   if(filteredItems.length < 0) {
@@ -109,7 +131,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
     }
   }, [selectedSlug, selectedSlugEdit, filteredItems]);  
 
-  
+    
 
     if(profile == true) {
       return (
@@ -173,7 +195,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   return (
   <>
   <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
-  {items?.map((item) => (
+  {filteredPagination?.map((item) => (
     <div 
     onClick={() => handleOnClick(item.slug)} 
     key={item.id} className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
@@ -197,7 +219,8 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   return (
   <>
       <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
-  {filteredItems?.map((item) => (
+        
+  {totalItems?.map((item) => (
     <div 
     onClick={() => handleOnClick(item.slug)} 
      key={item.id} className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
@@ -216,6 +239,31 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   </>
   )
   }
+
+  return (
+    <>
+      <p className="text-black">TEST</p>
+    <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
+      <p className="text-black">TEST</p>
+    {totalItems?.map((item) => (
+      <div 
+      onClick={() => handleOnClick(item.slug)} 
+      key={item.id} className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+        <img className="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1599076311391-28adf17fade5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product Image" />
+        <div className="p-4">
+          <h2 className="mb-2 text-lg font-medium dark:text-white text-gray-900">{item.title}</h2>
+          <h3 className="mb-2 text-md font-medium dark:text-white text-gray-900">{item.year}, {item.fuel}, {item.mileage}</h3>
+          <p className="mb-2 text-base dark:text-gray-300 text-gray-700">{item.body}</p>
+          <div className="flex items-center">
+            <p className="mr-2 text-lg font-semibold text-gray-900 dark:text-white">€{item.price}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+    </div>
+    </>
+    )
+  
 }
 
 export default ListingsList

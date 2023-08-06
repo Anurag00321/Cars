@@ -16,13 +16,9 @@ const Home: React.FC<ListingsListProps> = async ({initialItems}) => {
   const listings = await getListings();
   const currenUser = await getCurrentUser() 
 
-  const items2 = ListingsList.name
-
-  // const [items, setItems] = useState(initialItems)
-
   return (
   <main className="absolute w-full h-full bg-beige">
-      <Landing currentUser={currenUser!}/>
+    <Landing currentUser={currenUser!}/>
     <ListingsFilter initialItems={listings}/>
     {/* <ListingsList initialItems={listings} featured={true}/> */}
   </main>

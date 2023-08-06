@@ -2,10 +2,12 @@ import prisma from "@/app/libs/prismadb";
 
 export const GetPopularMake = async (date?: Date) => {
 
+  const currentDate = new Date()
+
   const result = await prisma.listing.groupBy({
     where: {
       createdAt: {
-        gte: date ? date : ""
+        gte: date ? date : currentDate
       }
     },
     by: ['make'],

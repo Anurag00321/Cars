@@ -107,12 +107,13 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
     queryParams.append('transmission', transmission);
     queryParams.append('price', price);
   
-    router.push(`/listings?${queryParams.toString()}`);
+    router.push(`/listings?&page=1${queryParams.toString()}`);
+    // router.push(`/listings?page=1`);
   };
 
   return (
     <FilterContext.Provider value={filteredItems}>
-      <div className="lg:top-2/4 md:3/4 absolute inset-0 bottom-10">
+      <div className="absolute lg:top-2/4 md:top-2/4 sm:top-2/4 inset-0 bottom-10">
         <div className="flex absolute inset-0 mx-auto max-w-2xl h-full justify-center bg-british-green-3 bg-opacity-100 rounded-lg shadow-2xl">
           <div className="grid grid-cols-2 gap-x-12 max-w-4xl max-h-md px-4 py-16 pt-24">
             <SelectMenu items={items} data={items} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange} />
