@@ -207,7 +207,7 @@ export const GetOptions = () => {
         { label: 'Accent', id: '87', make: 'Hyundai' },
         { label: 'Atos', id: '88', make: 'Hyundai' },
         { label: 'Atos Prime', id: '89', make: 'Hyundai' },
-        { label: 'Coupé', id: '90', make: 'Hyundai' },
+        { label: 'Coupe', id: '90', make: 'Hyundai' },
         { label: 'Elantra', id: '91', make: 'Hyundai' },
         { label: 'F-Pace', id: '92', make: 'Jaguar' },
         { label: 'F-Type', id: '93', make: 'Jaguar' },

@@ -14,7 +14,7 @@ interface ListingsListProps {
 const Home: React.FC<ListingsListProps> = async ({initialItems}) => {
 
   const listings = await getListings();
-  const currenUser = await getCurrentUser() 
+  const currenUser = await getCurrentUser()
 
   return (
   <main className="absolute w-full h-full bg-beige">
