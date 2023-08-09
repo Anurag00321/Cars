@@ -20,7 +20,7 @@ interface ListingsListProps {
     featured?: boolean;
     // searchParams: { page: string}
     total?: Listing[]
-    filteredListings: Listing[]
+    filteredListings?: Listing[]
 }
 
 const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updatedItems, featured, 

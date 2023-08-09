@@ -34,7 +34,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing}) => {
         <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
         {listing?.map((item) => (
           <div 
-          onClick={() => setSelectedSlug(item.slug)} 
+          onClick={() => setSelectedSlug(item.slug)}
           key={item.id} className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
             <img className="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1599076311391-28adf17fade5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product Image" />
             <div className="p-4">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { ReactEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import GetOptions from '@/app/actions/getOptions'
 import { XCircleIcon, ArrowUpOnSquareIcon } from '@heroicons/react/20/solid'
 import { CldUploadButton } from 'next-cloudinary';
@@ -9,7 +9,26 @@ import { Listing } from '@prisma/client';
 import SelectMenuCustom from '../../../../../../components/selectMenuCustom';
 import InputField from '../../../../../../components/inputField';
 import getListingBySlug from '@/app/actions/getListingBySlug';
+import { useRouter } from 'next/navigation';
 
+import {
+  DndContext, 
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+
+import {
+  arrayMove,
+  horizontalListSortingStrategy,
+  rectSwappingStrategy,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import SortableItem from './SortableItem';
 
 interface OptionsProps {
   label: string;
@@ -33,6 +52,8 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
     const item = initialItems[0];
 
     const options = GetOptions()
+    
+    const router = useRouter()
 
     // const [itemColor, setItemColors] = useState('')
 
@@ -326,8 +347,10 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
                 setInputFieldsError(data.inputField)
                 setSelectMenusError(data.selectMenu)
                 setTitleDescriptionError(data.titleDescription)
-            })
-            .finally(() => setIsLoading(false))    
+              })
+              .finally(() => {
+              router.push(`/listings/${slug}`)
+              setIsLoading(false)})
           }, [title, description, make, model,
         year, coupe_type, number_doors, condition,
         price, fuel, transmission, mileage, power,
@@ -336,10 +359,58 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
     // const isValidOption = (selectedValue: string, options: OptionsProps[], targetId: string) => {
     //   return options.find(option => option.id === selectedValue)?.id === targetId || '';
     // };
+            
+
+    // const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+    //   const updatedCards = [...photos];
+    //   const [draggedCard] = updatedCards.splice(dragIndex, 1);
+    //   updatedCards.splice(hoverIndex, 0, draggedCard);
+    //   setPhotos(updatedCards);
+    // }, [photos]);
+  
+    //   const renderCard = useCallback(
+    //   (image: any, index: number) => {
+    //     return (
+    //       <img
+    //         key={image.id}
+    //         src={image}
+    //       />
+    //     )
+    //   },
+    //   [],
+    // )
+    // console.log('item.photos',item.photos)
     
+    const [photosData, setPhotosData] = useState(photos)
+
+    const sensors = useSensors(
+      useSensor(PointerSensor),
+      useSensor(KeyboardSensor, {
+        coordinateGetter: sortableKeyboardCoordinates,
+      })
+    );  
+      
+  function handleDragEnd(event: any) {
+    const {active, over} = event;
+    
+    if (active.id !== over.id) {
+      setPhotos((photos) => {
+        const oldIndex = photos.indexOf(active.id);
+        const newIndex = photos.indexOf(over.id);
+        
+        return arrayMove(photos, oldIndex, newIndex);
+      });
+    }
+  }
+      
     return (
-      <div>
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-16">
+      <>
+      <DndContext 
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      >
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-16">
       {(selectMenusError || inputFieldsError || titleDescriptionError
         ) && (
         <div className="rounded-md bg-red-50 p-4">
@@ -434,6 +505,14 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         <div className="sm:col-span-2 md:col-span-2 lg:col-span-3 space-y-8">
         <InputField label='Title' type="text" value={title} placeholder='Listing title..' onChange={handleTitleChange} error={(title === '') ? !!inputFieldsError : false}/>
         <InputField label='Description' type="text" value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger error={(description === '') ? !!inputFieldsError : false}/>
+        <SortableContext 
+        items={photos}
+        strategy={horizontalListSortingStrategy}
+        >
+        <div className='flex flex-row gap-8'>
+        {photos.map(photo => <SortableItem key={photo.id} id={photo}/>)}
+        </div>
+          </SortableContext>
         <div className="w-full">
           <CldUploadButton
           options={{ maxFiles: 6 }}
@@ -459,7 +538,8 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         </div>
         </div>
       </div>
-      </div>
+      </DndContext>
+      </>
     )};
 
 export default ListingEditForm

@@ -19,6 +19,7 @@ export const Landing: React.FC<LandingProps> = ({currentUser}) => {
     useEffect(() => {
         router.prefetch('/listings/create');
         router.prefetch('/signin')
+        router.prefetch('/listings')
     }, [router])
 
     const handleCreateOnClick = () => {

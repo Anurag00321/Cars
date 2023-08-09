@@ -4,6 +4,7 @@ import { Listing } from "@prisma/client";
 import { useContext, useState, useEffect } from 'react';
 import { ListingsFilter, FilterContext } from "../../components/ListingsFilter";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import ImageGallery from "./imageGallery";
 
 interface ListingPageProps {
     initialItems: Listing[];
@@ -21,7 +22,8 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems}) => {
       <p className="mt-8">{item.make}/{item.model}/{item.coupe_type}/Added: {item.createdAt.toString()}</p>
       <h2 className="mt-16 mb-6 font-bold">{item.title}</h2>
       <p className="ml-2 mt-40 absolute text-lg font-semibold text-gray-900 dark:text-orange-1">€{item.price}</p>
-      <img className="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1599076311391-28adf17fade5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product Image" />
+      <ImageGallery listing={items}/>
+      {/* <img className="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1599076311391-28adf17fade5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product Image" /> */}
       <p className="my-6 font-bold">Summary</p>
       <div className="grid grid-cols-3">
         <p className="">Car type: {item.coupe_type}</p>
