@@ -29,8 +29,15 @@ module.exports = {
         'orange-4': '#DE9204',
         'light-purple': '#DECDF5',
         'light-purple-2': '#6A5B6E',
-      },  
+      },
+      screens: {
+        'xs': {'max': '639px'},
+        'sm-md': {'min': '768px', 'max': '890px'},
+      }
     },
+    fontFamily: {
+      Coolvetica: ['Coolvetica', 'sans']
+    }
   },
   plugins: [
     require('@tailwindcss/typography'),

@@ -20,7 +20,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
               item.photos.map((image) => (
                 <Tab
                   key={image}
-                  className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
+                  className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 ring-british-green-4 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
                 >
                   {({ selected }) => (
                     <>
@@ -30,7 +30,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
                       </span>
                       <span
                         className={classNames(
-                          selected ? 'ring-indigo-500' : 'ring-transparent',
+                          selected ? 'ring-british-green-5' : 'ring-transparent',
                           'absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none'
                         )}
                         aria-hidden="true"

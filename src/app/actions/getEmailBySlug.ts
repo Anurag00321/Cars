@@ -1,7 +1,7 @@
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "./getCurrentUser";
 
-const getListingBySlug = async (
+const getEmailBySlug = async (
   slug: string
 ) => {
   try {
@@ -26,21 +26,11 @@ const getListingBySlug = async (
       }
     })
 
-    // const listingData = {
-    //   listing ? [listing] : [],
-    //   listingEmail
-    // }
-
-    // return (listingData);
-    
-    // return listing ? [{ listing, listingEmail }] : [];
-    // return listing ? [[listing], listingEmail] : [];
-    // return { listing, listingEmail };
-    return listing ? [listing] : [];
+    return listingEmail
   } catch (error: any) {
     console.log(error)
     return null;
   }
 };
 
-export default getListingBySlug;
+export default getEmailBySlug;

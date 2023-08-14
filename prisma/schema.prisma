@@ -80,7 +80,7 @@ model Listing {
   coupe_type   String
   number_doors String
   condition    String
-  price        String
+  price        Int
   fuel         String
   power        String
   transmission String

@@ -33,6 +33,7 @@ export async function POST(
     let inputFieldsError = "";
     let selectMenusError = "";
     let titleDescriptionError = "";
+    let photosError = "";
 
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Please sign in to create a new listing.', { status: 400 });
@@ -66,6 +67,10 @@ export async function POST(
       // throw new Error('Please enter the price of the vehicle.')
     };
 
+    if (photos.length < 1) {
+      photosError += "Please upload at least one photo for the vehicle."
+    }
+
     // check if two or more of the errors are true
     const dotCount = (value: any) => {
       return value.split('.').length - 1;
@@ -86,7 +91,7 @@ export async function POST(
     titleDescriptionError.trim().length > 0
   ) {
     return await NextResponse.json(
-      { data: { inputField: inputFieldsError, selectMenu: selectMenusError, titleDescription: titleDescriptionError } },
+      { data: { inputField: inputFieldsError, selectMenu: selectMenusError, titleDescription: titleDescriptionError, photos: photosError } },
       { status: 400 }
     );
     }

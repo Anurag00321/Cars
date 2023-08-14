@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 
 interface ListingCardProps {
     listing: Listing[]
+    anyFilters: boolean
 }
 
-export const ListingCard: React.FC<ListingCardProps> = ({listing}) => {
+export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters}) => {
 
     const router = useRouter();
 
@@ -16,7 +17,6 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing}) => {
     console.log(selectedSlug)
 
     // const [item, setItem] = useState(listing || [])
-
 
     useEffect (() => {
             const queryParams = new URLSearchParams('=');
@@ -29,9 +29,21 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing}) => {
             }
     }, [selectedSlug])
 
+    const checkFilters = () => {
+      if(anyFilters) {
+        return "Listings based on your search"
+      } else {
+        return "All listings"
+      }
+    }
+
+    const listingsText = checkFilters()
+
       return (
         <>
-        <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
+          <div className="flex flex-col items-center justify-center pt-20">
+          <p className="font-bold text-3xl font-rubik text-gray-900 pb-4">{listingsText}</p>
+        <div className="flex flex-row flex-wrap	max-w-6xl mx-auto gap-x-20 mb-20">
         {listing?.map((item) => (
           <div 
           onClick={() => setSelectedSlug(item.slug)}
@@ -47,6 +59,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing}) => {
             </div>
           </div>
         ))}
+        </div>
         </div>
         </>
         )      

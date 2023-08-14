@@ -2,6 +2,7 @@ import getListingBySlug from "@/app/actions/getListingBySlug"
 import SlugListingComp from "./components/SlugListing"
 import ListingsList from "../components/ListingsList"
 import ListingPage from "./components/ListingPage"
+import getEmailBySlug from "@/app/actions/getEmailBySlug"
 
 interface Params {
     slug: string
@@ -10,14 +11,19 @@ interface Params {
 export const SlugListing = async ({ params }: { params: Params }) => {
 
     const listing = await getListingBySlug(params.slug)
+    const userEmail = await getEmailBySlug(params.slug)
 
     if(!listing) {
         console.log('no listing')
     }
 
+    if(!userEmail) {
+        console.log('no user Email')
+    }
+
     return (
         <div>
-            <ListingPage initialItems={listing as any} />
+            <ListingPage initialItems={listing as any} listingEmail={userEmail}/>
         </div>
     )
 }

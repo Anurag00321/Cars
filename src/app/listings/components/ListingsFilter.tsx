@@ -9,6 +9,7 @@ import SelectMenuCustom from "../../../../components/selectMenuCustom";
 import { InputField } from "../../../../components/inputField";
 import Landing from "../../../../components/landing";
 import GetOptions from "@/app/actions/getOptions";
+import { unique } from "next/dist/build/utils";
 
 
 interface ListingsFilterProps {
@@ -46,11 +47,49 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
 
   const router = useRouter();
 
+  const [makeNoDupe, setMakeNoDupe] = useState<string[]>([])
+
   useEffect(() => {
     const filtered = items?.filter(item => item.make === make);
     setFilteredItems(filtered);
+  
+    console.log('uniqueModelsArray:', uniqueModelsArray);
   }, [make, items]);
+  
+      // Create a map to store unique models and their corresponding listing objects
+      const uniqueModelsMap = new Map<string, Listing>();
+      filteredItems.forEach(item => {
+        if (!uniqueModelsMap.has(item.model)) {
+          uniqueModelsMap.set(item.model, item);
+        }
+      });
+    
+      // Extract the values (listing objects) from the map to get uniqueModelsArray
+      const uniqueModelsArray = Array.from(uniqueModelsMap.values());  
 
+  const unique = [...new Set(items.filter(item => item.make))]
+
+  const uniqueItemsArray = unique?.filter(
+    (item, index, self) => index === self.findIndex(t => t.make === item.make)
+  );
+
+  // const uniqueModelsArray = filteredItems?.filter(
+  //   (item, index, self) => index === self.findIndex(t => t.make === item.model)
+  // );  
+
+// useEffect(() => {
+//   // Filter items based on selected make
+//   const filtered = items?.filter(item => item.make === make);
+
+//   // Get unique car makes from the filtered items
+//   const uniqueMakes = [...new Set(filtered?.map(item => item.make))];
+
+//   // Create an array of items with unique makes
+//   const uniqueItems = items?.filter(item => uniqueMakes.includes(item.make));
+
+//   setFilteredItems(uniqueItems);
+// }, [make, items]);
+  
   const handleMakeChange = (value: string) => {
     setMake(value);
     setModel('')
@@ -95,7 +134,7 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrice(event.target.value)
-    setFilteredItems(filteredItems.filter(item => item.price === price));
+    setFilteredItems(filteredItems.filter(item => item.price === +price));
   };
 
   const handleSubmit = () => {
@@ -111,22 +150,23 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
     // router.push(`/listings?page=1`);
   };
 
+
   return (
     <FilterContext.Provider value={filteredItems}>
-      <div className="absolute lg:top-2/4 md:top-2/4 sm:top-2/4 inset-0 bottom-10">
+    <div className="absolute xs:top-[20rem] sm:top-[24rem] md:top-[26rem] lg:top-[45%] mt-6 inset-0 bottom-10 ">
         <div className="flex absolute inset-0 mx-auto max-w-2xl h-full justify-center bg-british-green-3 bg-opacity-100 rounded-lg shadow-2xl">
-          <div className="grid grid-cols-2 gap-x-12 max-w-4xl max-h-md px-4 py-16 pt-24">
-            <SelectMenu items={items} data={items} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange} />
-            <SelectMenu items={filteredItems} data={filteredItems} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 max-w-4xl max-h-md px-4 py-8 sm:py-16 sm:pt-24">
+            <SelectMenu items={uniqueItemsArray} data={uniqueItemsArray} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange} />
+            <SelectMenu items={uniqueModelsArray} data={uniqueModelsArray} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange} />
             <SelectMenuCustom options={fuelType} field="fuel" value={fuel} onChange={handleFuelChange} />
             <SelectMenuCustom options={transmissionType} field="transmission" value={transmission} onChange={handleTransmissionChange} />
             <SelectMenuCustom options={yearsMap} field="year" value={year} onChange={handleYearChange} />
             <InputField type="text" label='Price' value={price} placeholder='Price..' onChange={handlePriceChange} />
-            <div className="col-span-2 flex justify-center">
+            <div className="sm:col-span-2 flex justify-center">
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="text-white focus:ring-4 focus:outline-none max-h-10 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center bg-orange-3 hover:bg-orange-4 dark:focus:ring-orange-4"
+                className="text-white focus:ring-4 focus:outline-none max-h-10 focus:ring-bg-orange-4 font-medium rounded-lg text-sm px-8 text-center bg-orange-3 hover:bg-orange-4 dark:focus:ring-orange-4"
               >
                 Submit
               </button>

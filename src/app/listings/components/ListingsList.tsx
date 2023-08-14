@@ -170,7 +170,10 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   if(featured === true) {
   return (
   <>
-  <div className="relative flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
+  {/* <div className="relative flex flex-col lg:flex-row max-[1074px]:gap-x-10 gap-x-2 xl:gap-x-20 mx-auto"> */}
+  <div className="flex flex-col items-center justify-center pt-28 md:pt-0 xl:pt-0">
+  <p className="pt-32 sm:pt-8 md:pt-16 font-bold text-3xl font-rubik text-gray-900">Featured listings</p>
+  <div className="relative flex flex-col lg:flex-row gap-x-2 xl:gap-x-20 mx-auto">
   {items.slice(-3)?.map((item) => (
     <div 
     onClick={() => handleOnClick(item.slug)} 
@@ -186,6 +189,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
       </div>
     </div>
   ))}
+  </div>
   </div>
   </>
   )

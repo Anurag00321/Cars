@@ -4,6 +4,7 @@ import ListingsList from "./components/ListingsList"
 import prisma from '../libs/prismadb'
 import Pagination from "../../../components/pagination";
 import ListingCard from "./components/ListingCard";
+import { Listing } from "@prisma/client";
 
 interface ListingsProps {
     searchParams: { page: string, make: string, model: string, 
@@ -23,17 +24,19 @@ export const Listings: React.FC<ListingsProps> = async ({searchParams:
     
     const filterData = async () => {
         
-        const skipCount = (currentPage - 1) * pageSize
+        const skipCount = await (currentPage - 1) * pageSize
         
+        const priceNum = parseInt(priceParam)
+
         const totalCount = await prisma.listing.findMany({
             skip: skipCount,
             take: pageSize,
-            orderBy: { id: 'desc'},
+            orderBy: { price: 'asc'},
             where: {
                 ...(makeParam && { make: { equals: makeParam } }),
                 ...(modelParam && { model: { equals: modelParam } }),
                 ...(yearParam && { year: { lte: yearParam } }),
-                ...(priceParam && { price: { gte: priceParam } }),
+                ...(priceParam && { price: { lte: parseInt(priceParam) } }),
                 ...(fuelParam && { fuel: { equals: fuelParam } }),
                 ...(transParam && { transmission: { equals: transParam } }),
             },
@@ -47,16 +50,28 @@ export const Listings: React.FC<ListingsProps> = async ({searchParams:
             ...(makeParam && { make: { equals: makeParam } }),
             ...(modelParam && { model: { equals: modelParam } }),
             ...(yearParam && { year: { lte: yearParam } }),
-            ...(priceParam && { price: { gte: priceParam } }),
+            ...(priceParam && { price: { lte: parseInt(priceParam) } }),
             ...(fuelParam && { fuel: { equals: fuelParam } }),
             ...(transParam && { transmission: { equals: transParam } }),
         },
     })
             
-    const filteredListings = await filterData()
+    const filteredListings: Listing[] = await filterData()
 
     const totalPages = Math.ceil(listingCount / pageSize)
-            
+
+    const allParams = [makeParam, modelParam, yearParam, priceParam, fuelParam, transParam]
+
+    const checkFilters = () => {
+        if (allParams.length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const filters = checkFilters()
+
     return (
         <div className="flex flex-col">
             {/* <ListingsList initialItems={listings}
@@ -64,7 +79,7 @@ export const Listings: React.FC<ListingsProps> = async ({searchParams:
             // total={totalCount} 
             searchParams={{page: '1'}}
             /> */}
-            <ListingCard listing={await filteredListings}/>
+            <ListingCard listing={await filteredListings} anyFilters={filters}/>
             <div className="flex-2">
             <Pagination currentPage={currentPage} totalPages={totalPages}/>
             </div>

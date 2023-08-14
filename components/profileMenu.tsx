@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useEffect, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
@@ -22,11 +21,11 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({currentUser}) => {
 
   const router = useRouter();
 
-  const [isAdmin, setIsAdmin] = useState(false)
-
-  const userRole = currentUser?.role
-
   const username = currentUser?.username
+
+  const [isAdmin, setIsAdmin] = useState(false)
+  
+  const userRole = currentUser?.role
 
   useEffect(() => {
     if(userRole === "ADMIN") {
