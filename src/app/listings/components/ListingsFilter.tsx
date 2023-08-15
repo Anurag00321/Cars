@@ -153,8 +153,8 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
 
   return (
     <FilterContext.Provider value={filteredItems}>
-    <div className="absolute xs:top-[20rem] sm:top-[24rem] md:top-[26rem] lg:top-[45%] mt-6 inset-0 bottom-10 ">
-        <div className="flex absolute inset-0 mx-auto max-w-2xl h-full justify-center bg-british-green-3 bg-opacity-100 rounded-lg shadow-2xl">
+    <div className="absolute xs:top-[20rem] sm:top-[24rem] md:top-[26rem] lg:top-[45%] lg:bottom-10 2xl:bottom-20 mt-6 inset-0 bottom-10 ">
+        <div className="flex absolute inset-0 mx-auto max-w-2xl h-full justify-center bg-british-green-3 bg-opacity-100 rounded-lg shadow-lg">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 max-w-4xl max-h-md px-4 py-8 sm:py-16 sm:pt-24">
             <SelectMenu items={uniqueItemsArray} data={uniqueItemsArray} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange} />
             <SelectMenu items={uniqueModelsArray} data={uniqueModelsArray} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange} />

@@ -2,21 +2,21 @@
 import { Listing } from "@prisma/client";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { DocumentMagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 interface ListingCardProps {
     listing: Listing[]
     anyFilters: boolean
+    anyListings: boolean
 }
 
-export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters}) => {
+export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters, anyListings}) => {
 
     const router = useRouter();
 
     const [selectedSlug, setSelectedSlug] = useState("")
 
     console.log(selectedSlug)
-
-    // const [item, setItem] = useState(listing || [])
 
     useEffect (() => {
             const queryParams = new URLSearchParams('=');
@@ -39,7 +39,37 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters}) =
 
     const listingsText = checkFilters()
 
+      // if there are no listings
+    if(anyListings) {
       return (
+        <div className='min-h-screen min-w-full flex items-center justify-center'>
+        <div className="bg-white min-h-full px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
+          <div className="max-w-max mx-auto">
+            <main className="sm:flex">
+              {/* <p className="text-4xl font-bold text-british-green-0 sm:text-5xl font-rubik">404</p> */}
+              <DocumentMagnifyingGlassIcon className="fill-british-green-0 w-12 h-12 "/>
+              <div className="sm:ml-6">
+                <div className="sm:border-l sm:border-gray-200 sm:pl-6">
+                  <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl font-rubik">No results</h1>
+                  <p className="mt-1 text-base text-gray-500 font-rubik">No listings were found based on your search. Try again with different filters.</p>
+                </div>
+                <div className="mt-8 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
+                  <a
+                    href="/"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-british-green-0 hover:bg-british-green-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-british-green-2"
+                  >
+                    Go back
+                  </a>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+        )
+    }
+
+    return (
         <>
           <div className="flex flex-col items-center justify-center pt-20">
           <p className="font-bold text-3xl font-rubik text-gray-900 pb-4">{listingsText}</p>

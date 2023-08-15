@@ -15,27 +15,26 @@ interface ReportCardsProps {
     totalListings: number;
     totalUsers: number;
     popularMake: any;
+    popularMakeStart?: any;
     queryData?: any;
 }
 
-
-export const ReportCards: React.FC<ReportCardsProps>  = ({initialItems, totalListings, totalUsers, popularMake, queryData}) => {
+export const ReportCards: React.FC<ReportCardsProps>  = ({initialItems, totalListings, totalUsers, popularMake, queryData, popularMakeStart}) => {
   
-
   const [items, setItems] = useState(initialItems)
   const [listingsCount, setListingsCount] = useState(totalListings)
   const [usersCount, setUsersCount] = useState(totalUsers)
   const [topMake, setTopMake] = useState(popularMake)
+  const [topMakeStart, setTopMakeStart] = useState(popularMakeStart)
 
   // console.log(dateItems)
 
   const item = initialItems[0]
 
   const stats = [
-      { name: 'Total listings', stat: `${listingsCount}`, previousStat: '70,946', change: '12%', changeType: 'increase' },
-      { name: 'Total users', stat: `${usersCount}`, previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
-      { name: 'Top Make', stat: `${topMake}`, previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
-      // { name: 'Listings created', stat: `${dateItems}`, previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
+      { name: 'Total listings', stat: `${listingsCount}`},
+      { name: 'Total users', stat: `${usersCount}`},
+      !queryData ? { name: 'Top Make', stat: `${topMakeStart}`} : { name: 'Top Make', stat: `${topMake}`}
   ]
 
     return (
@@ -50,30 +49,7 @@ export const ReportCards: React.FC<ReportCardsProps>  = ({initialItems, totalLis
             <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
               <div className="flex items-baseline text-2xl font-semibold text-orange-1">
                 {item.stat}
-                {/* <span className="ml-2 text-sm font-medium text-gray-500">from {item.previousStat}</span> */}
               </div>
-
-              {/* <div
-                className={classNames(
-                  item.changeType === 'increase' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
-                  'inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium md:mt-2 lg:mt-0'
-                )}
-              >
-                {item.changeType === 'increase' ? (
-                  <ArrowSmallUpIcon
-                    className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500"
-                    aria-hidden="true"
-                  />
-                ) : (
-                  <ArrowSmallDownIcon
-                    className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-red-500"
-                    aria-hidden="true"
-                  />
-                )}
-
-                <span className="sr-only">{item.changeType === 'increase' ? 'Increased' : 'Decreased'} by</span>
-                {item.change}
-              </div> */}
             </dd>
           </div>
         ))}

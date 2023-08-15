@@ -5,6 +5,8 @@ import prisma from '../libs/prismadb'
 import Pagination from "../../../components/pagination";
 import ListingCard from "./components/ListingCard";
 import { Listing } from "@prisma/client";
+import { Suspense } from 'react'
+import LoadingComponent from "../loading";
 
 interface ListingsProps {
     searchParams: { page: string, make: string, model: string, 
@@ -72,17 +74,27 @@ export const Listings: React.FC<ListingsProps> = async ({searchParams:
 
     const filters = checkFilters()
 
+    const checkListingsLength = () => {
+        if (filteredListings.length < 1) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+        // check if there are any listings based on the user's filters
+    const anyListings = checkListingsLength()
+
     return (
         <div className="flex flex-col">
-            {/* <ListingsList initialItems={listings}
-            filteredListings={filteredListings}
-            // total={totalCount} 
-            searchParams={{page: '1'}}
-            /> */}
-            <ListingCard listing={await filteredListings} anyFilters={filters}/>
-            <div className="flex-2">
-            <Pagination currentPage={currentPage} totalPages={totalPages}/>
-            </div>
+            <Suspense fallback={<LoadingComponent />}>
+                <ListingCard listing={await filteredListings} anyFilters={filters} anyListings={anyListings}/>
+                <div className="flex-2">
+                {!anyListings &&
+                <Pagination currentPage={currentPage} totalPages={totalPages} />
+                }
+                </div>
+            </Suspense>
         </div>
     )
 

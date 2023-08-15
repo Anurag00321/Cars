@@ -6,6 +6,8 @@ import ListingsFilter from './listings/components/ListingsFilter';
 import getListings from './actions/getListings';
 import Landing from '../../components/landing';
 import getCurrentUser from './actions/getCurrentUser';
+import { Suspense } from 'react';
+import LoadingComponent from './loading';
 
 interface ListingsListProps {
   initialItems: Listing[];
@@ -31,16 +33,18 @@ const Home: React.FC<ListingsListProps> = async ({initialItems}) => {
 
   return (
     <main className="bg-beige">
-    <Landing currentUser={currenUser!} />
-    <div className="max-w-7xl mx-auto my-auto py-6 sm:px-6 lg:px-8 bg-beige">
-      <div className="px-4 py-4 sm:px-0">
-        <div className="h-72" />
-        <ListingsFilter initialItems={listings} />
-        {/* <p className="pt-8 font-bold text-3xl font-rubik text-british-green-1">Featured listings</p> */}
-        <ListingsList initialItems={listings} featured={true} />
+      <Suspense fallback={<LoadingComponent />}>
+      <Landing currentUser={currenUser!} />
+      <div className="max-w-7xl max-h-lg mx-auto my-auto py-6 sm:px-6 lg:px-8 bg-beige">
+        <div className="px-4 py-4 sm:px-0">
+          <div className="h-72" />
+          <ListingsFilter initialItems={listings} />
+          {/* <p className="pt-8 font-bold text-3xl font-rubik text-british-green-1">Featured listings</p> */}
+          <ListingsList initialItems={listings} featured={true} />
+        </div>
       </div>
-    </div>
-  </main>
+      </Suspense>
+    </main>
   )
 
 //   return (

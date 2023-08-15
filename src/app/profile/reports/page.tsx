@@ -4,13 +4,14 @@ import getListingsCount from "@/app/actions/getListingsCount";
 import getUsersCount from "@/app/actions/getUsersCount";
 import GetPopularMake from "@/app/actions/getPopularMake";
 // import GetDateFilter from "@/app/actions/getDateFilter";
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { createServerContext } from 'react';
 import { headers } from 'next/headers';
 import { redirect, useSearchParams } from "next/navigation";
 import { subDays } from "date-fns";
 import prisma from "@/app/libs/prismadb";
 import SelectMenuCustom from "../../../../components/selectMenuCustom";
+import LoadingComponent from "@/app/loading";
 
 export const Reports = async () => {
     
@@ -18,6 +19,14 @@ export const Reports = async () => {
     const totalListings = await getListingsCount()
     const totalUsers = await getUsersCount()
     const popularMake = await GetPopularMake()
+    
+    const aggregateMake = await prisma.listing.aggregate({
+      _max: {
+        make: true,
+      },
+    })  
+    
+    const mostPopularMake = await aggregateMake._max.make
     
     const GetDateFilter = async (formData: FormData) => {
         "use server"
@@ -57,10 +66,11 @@ export const Reports = async () => {
 
     return (
         <div>
+            <Suspense fallback={<LoadingComponent />}>
             <form action={GetDateFilter} className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8">
                 {/* <input name="searchQuery"></input> */}
                 {/* <SelectMenuCustom name="searchQuery" options={dateOptions} /> */}
-                <p className="flex-0">Pick time period</p>
+                <p className="flex-0 font-rubik font-medium">Pick time period</p>
                 <select name="searchQuery" className="mt-2 flex-2 bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-6 py-2 text-left cursor-default focus:outline-none focus:ring-british-green-4 focus:border-british-green-4 sm:text-sm ">
                     {/* <option label="Since start" value="200" className="cursor-default select-none relative py-2 pl-3 pr-9">7 days</option> */}
                     <option value="7" className="cursor-default select-none relative py-2 pl-3 pr-9">7 days</option>
@@ -80,8 +90,10 @@ export const Reports = async () => {
                 totalListings={totalListings}
                 totalUsers={totalUsers}
                 popularMake={popularMake}
+                popularMakeStart={mostPopularMake}
             />  
             </div>
+            </Suspense>
         </div>
     )
 };

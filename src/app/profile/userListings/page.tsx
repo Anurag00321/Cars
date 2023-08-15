@@ -3,8 +3,9 @@ import getCurrentUser from "../../actions/getCurrentUser";
 import getUserListings from "../../actions/getUserListings";
 import ListingsList from "../../listings/components/ListingsList";
 import { redirect, useSearchParams } from "next/navigation";
-import ProfileButtons from "../dashboard/components/profileButtons";
 import getUserListingsAdmin from "@/app/actions/getUserEmail";
+import { Suspense } from "react";
+import LoadingComponent from "@/app/loading";
 
 export const Profile = async () => {
     
@@ -23,6 +24,7 @@ export const Profile = async () => {
 
     return (
         <>
+          <Suspense fallback={<LoadingComponent />}>
         <form className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8" action={searchUserListings}>
             <input
                 className="flex-1 bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-text focus:outline-none focus:ring-1 focus:ring-british-green-0 focus:border-british-green-0 sm:text-sm"
@@ -37,6 +39,7 @@ export const Profile = async () => {
             </button>
         </form>
         <ListingsList initialItems={listings} profile={true}/>
+        </Suspense>
         </>
     )
 };

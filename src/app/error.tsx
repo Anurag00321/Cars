@@ -2,7 +2,7 @@
  
 import { useRouter } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
-import LoadingComponent from '../loading'
+import LoadingComponent from './loading'
  
 export const Error = ({
   error,
@@ -15,12 +15,6 @@ export const Error = ({
     console.error(error)
   }, [error])
   
-  // const router = useRouter()
-
-  // const handleReset = () => {
-  //   router.push('/')
-  // }
-
   return (
     <>
     <Suspense fallback={<LoadingComponent />}>

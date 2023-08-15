@@ -37,7 +37,7 @@ export const Landing: React.FC<LandingProps> = ({currentUser}) => {
         // unoptimized={true} priority 
         alt="Landing Photo" 
         className="brightness-[0.6] relative w-full sm:max-h-[32rem] object-cover opacity-85 shadow-md"/>
-            <div className='absolute text-white max-w-5xl mx-auto'>
+            <div className='absolute text-white max-w-5xl mx-auto pb-6'>
             <p className="mt-2 text-lg sm:text-2xl font-medium px-6 xl:px-0">Lorem ipsum dolor sit amet consectetur</p>
             <p className="mt-4 text-md sm:text-lg font-thin px-6 xl:px-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel veritatis ratione labore, exercitationem, incidunt omnis deserunt perspiciatis dolores recusandae necessitatibus provident sed accusamus non optio tenetur id! Laboriosam, facere eos?</p>
                 <div className="flex justify-center items-center pb-12 lg:pb-0 px-6 xl:px-0 sm:block">

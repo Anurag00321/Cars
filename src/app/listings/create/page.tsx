@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import SelectMenuCustom from '../../../../components/selectMenuCustom'
 import SelectMenu from "../../../../components/selectMenu";
 import InputField from "../../../../components/inputField";
@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Listing } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { redirect } from 'next/navigation'
+import { LoadingComponent } from '@/app/loading';
 
 interface ListingCreateProps {
     options: Listing[]
@@ -318,6 +319,7 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
     return (
       <>
       <div>
+      <Suspense fallback={<LoadingComponent />}>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-16">
       {(selectMenusError || inputFieldsError || titleDescriptionError || photosError
         ) && (
@@ -342,7 +344,7 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
         )}
     </div>
   <div className="flex flex-col justify-center mx-auto max-w-4xl mt-20 mb-16">    
-    <p className="mb-10 font-Coolvetica place-self-center text-4xl font-medium">Create a new listing</p>  
+    <p className="mb-10 font-rubik place-self-center text-4xl font-medium">Create a new listing</p>  
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-16">
         <SelectMenuCustom
           options={carMakesData}
@@ -427,7 +429,7 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
         <button
             onClick={handleSubmit}
             type="button" 
-            className={`w-full text-white flex items-center justify-center bg-british-green-0 hover:bg-british-green-3 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:focus:ring-blue-800 ${isLoading ? 'cursor-not-allowed bg-' : ''}`}
+            className={`w-full text-white flex items-center justify-center bg-british-green-0 hover:bg-british-green-3 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:focus:ring-blue-800 ${isLoading ? 'cursor-not-allowed opacity-80' : ''}`}
             disabled={isLoading}
           >
             Submit
@@ -435,6 +437,7 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
         </div>
         </div>
       </div>
+      </Suspense>
       </div>
       </>
     )};
