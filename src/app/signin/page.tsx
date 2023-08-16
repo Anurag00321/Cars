@@ -9,7 +9,8 @@ import { useState, FC, Suspense } from "react";
 import { XCircleIcon, EyeIcon } from '@heroicons/react/20/solid'
 import LoadingComponent from "@/app/signin/loading";
 
-export const SignIn: FC = () => {
+export default function SignIn(){
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -144,6 +145,4 @@ export const SignIn: FC = () => {
         </Suspense>
   </div>
   )
-};
-
-export default SignIn
+}

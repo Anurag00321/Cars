@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import LoadingComponent from "@/app/register/loading";
 
-export const Register = () => {
+export default function Register(){
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -192,6 +192,4 @@ export const Register = () => {
       </Suspense>
   </div>
   )
-};
-
-export default Register
+}
