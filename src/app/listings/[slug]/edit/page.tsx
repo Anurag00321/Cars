@@ -8,9 +8,9 @@ interface EditListingsProps {
     params: any
 }
 
-export const Edit: React.FC<EditListingsProps> = async ({searchParams: {slug}}) => {
+export default async function Edit({ params }: { params: { slug: string } }) {
 
-    const listingOptions = await getListingBySlug(slug)
+    const listingOptions = await getListingBySlug(params.slug)
 
     return (
         <div>
@@ -20,5 +20,3 @@ export const Edit: React.FC<EditListingsProps> = async ({searchParams: {slug}}) 
         </div>
     )
 }
-
-export default Edit
