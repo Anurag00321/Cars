@@ -1,28 +1,28 @@
-// import prisma from "@/app/libs/prismadb";
-import { useSession } from "next-auth/react";
-import { PrismaClient, User } from "@prisma/client";
+// // import prisma from "@/app/libs/prismadb";
+// import { useSession } from "next-auth/react";
+// import { PrismaClient, User } from "@prisma/client";
 
-const prisma = new PrismaClient()
+// const prisma = new PrismaClient()
 
-export const getUsername = async () => {
-    const { data: session, status } = useSession()
-    const sessionEmail = session?.user?.email as string
+// export const getUsername = async () => {
+//     const { data: session, status } = useSession()
+//     const sessionEmail = session?.user?.email as string
   
-    if(status == 'authenticated') {
-      const user = await prisma.user.findUnique({
-        where: {
-            email: sessionEmail
-        },
-        select: {
-          name: true
-        }
-      })
-      const username = user?.name
+//     if(status == 'authenticated') {
+//       const user = await prisma.user.findUnique({
+//         where: {
+//             email: sessionEmail
+//         },
+//         select: {
+//           name: true
+//         }
+//       })
+//       const username = user?.name
     
-    return (
-        username
-    )
+//     return (
+//         username
+//     )
 
-}}
+// }}
 
-export default getUsername
+// export default getUsername

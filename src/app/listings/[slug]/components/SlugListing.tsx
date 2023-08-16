@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import getListingBySlug from "@/app/actions/getListingBySlug";
 import getListings from "@/app/actions/getListings";
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { 
+    // usePathname, useRouter, 
+    useSearchParams } from 'next/navigation';
 import { useEffect, useState } from "react";
 import ListingsList from "../../components/ListingsList";
 

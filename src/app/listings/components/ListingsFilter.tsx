@@ -3,13 +3,10 @@
 import { Listing } from "@prisma/client";
 import { useState, useEffect, createContext } from 'react';
 import SelectMenu from "../../../../components/selectMenu";
-import { useRouter, usePathname, useSearchParams} from 'next/navigation';
-import SelectMenuPrice from "../../../../components/selectMenuPrice";
+import { useRouter} from 'next/navigation';
 import SelectMenuCustom from "../../../../components/selectMenuCustom";
 import { InputField } from "../../../../components/inputField";
-import Landing from "../../../../components/landing";
 import GetOptions from "@/app/actions/getOptions";
-import { unique } from "next/dist/build/utils";
 
 
 interface ListingsFilterProps {
@@ -17,15 +14,17 @@ interface ListingsFilterProps {
   sideBar?: boolean;
 }
 
-interface Option {
-  // placeholder: string;
-  id: string;
-  label: string;
-}
+// interface Option {
+//   // placeholder: string;
+//   id: string;
+//   label: string;
+// }
 
 export const FilterContext = createContext<Listing[]>([]);
 
-export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, sideBar }) => {
+export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) => {
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [items, setItems] = useState(initialItems);
 
   const [make, setMake] = useState('');

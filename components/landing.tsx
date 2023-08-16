@@ -4,17 +4,19 @@ import landingPhoto from 'public/landingPhoto.jpg'
 import Image from 'next/image'
 import { useRouter } from "next/navigation";
 import { User } from '@prisma/client';
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect } from 'react';
 
 interface LandingProps {
     currentUser: User
 }  
 
-export const Landing: React.FC<LandingProps> = ({currentUser}) => {
+export const Landing: React.FC<LandingProps> = () => {
     
     const router = useRouter();
-    const { data: session, status: status } = useSession()
+    const { 
+        // data: session
+        status: status } = useSession()
 
     useEffect(() => {
         router.prefetch('/listings/create');

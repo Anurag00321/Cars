@@ -3,13 +3,11 @@
 import { useSession, signOut } from "next-auth/react";
 import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import getUsername from "@/app/actions/getUsername";
+// import getUsername from "@/app/actions/getUsername";
 import { UserCircleIcon } from '@heroicons/react/24/outline';
-import getCurrentUser from "@/app/actions/getCurrentUser";
 import { User } from "@prisma/client";
-import ProfileMenu from "./profileMenu";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import LoadingComponent from "@/app/loading";
 import Image from 'next/image'

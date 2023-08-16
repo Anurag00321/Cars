@@ -1,10 +1,12 @@
 'use client'
 
-import { SessionProvider, signIn, signOut, useSession, SignInResponse  } from "next-auth/react";
-import { redirect } from 'next/navigation';
+import { signIn,
+          // useSession  
+        } from "next-auth/react";
+// import { redirect } from 'next/navigation';
 import { useRouter } from "next/navigation";
-import { useEffect, useState, FC, Suspense } from "react";
-import { XCircleIcon, ExclamationCircleIcon, EyeIcon } from '@heroicons/react/20/solid'
+import { useState, FC, Suspense } from "react";
+import { XCircleIcon, EyeIcon } from '@heroicons/react/20/solid'
 import LoadingComponent from "@/app/signin/loading";
 
 export const SignIn: FC = () => {
@@ -14,9 +16,11 @@ export const SignIn: FC = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false)
+
   const [isLoading, setIsLoading] = useState(false)
   
-  const session = useSession()
+  // const session = useSession()
   const router = useRouter();
 
   const resetState = () => {
@@ -52,13 +56,6 @@ export const SignIn: FC = () => {
         }).finally(() => setIsLoading(false))
       }
   
-  const handleSignOut = () => {
-    signOut;
-    router.push('/')
-  }
-
-  const [showPassword, setShowPassword] = useState(false)
-
   return (
   <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-white">
     <Suspense fallback={<LoadingComponent/>}>

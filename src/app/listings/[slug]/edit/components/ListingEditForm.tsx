@@ -271,7 +271,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
       const check = photos.includes(result)
       if (check) {
         const id = photos.indexOf(result)
-          let newArr = photos
+          const newArr = photos
           newArr.splice(id, 1)
             setPhotos([...newArr])
       } else {

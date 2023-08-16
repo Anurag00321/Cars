@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 interface InputField {
   label?: string;
   value: string;
@@ -10,7 +8,7 @@ interface InputField {
   onChange: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const numberSchema = z.number().min(0).max(10);
+// const numberSchema = z.number().min(0).max(10);
 
 export const InputField: React.FC<InputField> = ({ label, value, placeholder, makeBigger, onChange, error, type }) => {
 

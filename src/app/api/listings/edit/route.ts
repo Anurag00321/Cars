@@ -37,35 +37,35 @@ export async function POST(
 
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Please sign in to create a new listing.', { status: 400 });
-    };
+    }
 
     if (!title) {
       titleDescriptionError += "Please provide a title for your listing."
-    };
+    }
 
     if (!body) {
       titleDescriptionError += "Please provide a description for your listing."
-    };
+    }
 
     if (!make || !model || !transmission || !fuel || !year || 
         !coupe_type || !number_doors || !condition || !color) {
         selectMenusError += "Please fill out all required fields."
-    };
+    }
 
 
     if (!mileage) {
       inputFieldsError += "Please enter the mileage of the vehicle."
-    };
+    }
 
     if (!power) {
       inputFieldsError += "Please enter the power of the vehicle."
-    };
+    }
 
     if (!price) {
       inputFieldsError += "Please enter the price of the vehicle."
       // return new NextResponse('Please enter the price of the vehicle.', {status: 400})
       // throw new Error('Please enter the price of the vehicle.')
-    };
+    }
 
     // check if two or more of the errors are true
     const dotCount = (value: any) => {
@@ -131,4 +131,4 @@ export async function POST(
     } catch (error) {
         console.log(error)
         return new NextResponse('Error', { status: 500 });
-    }};
+}}

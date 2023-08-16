@@ -193,7 +193,7 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
     const check = photos.includes(result)
     if (check) {
       const id = photos.indexOf(result)
-        let newArr = photos
+        const newArr = photos
         newArr.splice(id, 1)
           setPhotos([...newArr])
     } else {
@@ -210,12 +210,6 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
 
   const [slugData, setSlugData] = useState('')
 
-  // useEffect(() => {
-  //   if (slugData.length > 0) {
-  //     router.push(`/listings/${slugData}`);
-  //   }
-  // }, [slugData]);
-
   const handleRedirect = () => {
     if (slugData.length > 0) {
       router.push(`/listings/${slugData}`);
@@ -226,10 +220,6 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
       console.log('photos', photos)
       setIsLoading(true)
       resetState();
-
-      // const photosUrls = photos.map((photo) => photo.info.secure_url);
-
-      // const photosToString = JSON.stringify(photosUrls);
 
       await axios.post('/api/listings', {
             title: `${title}`,
@@ -262,26 +252,9 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
             router.push(`/listings/${slugTest}`)
             router.push(`/listings/${callback.data.slug}`)
             handleRedirect()
-            // if(slugData.length > 1) {
-            // router.push(`/listings/${slugData}`)
-            // redirect(`/listings/${slugData}`)
-            // } else {
-            //   router.push(`/listings/${callback.data.slug}`)
-            //   redirect(`/listings/${callback.data.slug}`)
-            // }
-            // console.log(slugData)
-            // await redirect(`/listings/${slugData}`)
-            // router.push(`/listings/${slugData}`)
-              // if(callback.data.ok) {
-              //     console.log('created', callback?.data.ok)
-              //     router.push(`listing/${callback?.data}`)
-              // }
-              // else if (callback.data.message) {
-              //   console.log('callback.data.message:', callback.data.message)
-              // }
           }).catch((callback) => {
             if(callback.response) {
-              const { data } = callback.response?.data
+              const { data } = callback.response?.data || {}
               // resetState();
               console.log(callback)
               setInputFieldsError(data?.inputField)
@@ -289,6 +262,8 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
               setTitleDescriptionError(data?.titleDescription)
               setPhotosError(data?.photos)
               window.scrollTo(0, 80)
+            } else {
+              console.log(callback)
             }
           })
           .finally(() => {
@@ -303,14 +278,10 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
       price, fuel, transmission, mileage, power,
       color, photos])
 
-
-    // const isValidOption = (selectedValue: string, options: OptionsProps[], targetId: string) => {
-    //   return options.find(option => option.id === selectedValue)?.id === targetId || '';
-    // };
-    
+    /* eslint-disable-next-line no-unsafe-optional-chaining */
     useEffect(() => {
       setIsMounted(true);
-    }, []);    
+    }, []);
 
     if (!isMounted) {
       return null;

@@ -1,5 +1,4 @@
 
-import { SessionProvider } from 'next-auth/react';
 import ListingsList from './listings/components/ListingsList';
 import { Listing } from "@prisma/client";
 import ListingsFilter from './listings/components/ListingsFilter';
@@ -13,7 +12,7 @@ interface ListingsListProps {
   initialItems: Listing[];
 }
 
-const Home: React.FC<ListingsListProps> = async ({initialItems}) => {
+const Home: React.FC<ListingsListProps> = async () => {
 
   const listings = await getListings();
   const currenUser = await getCurrentUser()

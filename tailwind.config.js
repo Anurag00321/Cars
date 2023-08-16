@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+/*eslint-env node*/
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',

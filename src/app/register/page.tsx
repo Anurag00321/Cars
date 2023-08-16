@@ -43,6 +43,7 @@ export const Register = () => {
         password,
         confirmPassword
     })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
     setIsLoading(false)
     const { errorData } = error.response
