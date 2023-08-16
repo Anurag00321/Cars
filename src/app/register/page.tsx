@@ -1,11 +1,11 @@
 'use client'
+
 import { Suspense, useCallback, useState } from "react";
-import { XCircleIcon } from '@heroicons/react/20/solid'
+import { XCircleIcon, EyeIcon } from '@heroicons/react/20/solid'
 import axios from "axios"
-import { NextResponse } from 'next/server';
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import LoadingComponent from "../loading";
+import LoadingComponent from "@/app/register/loading";
 
 export const Register = () => {
 
@@ -21,6 +21,8 @@ export const Register = () => {
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const router = useRouter();
 
@@ -65,7 +67,7 @@ export const Register = () => {
   }, [email, username, password, confirmPassword])
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-white">
+    <div className="flex min-h-screen relative flex-col justify-center px-6 py-12 lg:px-8 bg-white">
       <Suspense fallback={<LoadingComponent />}>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up</h2>
@@ -133,17 +135,23 @@ export const Register = () => {
             <div className="flex items-center justify-between">
               <label className="block text-sm font-medium leading-6 text-gray-900">Password</label>
             </div>
-            <div className="mt-2">
-              <div>
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  disabled={isLoading}
-                  className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
-                    passwordError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-                  } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
-                />
-              </div>
+            <div className="mt-2 relative">
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                type={showPassword ? 'text' : 'password'}
+                required
+                disabled={isLoading}
+                className={`block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                  passwordError || error ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
+                } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-2 flex items-center p-1"
+              >
+                <EyeIcon className="h-5 w-auto fill-gray-500" />
+              </button>
             </div>
           </div>
           <div>
@@ -153,6 +161,8 @@ export const Register = () => {
             <div>
                 <input
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  type={showPassword ? 'text' : 'password'}
+                  disabled={isLoading}
                   required
                   className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
                     passwordConfirmError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''

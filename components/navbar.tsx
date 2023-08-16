@@ -4,7 +4,6 @@ import { useSession, signOut } from "next-auth/react";
 import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import getUsername from "@/app/actions/getUsername";
-// import { UserCircleIcon } from '@heroicons/react/20/solid';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { User } from "@prisma/client";
@@ -13,6 +12,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import LoadingComponent from "@/app/loading";
+import Image from 'next/image'
+import flatsixLogo from 'public/flatsixLogo.png'
 
 interface NavBarProps {
   currentUser: User
@@ -72,81 +73,17 @@ export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
     ])
   ];
 
-//   return (
-//     <nav className="z-10 relative border-gray-200 bg-british-green-1 shadow-md">
-//     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-//     <a href="/" onClick={handleLogoClick} className="flex items-center">
-//         {/* <img src="" className="h-8 mr-3" alt="Logo" /> */}
-//         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">flatSix</span>
-//     </a>
-//     <div className="flex md:order-2">
-//     <button 
-//           type="button"
-//           onClick={() => router.push('/listings/create')}
-//           className="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-4 md:mr-4 border border-white bg-transperant hover:bg-british-green-2 dark:focus:ring-british-green-0"
-//           >Add a listing
-//           </button>
-//       {!sessionStatus &&
-//           <button 
-//           type="button"
-//           onClick={() => router.push('/register')}
-//           className="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-4 md:mr-4 bg-british-green-2 hover:bg-british-green-4 dark:focus:ring-british-green-0"
-//           >Sign up
-//           </button>
-//         }
-//         {!sessionStatus &&
-//         <button 
-//         type="button"
-//         onClick={() => router.push('/signin')}
-//         className="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-4 md:mr-4 bg-british-green-2 hover:bg-british-green-4 dark:focus:ring-british-green-0"
-//         >Login
-//         </button>
-//         }
-//         {/* {sessionStatus &&
-//           <div className="flex flex-row items-center">
-//             <button onClick={handleLogout} 
-//             type="button" 
-//             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 dark:bg-light-green dark:hover:bg-british-green-4 dark:focus:ring-british-green-2"
-//             >Log out
-//             </button>
-//           </div>
-//         } */}
-//         {/* <div className="bg-gray-100 rounded-3xl"> */}
-//         <div className="">
-//         <ProfileMenu currentUser={currentUser}/>
-//         </div>
-//         {/* <UserCircleIcon onClick={() => router.push('/profile')} className="h-9 w-9 text-gray-300 cursor-pointer" aria-hidden="true" /> */}
-//         {/* </div> */}
-//         <button data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
-//           <span className="sr-only">Open main menu</span>
-//           <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
-//       </button>
-//     </div>
-//     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-//       <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-british-green-1 dark:border-gray-700">
-//         {/* <li onClick={() => router.push('/')}>
-//         <button className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-british-green-2 md:p-0 md:dark:hover:text-light-green dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Home</button>
-//         </li>
-//         <li onClick={() => router.push('/listings')}>
-//         <button className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-british-green-2 md:p-0 md:dark:hover:text-light-green dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Listings</button>
-//         </li> */}
-//       </ul>
-//     </div>
-//     </div>
-//   </nav>
-// )};
-
 return (
   <>
   <Suspense fallback={<LoadingComponent />}>
-    <Disclosure as="nav" className="bg-british-green-1">
+    <Disclosure as="nav" className="bg-british-green-1 fixed md:static z-20 w-full">
       {({ open }) => (
         <>
           <div className="z-10 relative max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="relative inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-100 hover:text-white hover:bg-british-green-0 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -155,28 +92,30 @@ return (
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-end">
+              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between">
                 <div className="flex-shrink-0 flex items-center">
-                  <p className="cursor-pointer block text-2xl font-semibold whitespace-nowrap dark:text-white" onClick={() => router.push('/')}>FlatSix</p>
-                  {/* <img
-                    className="block lg:hidden h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                    alt="Workflow"
-                  />
-                  <img
-                    className="hidden lg:block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                    alt="Workflow"
-                  /> */}
+                  {/* <p className="cursor-pointer block text-2xl font-semibold whitespace-nowrap dark:text-white" onClick={() => router.push('/')}>FlatSix</p> */}
+                  <Image 
+                  src={flatsixLogo}
+                  // unoptimized={true} priority 
+                  alt="Logo"
+                  onClick={() => router.push('/')}
+                  className="hidden lg:block h-6 w-auto cursor-pointer"/>
+                  <Image 
+                  src={flatsixLogo} 
+                  // unoptimized={true} priority 
+                  alt="Logo"
+                  onClick={() => router.push('/')}
+                  className="block lg:hidden h-6 w-auto pr-10 cursor-pointer"/>
                 </div>
-                <div className="hidden sm:block sm:ml-6">
+                <div className="hidden sm:flex sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-100 hover:bg-british-green-0 hover:text-white',
+                          item.current ? 'bg-british-green-1 text-white' : 'text-gray-100 hover:bg-british-green-1 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium', sessionStatus ? 'hidden' : ''
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -188,28 +127,15 @@ return (
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* <button
-                  type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button> */}
-
                 {/* Profile dropdown */}
+                {sessionStatus &&
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    {sessionStatus &&
                     <Menu.Button className="bg-british-green-2 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       <UserCircleIcon className="h-9 w-9 text-gray-100 cursor-pointer" aria-hidden="true" />
-                      {/* <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      /> */}
                     </Menu.Button>                    
-                    }
+                     
                   </div>
                   <Transition
                     as={Fragment}
@@ -271,6 +197,7 @@ return (
                     </Menu.Items>
                   </Transition>
                 </Menu>
+                }
               </div>
             </div>
           </div>
@@ -283,7 +210,7 @@ return (
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-british-green-0 hover:text-gray-100',
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}

@@ -18,47 +18,21 @@ const Home: React.FC<ListingsListProps> = async ({initialItems}) => {
   const listings = await getListings();
   const currenUser = await getCurrentUser()
 
-//   return (
-// <main className="absolute w-full h-screen bg-beige">
-//   <div className="flex flex-col gap-y-[60%] sm:gap-y-[50%] md:gap-y-[43%] h-full bg-beige">
-//     <Landing currentUser={currenUser!} />
-//     <ListingsFilter initialItems={listings} />
-//     <div className="flex flex-col bg-beige pb-10 items-center justify-center z-10"> {/* Adjust z-index */}
-//       <p className="pt-8 font-bold text-3xl font-rubik text-british-green-1">Featured listings</p>
-//       <ListingsList initialItems={listings} featured={true} />
-//     </div>
-//   </div>
-// </main>
-//   )
-
   return (
-    <main className="bg-beige">
+    <main className="bg-beige pt-[64px] md:pt-0">
       <Suspense fallback={<LoadingComponent />}>
-      <Landing currentUser={currenUser!} />
-      <div className="max-w-7xl max-h-lg mx-auto my-auto py-6 sm:px-6 lg:px-8 bg-beige">
-        <div className="px-4 py-4 sm:px-0">
-          <div className="h-72" />
-          <ListingsFilter initialItems={listings} />
-          {/* <p className="pt-8 font-bold text-3xl font-rubik text-british-green-1">Featured listings</p> */}
-          <ListingsList initialItems={listings} featured={true} />
+        <Landing currentUser={currenUser!} />
+        <div className="max-w-7xl max-h-lg mx-auto my-auto py-20 sm:px-6 lg:px-6 bg-beige">
+          <div className="px-4 py-4 sm:px-0">
+            <div className="h-72" />
+            <ListingsFilter initialItems={listings} />
+            {/* <p className="pt-8 font-bold text-3xl font-rubik text-british-green-1">Featured listings</p> */}
+            <ListingsList initialItems={listings} featured={true} />
+          </div>
         </div>
-      </div>
       </Suspense>
     </main>
   )
-
-//   return (
-//     <main className="absolute w-full min-h-full bg-beige">
-//     <div className="flex items-center justify-between h-16">
-//     <div className="flex items-center">    
-//     <Landing currentUser={currenUser!} />
-//     <ListingsFilter initialItems={listings} />
-//       <p className="pt-8 font-bold text-3xl font-rubik text-british-green-1">Featured listings</p>
-//       <ListingsList initialItems={listings} featured={true} />
-//     </div>
-//   </div>
-// </main>
-//   )
 }
 
 export default Home

@@ -6,11 +6,14 @@ import { redirect, useSearchParams } from "next/navigation";
 import getUserListingsAdmin from "@/app/actions/getUserEmail";
 import { Suspense } from "react";
 import LoadingComponent from "@/app/loading";
+import Error from "@/app/error";
 
 export const Profile = async () => {
     
     const listings = await getListings()
-    // const userListings = await getUserListingsAdmin('vancelotkata@gmail.com')
+    const currentUser = await getCurrentUser()
+
+    const userRole = currentUser?.role  
 
     const searchUserListings = async (formData: FormData) => {
         "use server"
@@ -21,6 +24,12 @@ export const Profile = async () => {
           redirect("/profile/userListings/search?query=" + searchQuery)
         }
       };
+
+    if(userRole !== "ADMIN") {
+        return(
+            <Error />
+        )
+    }  
 
     return (
         <>

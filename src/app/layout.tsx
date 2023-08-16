@@ -6,6 +6,7 @@ import './globals.css'
 import getCurrentUser from './actions/getCurrentUser'
 import { Suspense } from 'react'
 import LoadingComponent from './loading'
+import Footer from '../../components/footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +29,7 @@ export default async function RootLayout({
         <Suspense fallback={<LoadingComponent />}>
           <Navbar currentUser={currenUser!}/>
           {children}
+          <Footer />
         </Suspense>
         </AuthContext>
       </body>

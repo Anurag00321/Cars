@@ -1,7 +1,7 @@
 import getListingBySlug from "@/app/actions/getListingBySlug"
 import ListingEditForm from "./components/ListingEditForm"
-// import ListingCreate from "../../components/ListingCreate"
-
+import { Suspense } from "react"
+import LoadingComponent from "@/app//listings/[slug]/edit/loading"
 
 interface Params {
     slug: string
@@ -13,8 +13,9 @@ export const EditListing = async ({ params }: { params: Params }) => {
 
     return (
         <div>
-            <ListingEditForm initialItems={listingOptions as any}/>
-            {/* <ListingCreate options={listingOptions}/> */}
+            <Suspense fallback={<LoadingComponent />}>
+                <ListingEditForm initialItems={listingOptions as any}/>
+            </Suspense>
         </div>
     )
 }

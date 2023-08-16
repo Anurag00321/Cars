@@ -29,9 +29,9 @@ export const InputField: React.FC<InputField> = ({ label, value, placeholder, ma
 
 return (
   <div>
-    {/* <label htmlFor={label} className="block text-sm font-medium text-gray-700">
+    <label htmlFor={label} className="block text-sm font-medium text-gray-500 pb-2 mt-1">
       {label}
-    </label> */}
+    </label>
     {makeBigger ? (
       <textarea
         name={label}

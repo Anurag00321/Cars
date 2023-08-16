@@ -49,7 +49,7 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
         <ImageGallery listing={items}/>
         <div className="col-span-1 flex flex-col lg:py-20 text-ellipsis">
           <p className="my-6 font-rubik font-bold text-3xl text-gray-800">Summary</p>
-          <div className="grid grid-cols-3 text-md gap-4 font-rubik font-light">
+          <div className="grid grid-cols-3 text-md gap-4 font-rubik font-light ">
             <p className="">Car type: 
               <span className="text-british-green-4 pl-1 font-bold">{item.coupe_type}</span>
             </p>

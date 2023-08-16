@@ -4,17 +4,19 @@ import { useRouter } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
 import LoadingComponent from './loading'
  
-export const Error = ({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) => {
-  useEffect(() => {
-    console.error(error)
-  }, [error])
-  
+// export const Error = ({
+//   error,
+//   reset,
+// }: {
+//   error: Error & { digest?: string }
+//   reset: () => void
+// }) => {
+//   useEffect(() => {
+//     console.error(error)
+//   }, [error])
+
+export const Error = () => {
+
   return (
     <>
     <Suspense fallback={<LoadingComponent />}>

@@ -112,8 +112,6 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
     
     const getIdByLabel = (optionsData: any, prop: string) => {
       const labelMatch = optionsData.find((field: any) => field.label === prop.toString())
-      // console.log('prop:', prop);
-      // console.log('labelMatch:', labelMatch);
       return labelMatch ? +labelMatch.id : 0;
     }
         
@@ -145,32 +143,16 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
     if(isMounted) {
       if (make) {
         const filteredModels = carModelsData.filter((item) => item.make === make);
-        // const test = filteredModels.filter((item) => item.label === model )
         setFilteredCarModels(filteredModels);
-        // console.log('filteredCarModels',filteredCarModels)
-        // console.log('test',test)
-        // const filteredYears = yearsData.filter((item) => item.label === year);
-        // setFilteredYears(filteredYears)
       }
     }
     }, [make, carModelsData]);
-
-    //   useEffect(() => {
-    //   const filteredModels = carModelsData.filter((model) => model.make === make);
-    //   // const modelFilter = filteredModels.filter((item) => item.label == model)
-    //   setFilteredCarModels(filteredModels as any);
-    // }, [make])
-
-    // const filteredModels = carModelsData.filter((item) => item.make === make);
-
-    // console.log(filteredModels)
 
     const makeId = getIdByLabel(carMakesData, item.make)
     const modelId = getIdByLabel(filteredCarModels, item.model)
     const transmissionId = getIdByLabel(transmissionData, item.transmission)
     const fuelId = getIdByLabel(fuelData, item.fuel)
     const yearId = getIdByLabel(yearsData, item.year);
-    // console.log('year ID:', yearId)
     const coupeId = getIdByLabel(categoryData, item.coupe_type)
     const numDoorsId = getIdByLabel(numDoorsData, item.number_doors)
     const conditionId = getIdByLabel(conditionData, item.condition)
@@ -341,7 +323,6 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
                 }
             }).catch((callback) => {
                 const { data } = callback.response.data
-                // resetState();
                 console.log(callback)
                 setInputFieldsError(data.inputField)
                 setSelectMenusError(data.selectMenu)
@@ -355,31 +336,6 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         year, coupe_type, number_doors, condition,
         price, fuel, transmission, mileage, power,
         color, photos])
-
-    // const isValidOption = (selectedValue: string, options: OptionsProps[], targetId: string) => {
-    //   return options.find(option => option.id === selectedValue)?.id === targetId || '';
-    // };
-            
-
-    // const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-    //   const updatedCards = [...photos];
-    //   const [draggedCard] = updatedCards.splice(dragIndex, 1);
-    //   updatedCards.splice(hoverIndex, 0, draggedCard);
-    //   setPhotos(updatedCards);
-    // }, [photos]);
-  
-    //   const renderCard = useCallback(
-    //   (image: any, index: number) => {
-    //     return (
-    //       <img
-    //         key={image.id}
-    //         src={image}
-    //       />
-    //     )
-    //   },
-    //   [],
-    // )
-    // console.log('item.photos',item.photos)
     
     const [photosData, setPhotosData] = useState(photos)
 
@@ -405,14 +361,14 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
 
   const [showSuccess, setShowSuccess] = useState(false)
 
-    //fixes hydration error
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);    
+      //fixes hydration error
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);    
 
-  if (!isMounted) {
-    return null;
-  }
+    if (!isMounted) {
+      return null;
+    }
 
   return (
     <>
@@ -457,6 +413,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={carMakesData}
         dynamicId={makeId}
         value={make}
+        label="Make"
         onChange={handleMakeChange}
         error={(make === '0' || make === '') ? !!selectMenusError : false}
         />
@@ -464,6 +421,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={filteredCarModels}
         dynamicId={modelId - 1} // -1 due to placeholder
         value={model}
+        label="Model"
         onChange={handleModelChange}
         error={(model === '0' || model === '') ? !!selectMenusError : false}
       />
@@ -472,6 +430,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={transmissionData}
         dynamicId={transmissionId}
         value={transmission}
+        label="Transmission"
         onChange={handleTransmissionChange}
         error={(transmission === '0' || transmission === '') ? !!selectMenusError : false}
         // error={isValidOption(transmission, transmissionData, '0') ? !!selectMenusError : false}
@@ -480,6 +439,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={fuelData}
         dynamicId={fuelId}
         value={fuel}
+        label="Fuel"
         onChange={handleFuelChange}
         error={(fuel === '0' || fuel === '') ? !!selectMenusError : false}
         />
@@ -487,6 +447,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={filteredYears}
         dynamicId={yearId}
         value={year}
+        label="Year"
         onChange={handleYearChange}
         error={(year === '0' || year === '') ? !!selectMenusError : false}
       />
@@ -494,6 +455,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={categoryData}
         dynamicId={coupeId}
         value={coupe_type}
+        label="Category"
         onChange={handleCategoryChange}
         error={(coupe_type === '0' || coupe_type === '') ? !!selectMenusError : false}
       />
@@ -501,6 +463,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={numDoorsData}
         dynamicId={numDoorsId}
         value={number_doors}
+        label="Number of doors"
         onChange={handleDoorsChange}
         error={(number_doors === '0' || number_doors === '') ? !!selectMenusError : false}
       />
@@ -508,6 +471,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={conditionData}
         dynamicId={conditionId}
         value={condition}
+        label="Condition"
         onChange={handleConditionChange}
         error={(condition === '0' || condition === '') ? !!selectMenusError : false}
       />
@@ -515,6 +479,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         options={colorsData}
         dynamicId={colorId}
         value={color}
+        label="Color"
         onChange={handleColorChange}
         error={(color === '0' || color === '') ? !!selectMenusError : false}
       />

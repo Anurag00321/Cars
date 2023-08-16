@@ -1,10 +1,11 @@
 'use client'
+
 import { SessionProvider, signIn, signOut, useSession, SignInResponse  } from "next-auth/react";
 import { redirect } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import { useEffect, useState, FC, Suspense } from "react";
-import { XCircleIcon, ExclamationCircleIcon } from '@heroicons/react/20/solid'
-import LoadingComponent from "../loading";
+import { XCircleIcon, ExclamationCircleIcon, EyeIcon } from '@heroicons/react/20/solid'
+import LoadingComponent from "@/app/signin/loading";
 
 export const SignIn: FC = () => {
   const [email, setEmail] = useState("");
@@ -15,8 +16,6 @@ export const SignIn: FC = () => {
 
   const [isLoading, setIsLoading] = useState(false)
   
-  const [username, setUsername] = useState("");
-
   const session = useSession()
   const router = useRouter();
 
@@ -26,7 +25,6 @@ export const SignIn: FC = () => {
     setPasswordError("")
   };
 
-  // make it async once possible
   const handleLogin = () => {
     setIsLoading(true)
     resetState();
@@ -59,8 +57,10 @@ export const SignIn: FC = () => {
     router.push('/')
   }
 
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
-  <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-white">
+  <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-white">
     <Suspense fallback={<LoadingComponent/>}>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         {(emailError || passwordError || error) && (
@@ -107,17 +107,23 @@ export const SignIn: FC = () => {
             <div className="flex items-center justify-between">
               <label className="block text-sm font-medium leading-6 text-gray-900">Password</label>
             </div>
-            <div className="mt-2">
-              <div>
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  disabled={isLoading}
-                  className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
-                    passwordError || error ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
-                  } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
-                />
-              </div>
+            <div className="mt-2 relative">
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                type={showPassword ? 'text' : 'password'}
+                required
+                disabled={isLoading}
+                className={`block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                  passwordError || error ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
+                } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-2 flex items-center p-1"
+              >
+                <EyeIcon className="h-5 w-auto fill-gray-500" />
+              </button>
             </div>
           </div>
           <div>

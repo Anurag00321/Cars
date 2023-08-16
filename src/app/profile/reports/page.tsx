@@ -12,6 +12,8 @@ import { subDays } from "date-fns";
 import prisma from "@/app/libs/prismadb";
 import SelectMenuCustom from "../../../../components/selectMenuCustom";
 import LoadingComponent from "@/app/loading";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import Error from "@/app/error";
 
 export const Reports = async () => {
     
@@ -19,6 +21,10 @@ export const Reports = async () => {
     const totalListings = await getListingsCount()
     const totalUsers = await getUsersCount()
     const popularMake = await GetPopularMake()
+
+    const currentUser = await getCurrentUser()
+
+    const userRole = currentUser?.role  
     
     const aggregateMake = await prisma.listing.aggregate({
       _max: {
@@ -63,6 +69,12 @@ export const Reports = async () => {
       { label: '14 days', id: '2' },
       { label: '30 days', id: '3' },
     ]
+
+    if(userRole !== "ADMIN") {
+      return(
+        <Error />
+      )
+    }
 
     return (
         <div>

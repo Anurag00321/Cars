@@ -161,7 +161,7 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
             <SelectMenuCustom options={fuelType} field="fuel" value={fuel} onChange={handleFuelChange} />
             <SelectMenuCustom options={transmissionType} field="transmission" value={transmission} onChange={handleTransmissionChange} />
             <SelectMenuCustom options={yearsMap} field="year" value={year} onChange={handleYearChange} />
-            <InputField type="text" label='Price' value={price} placeholder='Price..' onChange={handlePriceChange} />
+            <InputField type="text" value={price} placeholder='Price..' onChange={handlePriceChange} />
             <div className="sm:col-span-2 flex justify-center">
               <button
                 type="button"

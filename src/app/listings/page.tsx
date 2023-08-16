@@ -6,7 +6,7 @@ import Pagination from "../../../components/pagination";
 import ListingCard from "./components/ListingCard";
 import { Listing } from "@prisma/client";
 import { Suspense } from 'react'
-import LoadingComponent from "../loading";
+import { LoadingComponent } from "@/app/listings/loading";
 
 interface ListingsProps {
     searchParams: { page: string, make: string, model: string, 

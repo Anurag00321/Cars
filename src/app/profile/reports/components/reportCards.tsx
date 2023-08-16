@@ -38,7 +38,7 @@ export const ReportCards: React.FC<ReportCardsProps>  = ({initialItems, totalLis
   ]
 
     return (
-      <div className="w-3xl">
+      <div className="w-3xl h-screen">
       {queryData ? <h3 className="text-lg leading-6 font-medium text-gray-900">Last {+queryData} days</h3>:
       <h3 className="text-lg leading-6 font-medium text-gray-900">Since start</h3>
       }

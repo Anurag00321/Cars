@@ -4,7 +4,7 @@ import ListingsList from "../components/ListingsList"
 import ListingPage from "./components/ListingPage"
 import getEmailBySlug from "@/app/actions/getEmailBySlug"
 import { Suspense } from "react"
-import LoadingComponent from "@/app/loading"
+import LoadingComponent from "@/app//listings/[slug]/loading"
 
 interface Params {
     slug: string
@@ -27,7 +27,7 @@ export const SlugListing = async ({ params }: { params: Params }) => {
         <div>
           <Suspense fallback={<LoadingComponent />}>
             <ListingPage initialItems={listing as any} listingEmail={userEmail}/>
-        </Suspense>
+          </Suspense>
         </div>
     )
 }

@@ -32,7 +32,8 @@ module.exports = {
       },
       screens: {
         'xs': {'max': '639px'},
-        'sm-md': {'min': '768px', 'max': '890px'},
+        'sm-md': {'max': '891px'},
+        // 'sm-md': {'min': '769px', 'max': '891px'},
       }
     },
     fontFamily: {
