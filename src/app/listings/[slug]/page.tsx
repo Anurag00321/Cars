@@ -9,7 +9,7 @@ interface Params {
     slug: string
 }
 
-export const Slug = async ({ params }: { params: Params }) => {
+export default async function Slug({ params }: { params: { slug: string } }) {
 
     const listing = await getListingBySlug(params.slug)
     const userEmail = await getEmailBySlug(params.slug)
@@ -30,5 +30,3 @@ export const Slug = async ({ params }: { params: Params }) => {
         </div>
     )
 }
-
-export default Slug
