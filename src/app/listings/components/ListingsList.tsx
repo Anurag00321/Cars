@@ -29,11 +29,21 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
 
   const itemsTest = useContext(FilterContext)
 
-
   const [items, setItems] = useState(initialItems)
   const [totalItems, setTotalItems] = useState(total || [])
   const [updatedItemsState, setUpdatedItemsState] = useState(updatedItems)
   
+  const [selectedSlug, setSelectedSlug] = useState("")
+  const [selectedSlugEdit, setSelectedSlugEdit] = useState("")
+
+  const [slug, setSlug] = useState('')
+
+  const [deleteConfirm, setDeleteConfirm] = useState(false)
+
+  const [open, setOpen] = useState(false)
+
+  const cancelButtonRef = useRef(null)
+
   const initialFilters = useContext(FilterContext)
 
   const [filteredState, setFilteredState] = useState(initialFilters || [])
@@ -76,7 +86,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
     }} else {
     setFilteredItems(filterData);
     }
-  }, [items, make, model, fuel, transmission, year, price, filteredPagination]);  
+  }, [items, make, model, fuel, transmission, year, price, filteredPagination, totalItems]);  
 
   if(filteredItems.length < 0) {
     return (
@@ -85,9 +95,6 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
       </div>
     )
   }
-
-  const [selectedSlug, setSelectedSlug] = useState("")
-  const [selectedSlugEdit, setSelectedSlugEdit] = useState("")
 
     // open the specific listing's page
   const handleOnClick = (slug: string) => {
@@ -103,14 +110,6 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
     setSelectedSlugEdit(slug);
   };
   
-  const [slug, setSlug] = useState('')
-
-  const [deleteConfirm, setDeleteConfirm] = useState(false)
-
-  const [open, setOpen] = useState(false)
-
-  const cancelButtonRef = useRef(null)
-
   const handleDelete = async (slug: string) => {
     setOpen(true)
       if (deleteConfirm === true) {
@@ -135,6 +134,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
     }
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     if (selectedSlug !== '') {
       router.push(`/listings/${selectedSlug}`);
@@ -142,7 +142,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
     if (selectedSlugEdit !== '') {
       router.push(`/listings/${selectedSlugEdit}/edit`);
     }
-  }, [selectedSlug, selectedSlugEdit, filteredItems]);  
+  }, [selectedSlug, selectedSlugEdit, filteredItems, router]);  
 
 
     if(profile == true) {

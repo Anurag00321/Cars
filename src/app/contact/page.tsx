@@ -21,7 +21,7 @@ export const Contact: React.FC = () => {
           <div className="flex h-full items-center relative py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:max-w-7xl lg:mx-auto lg:py-32">
             <div className="lg:pr-8">
               <div className="max-w-md mx-auto sm:max-w-lg lg:mx-0 font-rubik">
-                <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Let's work together</h2>
+                <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Let&apos;s work together</h2>
                 <p className="mt-4 text-xl font-medium text-gray-500 sm:mt-3">
                   We&apos;d love to hear from you! You are welcome to contact us via the ways listed below.
                 </p>
@@ -40,7 +40,6 @@ export const Contact: React.FC = () => {
         </Suspense>
         </>
       )
-    
 }
 
 export default Contact

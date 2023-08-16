@@ -5,8 +5,6 @@ import { UserCircleIcon } from '@heroicons/react/24/outline'
 import { User } from '@prisma/client'
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import getUsername from '@/app/actions/getUsername'
-
 
 function classNames(...className: any) {
   return className.filter(Boolean).join(' ')
@@ -36,7 +34,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({currentUser}) => {
       setIsAdmin(false)
       router.prefetch("/profile/listings");
     }
-  }, []);
+  }, [router, userRole]);
 
   const handleLogout = () => {
     signOut()

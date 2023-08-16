@@ -27,7 +27,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters, an
             } else {
                 setSelectedSlug(selectedSlug)
             }
-    }, [selectedSlug])
+    }, [selectedSlug, router])
 
     const checkFilters = () => {
       if(anyFilters) {

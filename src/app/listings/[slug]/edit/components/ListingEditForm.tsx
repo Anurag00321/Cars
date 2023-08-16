@@ -146,7 +146,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         setFilteredCarModels(filteredModels);
       }
     }
-    }, [make, carModelsData]);
+    }, [make, carModelsData, isMounted]);
 
     const makeId = getIdByLabel(carMakesData, item.make)
     const modelId = getIdByLabel(filteredCarModels, item.model)
@@ -335,7 +335,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
           }, [title, description, make, model,
         year, coupe_type, number_doors, condition,
         price, fuel, transmission, mileage, power,
-        color, photos])
+        color, photos, slug, variant])
     
     const [photosData, setPhotosData] = useState(photos)
 
