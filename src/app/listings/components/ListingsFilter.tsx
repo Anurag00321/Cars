@@ -47,16 +47,12 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
 
   const router = useRouter();
 
-  const [makeNoDupe, setMakeNoDupe] = useState<string[]>([])
-
   useEffect(() => {
     const filtered = items?.filter(item => item.make === make);
     setFilteredItems(filtered);
-  
-    console.log('uniqueModelsArray:', uniqueModelsArray);
+    
   }, [make, items]);
   
-      // Create a map to store unique models and their corresponding listing objects
       const uniqueModelsMap = new Map<string, Listing>();
       filteredItems.forEach(item => {
         if (!uniqueModelsMap.has(item.model)) {
@@ -64,7 +60,6 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
         }
       });
     
-      // Extract the values (listing objects) from the map to get uniqueModelsArray
       const uniqueModelsArray = Array.from(uniqueModelsMap.values());  
 
   const unique = [...new Set(items.filter(item => item.make))]
@@ -72,23 +67,6 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems, si
   const uniqueItemsArray = unique?.filter(
     (item, index, self) => index === self.findIndex(t => t.make === item.make)
   );
-
-  // const uniqueModelsArray = filteredItems?.filter(
-  //   (item, index, self) => index === self.findIndex(t => t.make === item.model)
-  // );  
-
-// useEffect(() => {
-//   // Filter items based on selected make
-//   const filtered = items?.filter(item => item.make === make);
-
-//   // Get unique car makes from the filtered items
-//   const uniqueMakes = [...new Set(filtered?.map(item => item.make))];
-
-//   // Create an array of items with unique makes
-//   const uniqueItems = items?.filter(item => uniqueMakes.includes(item.make));
-
-//   setFilteredItems(uniqueItems);
-// }, [make, items]);
   
   const handleMakeChange = (value: string) => {
     setMake(value);

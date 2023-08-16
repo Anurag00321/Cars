@@ -36,42 +36,42 @@ body {
 
 @font-face {
   font-family: 'rubik';
-  src: url('../../public/fonts/rubik/rubik-light.ttf') format('truetype');
+  src: url('/fonts/rubik/rubik-light.ttf') format('truetype');
   font-weight: light;
   font-style: light;
 }
 
 @font-face {
   font-family: 'rubik';
-  src: url('../../public/fonts/rubik/rubik-regular.ttf') format('truetype');
-  font-weight: regular;
+  src: url('/fonts/rubik/rubik-regular.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'rubik';
-  src: url('../../public/fonts/rubik/rubik-medium.ttf') format('truetype');
+  src: url('/fonts/rubik/rubik-medium.ttf') format('truetype');
   font-weight: medium;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'rubik';
-  src: url('../../public/fonts/rubik/rubik-semibold.ttf') format('truetype');
-  font-weight: semibold;
+  src: url('/fonts/rubik/rubik-semibold.ttf') format('truetype');
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'rubik';
-  src: url('../../public/fonts/rubik/rubik-bold.ttf') format('truetype');
+  src: url('/fonts/rubik/rubik-bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'rubik';
-  src: url('../../public/fonts/rubik/rubik-extrabold.ttf') format('truetype');
-  font-weight: extrabold;
+  src: url('/fonts/rubik/rubik-extrabold.ttf') format('truetype');
+  font-weight: 800;
   font-style: normal;
 }
