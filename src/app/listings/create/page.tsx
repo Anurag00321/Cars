@@ -30,7 +30,7 @@ interface Option {
 }
 
 
-export default function Create(props: ListingCreateProps){
+export default function Create(){
   
   const [isMounted, setIsMounted] = useState(false);
   
