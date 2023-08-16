@@ -10,7 +10,7 @@ import { LoadingComponent } from "@/app/listings/loading";
 
 interface ListingsProps {
     searchParams: { page: string, make: string, model: string, 
-        year: string, price: string, fuel: string, transmission: string}
+    year: string, price: string, fuel: string, transmission: string}
 }
 
 export const Listings: React.FC<ListingsProps> = async ({searchParams: 

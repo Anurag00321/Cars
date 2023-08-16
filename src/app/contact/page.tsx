@@ -1,9 +1,11 @@
+'use client'
+
 import { Suspense } from 'react'
 import LoadingComponent from '@/app/contact/loading'
 import Image from 'next/image'
 import contactPhoto from 'public/contactPhoto.jpg'
 
-export const Contact: React.FC = () => {
+const Contact: React.FC = () => {
 
     return (
         <>
