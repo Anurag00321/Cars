@@ -23,7 +23,7 @@ export const ContactUs = () => {
               <div className="max-w-md mx-auto sm:max-w-lg lg:mx-0 font-rubik">
                 <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Let's work together</h2>
                 <p className="mt-4 text-xl font-medium text-gray-500 sm:mt-3">
-                  We’d love to hear from you! You are welcome to contact us via the ways listed below.
+                  We&apos;d love to hear from you! You are welcome to contact us via the ways listed below.
                 </p>
                 <h3 className="text-xl font-medium tracking-tight sm:text-2xl mt-6">
                     Email: 
