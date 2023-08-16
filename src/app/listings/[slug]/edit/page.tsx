@@ -3,13 +3,14 @@ import ListingEditForm from "./components/ListingEditForm"
 import { Suspense } from "react"
 import LoadingComponent from "@/app//listings/[slug]/edit/loading"
 
-interface Params {
-    slug: string
+interface EditListingsProps {
+    searchParams: { slug: string },
+    params: any
 }
 
-export const EditListing = async ({ params }: { params: Params }) => {
+export const Edit: React.FC<EditListingsProps> = async ({searchParams: {slug}}) => {
 
-    const listingOptions = await getListingBySlug(params.slug)
+    const listingOptions = await getListingBySlug(slug)
 
     return (
         <div>
@@ -20,4 +21,4 @@ export const EditListing = async ({ params }: { params: Params }) => {
     )
 }
 
-export default EditListing
+export default Edit

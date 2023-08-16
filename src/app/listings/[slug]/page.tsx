@@ -1,5 +1,4 @@
 import getListingBySlug from "@/app/actions/getListingBySlug"
-import SlugListingComp from "./components/SlugListing"
 import ListingsList from "../components/ListingsList"
 import ListingPage from "./components/ListingPage"
 import getEmailBySlug from "@/app/actions/getEmailBySlug"
@@ -10,7 +9,7 @@ interface Params {
     slug: string
 }
 
-export const SlugListing = async ({ params }: { params: Params }) => {
+export const Slug = async ({ params }: { params: Params }) => {
 
     const listing = await getListingBySlug(params.slug)
     const userEmail = await getEmailBySlug(params.slug)
@@ -32,4 +31,4 @@ export const SlugListing = async ({ params }: { params: Params }) => {
     )
 }
 
-export default SlugListing
+export default Slug

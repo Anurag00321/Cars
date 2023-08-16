@@ -4,7 +4,7 @@ import getUserListings from "../../actions/getUserListings";
 import ListingsList from "../../listings/components/ListingsList";
 import LoadingComponent from "@/app/loading";
 
-export const Profile = async () => {
+export const Listings = async () => {
     
     const currentUserListings = await getUserListings()
 
@@ -17,4 +17,4 @@ export const Profile = async () => {
     )
 };
 
-export default Profile
+export default Listings

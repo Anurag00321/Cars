@@ -30,7 +30,7 @@ interface Option {
 }
 
 
-export const ListingCreate: React.FC<ListingCreateProps>  = () => {
+export const Create: React.FC<ListingCreateProps>  = () => {
   
   const [isMounted, setIsMounted] = useState(false);
   
@@ -413,4 +413,4 @@ export const ListingCreate: React.FC<ListingCreateProps>  = () => {
       </>
     )};
 
-export default ListingCreate
+export default Create

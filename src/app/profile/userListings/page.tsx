@@ -8,7 +8,7 @@ import { Suspense } from "react";
 import LoadingComponent from "@/app/loading";
 import Error from "@/app/error";
 
-export const Profile = async () => {
+export const UserListings = async () => {
     
     const listings = await getListings()
     const currentUser = await getCurrentUser()
@@ -53,4 +53,4 @@ export const Profile = async () => {
     )
 };
 
-export default Profile
+export default UserListings
