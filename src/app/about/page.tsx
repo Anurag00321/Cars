@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import LoadingComponent from '../loading';
 import aboutPhoto from 'public/aboutPhoto.jpg'
 
-export const AboutUs = () => {
+export const About: React.FC = () => {
 
   return (
     <Suspense fallback={<LoadingComponent />}>
@@ -24,6 +24,6 @@ export const AboutUs = () => {
     </div>
     </Suspense>
   );
-  }
+}
 
-export default AboutUs
+export default About

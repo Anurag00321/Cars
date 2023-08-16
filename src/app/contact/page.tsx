@@ -3,7 +3,7 @@ import LoadingComponent from '@/app/contact/loading'
 import Image from 'next/image'
 import contactPhoto from 'public/contactPhoto.jpg'
 
-export const ContactUs = () => {
+export const Contact: React.FC = () => {
 
     return (
         <>
@@ -43,4 +43,4 @@ export const ContactUs = () => {
     
 }
 
-export default ContactUs
+export default Contact
