@@ -4,7 +4,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 
 const prisma = new PrismaClient()
 
-export async function DELETE(
+export default async function DELETE(
     request: Request,
   ) {
     try {
@@ -25,8 +25,8 @@ export async function DELETE(
 
     console.log('listing deleted:', listing)
     // console.log('nextresp:',NextResponse.json(listing))
-    return NextResponse.json({ message: NextResponse, success: false });
-        } catch (error) {
+    return NextResponse.json({ message: 'Listing deleted', success: true });
+} catch (error) {
         console.log(error)
         return new NextResponse('Error, the listing was not deleted', { status: 500 });
 }}

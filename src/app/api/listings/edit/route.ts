@@ -4,7 +4,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 
 const prisma = new PrismaClient()
 
-export async function POST(
+export default async function POST(
     request: Request,
   ) {
     try {
