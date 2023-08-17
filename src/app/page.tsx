@@ -12,7 +12,6 @@ interface ListingsListProps {
   initialItems: Listing[];
 }
 
-
 // const Home: React.FC<ListingsListProps> = async () => {
 
 export default async function Page({initialItems}: ListingsListProps) {
@@ -36,5 +35,3 @@ export default async function Page({initialItems}: ListingsListProps) {
     </main>
   )
 }
-
-export const revalidate = 0;
