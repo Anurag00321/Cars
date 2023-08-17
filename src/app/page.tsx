@@ -15,11 +15,11 @@ interface ListingsListProps {
 
 // const Home: React.FC<ListingsListProps> = async () => {
 
-  export default async function Page({initialItems}: ListingsListProps) {
+export default async function Page({initialItems}: ListingsListProps) {
 
   const listings = await getListings();
   const currenUser = await getCurrentUser()
-
+  
   return (
     <main className="bg-beige pt-[64px] md:pt-0">
       <Suspense fallback={<LoadingComponent />}>
@@ -36,3 +36,5 @@ interface ListingsListProps {
     </main>
   )
 }
+
+export const revalidate = 0;
