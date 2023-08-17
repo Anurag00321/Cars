@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
       router.prefetch("/signin");
       router.prefetch("/");
     }
-  }, [status, router, sessionStatus, userRole]);
+  }, [status, router, sessionStatus, userRole, isAdmin]);
 
   
   const handleLogout = () => {
@@ -65,12 +65,12 @@ export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
   
   const navigation = [
     ...(sessionStatus ? [] : [
-        { name: 'Sign up', href: '/register', current: false },
-        { name: 'Login', href: '/signin', current: false },
+        { name: 'Sign up', href: '/register', current: false},
+        { name: 'Login', href: '/signin', current: false},
     ]),
-    ...(!sessionStatus ? [] : [
-    { name: 'Add a listing', href: '/listings/create', current: false },
-    ])
+    // ...(!sessionStatus ? [] : [
+    // { name: 'Add a listing', href: '/listings/create', current: false, className: 'inline md:hidden' },
+    // ])
   ];
 
 return (
@@ -116,7 +116,8 @@ return (
                         href={item.href}
                         className={classNames(
                           item.current ? 'bg-british-green-1 text-white' : 'text-gray-100 hover:bg-british-green-1 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium', sessionStatus ? 'hidden' : ''
+                          'px-3 py-2 rounded-md text-sm font-medium'
+                          , sessionStatus ? 'hidden' : ''
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >

@@ -230,7 +230,7 @@ export default function Create(){
             coupe_type: `${coupe_type}`,
             number_doors: `${number_doors}`,
             condition: `${condition}`,
-            price: `${price}`,
+            price: +price,
             fuel: `${fuel}`,
             transmission: `${transmission}`,
             mileage: `${mileage}`,
@@ -330,7 +330,7 @@ export default function Create(){
           onChange={handleModelChange}
           error={(model === '0' || model === '') ? !!selectMenusError : false}
         />
-        <InputField label='Variant' value={variant} placeholder='Variant..(M3, GTI)' onChange={handleVariantChange}/>
+        <InputField value={variant} placeholder='Variant..(M3, GTI)' onChange={handleVariantChange}/>
         <SelectMenuCustom
           options={transmissionData}
           value={transmission}
@@ -374,12 +374,12 @@ export default function Create(){
           onChange={handleColorChange}
           error={(color === '0' || color === '') ? !!selectMenusError : false}
         />
-        <InputField label='Mileage' type="number" value={mileage} placeholder='Mileage..' onChange={handleMileageChange} error={(mileage === '') ? !!inputFieldsError : false}/>
-        <InputField label='Power' type="number" value={power} placeholder='Power..' onChange={handlePowerChange} error={(power === '') ? !!inputFieldsError : false}/>
-        <InputField label='Price' type="number" value={price} placeholder='Price..' onChange={handlePriceChange} error={(price === '') ? !!inputFieldsError : false}/>
+        <InputField type="number" value={mileage} placeholder='Mileage..' onChange={handleMileageChange} error={(mileage === '') ? !!inputFieldsError : false}/>
+        <InputField type="number" value={power} placeholder='Power..' onChange={handlePowerChange} error={(power === '') ? !!inputFieldsError : false}/>
+        <InputField type="number" value={price} placeholder='Price..' onChange={handlePriceChange} error={(price === '') ? !!inputFieldsError : false}/>
         <div className="sm:col-span-2 md:col-span-2 lg:col-span-3 space-y-8">
-        <InputField label='Title' type="text" value={title} placeholder='Listing title..' onChange={handleTitleChange} error={(title === '') ? !!inputFieldsError : false}/>
-        <InputField label='Description' type="text" value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger error={(description === '') ? !!inputFieldsError : false}/>
+        <InputField type="text" value={title} placeholder='Listing title..' onChange={handleTitleChange} error={(title === '') ? !!inputFieldsError : false}/>
+        <InputField type="text" value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger error={(description === '') ? !!inputFieldsError : false}/>
         <div className='bg-sky-200 mt-[21rem] pl-2 pb-4 md:pb-0 rounded-xl mx-24 md:mx-64'>
           <div className="flex w-full h-full flex-col items-center justify-center gap-y-6">
             <p className='pt-2 font-rubik font-normal text-xl text-blue-800'>Upload Photos</p>

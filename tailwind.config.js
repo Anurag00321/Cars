@@ -37,16 +37,54 @@ module.exports = {
         // 'sm-md': {'min': '769px', 'max': '891px'},
       }
     },
+    // fontFamily: {
+    //   Rubik: ['rubik', 'sans-serif'],
+    // },
+    // fontWeight: {
+    //   light: '300',
+    //   regular: '400',
+    //   medium: '500',
+    //   semibold: '600',
+    //   bold: '700',
+    //   extrabold: '800',
+    // },
     fontFamily: {
-      rubik: ['rubik', 'sans-serif'],
-    },
-    fontWeight: {
-      light: '300',
-      regular: '400',
-      medium: '500',
-      semibold: '600',
-      bold: '700',
-      extrabold: '800',
+      'light': [
+          'rubik, sans-serif',
+          {
+              fontVariationSettings: '"wght" 300',
+          },
+        ],
+        'normal': [
+            'rubik, sans-serif',
+            {
+                fontVariationSettings: '"wght" 400',
+            },
+        ],
+        'medium': [
+            'rubik, sans-serif',
+            {
+                fontVariationSettings: '"wght" 500',
+            },
+        ],
+        'semibold': [
+            'rubik, sans-serif',
+            {
+                fontVariationSettings: '"wght" 600',
+            },
+        ],
+        'bold': [
+            'rubik, sans-serif',
+            {
+                fontVariationSettings: '"wght" 700',
+            },
+        ],
+        'extrabold': [
+            'rubik, sans-serif',
+            {
+                fontVariationSettings: '"wght" 800',
+            },
+        ],
     },
   },
   plugins: [

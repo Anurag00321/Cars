@@ -75,3 +75,8 @@ body {
   font-weight: 800;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'rubik-variable';
+  src: url('/fonts/rubik/rubik-variablefont_wght.ttf') format('truetype');
+}
