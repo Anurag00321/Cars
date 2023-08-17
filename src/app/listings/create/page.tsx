@@ -276,7 +276,8 @@ export default function Create(){
         }, [title, description, make, model,
       year, coupe_type, number_doors, condition,
       price, fuel, transmission, mileage, power,
-      color, photos])
+      color, photos, handleRedirect, router,
+      slugData, variant])
 
     /* eslint-disable-next-line no-unsafe-optional-chaining */
     useEffect(() => {
@@ -289,7 +290,7 @@ export default function Create(){
 
     return (
       <>
-      <div>
+      <div className="pt-[64px] md:pt-0 px-8 md:px-0">
       <Suspense fallback={<LoadingComponent />}>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-16">
       {(selectMenusError || inputFieldsError || titleDescriptionError || photosError
@@ -379,8 +380,8 @@ export default function Create(){
         <div className="sm:col-span-2 md:col-span-2 lg:col-span-3 space-y-8">
         <InputField label='Title' type="text" value={title} placeholder='Listing title..' onChange={handleTitleChange} error={(title === '') ? !!inputFieldsError : false}/>
         <InputField label='Description' type="text" value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger error={(description === '') ? !!inputFieldsError : false}/>
-        <div className='bg-sky-200 m-[21rem] pl-2 rounded-xl'>
-          <div className="flex w-full flex-col items-center justify-center gap-y-6">
+        <div className='bg-sky-200 mt-[21rem] pl-2 pb-4 md:pb-0 rounded-xl mx-24 md:mx-64'>
+          <div className="flex w-full h-full flex-col items-center justify-center gap-y-6">
             <p className='pt-2 font-rubik font-normal text-xl text-blue-800'>Upload Photos</p>
             <CldUploadButton
             options={{ maxFiles: 6 }}

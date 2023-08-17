@@ -41,9 +41,9 @@ export const Landing: React.FC<LandingProps> = () => {
         className="brightness-[0.6] relative w-full sm:max-h-[32rem] object-cover shadow-md"/>
             <div className='absolute text-white max-w-5xl mx-auto pb-8 sm:pb-6 lg:pb-0'>
             <p className="mt-2 text-lg sm:text-2xl font-medium px-6 xl:px-0">Your Car, Your Price, Our Platform</p>
-            <p className="mt-4 text-md sm:text-lg font-thin px-6 xl:px-0">
+            <p className="mt-4 text-md sm:text-lg font-light px-6 xl:px-0">
                 Say goodbye to the traditional car selling process. 
-                With FlatSix, you can list your used car, attract interested buyers, and seal the deal – all in a few simple steps
+                With FlatSix, you can list your used car, attract interested buyers, and seal the deal - all in a few simple steps
             </p>
                 <div className="flex justify-center items-center pb-0 sm:pb-12 lg:pb-0 px-6 xl:px-0 sm:block">
                     <button 

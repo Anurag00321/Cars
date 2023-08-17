@@ -17,18 +17,20 @@ interface NavBarProps {
   currentUser: User
 }
 
-function classNames(...className: any[]) {
+function classNames(...className: unknown[]) {
   return className.filter(Boolean).join(' ');
 }
 
 export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
 
-  const { data: session, status: status } = useSession()
-  const sessionEmail = session?.user?.email as string
+  const { 
+    // data: session
+    status: status } = useSession()
+  // const sessionEmail = session?.user?.email as string
 
   const router = useRouter();
 
-  const user = currentUser
+  // const user = currentUser
   
   const [sessionStatus, setSessionStatus] = useState(false)
   

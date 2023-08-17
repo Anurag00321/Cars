@@ -9,7 +9,13 @@ interface Params {
     slug: string
 }
 
-export default async function Slug({ params }: { params: { slug: string } }) {
+export default async function Page({
+    params,
+  }: {
+    params: Params;
+  }): Promise<JSX.Element | null> {
+
+    // const slugParam = slug
 
     const listing = await getListingBySlug(params.slug)
     const userEmail = await getEmailBySlug(params.slug)
@@ -23,7 +29,7 @@ export default async function Slug({ params }: { params: { slug: string } }) {
     }
 
     return (
-        <div>
+      <div className="pt-[64px] md:pt-0">
           <Suspense fallback={<LoadingComponent />}>
             <ListingPage initialItems={listing as any} listingEmail={userEmail}/>
           </Suspense>

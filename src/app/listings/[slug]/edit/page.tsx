@@ -13,7 +13,7 @@ export default async function Edit({ params }: { params: { slug: string } }) {
     const listingOptions = await getListingBySlug(params.slug)
 
     return (
-        <div>
+        <div className="pt-[64px] md:pt-0">
             <Suspense fallback={<LoadingComponent />}>
                 <ListingEditForm initialItems={listingOptions as any}/>
             </Suspense>

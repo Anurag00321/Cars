@@ -27,6 +27,26 @@ export const ReportCards: React.FC<ReportCardsProps>  = ({initialItems, totalLis
   const [topMake, setTopMake] = useState(popularMake)
   const [topMakeStart, setTopMakeStart] = useState(popularMakeStart)
 
+  useEffect(() => {
+    setItems(initialItems);
+  }, [initialItems]);
+  
+  useEffect(() => {
+    setListingsCount(totalListings);
+  }, [totalListings]);
+  
+  useEffect(() => {
+    setUsersCount(totalUsers);
+  }, [totalUsers]);
+  
+  useEffect(() => {
+    setTopMake(popularMake);
+  }, [popularMake]);
+  
+  useEffect(() => {
+    setTopMakeStart(popularMakeStart);
+  }, [popularMakeStart]);
+      
   // console.log(dateItems)
 
   const item = initialItems[0]

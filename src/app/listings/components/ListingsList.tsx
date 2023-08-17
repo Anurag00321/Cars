@@ -4,28 +4,23 @@ import { Listing } from "@prisma/client";
 import { useContext, useState, useEffect, useCallback, Fragment, useRef } from 'react';
 import { ListingsFilter, FilterContext } from "./ListingsFilter";
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
-import getListingBySlug from "@/app/actions/getListingBySlug";
-import InputField from "../../../../components/inputField";
-import getUserListingsAdmin from "@/app/actions/getUserEmail";
 import axios from "axios";
-import Link from "next/link";
 import Pagination from "../../../../components/pagination";
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 
 interface ListingsListProps {
-    initialItems: Listing[];
-    updatedItems?: Listing[];
-    profile?: boolean;
-    featured?: boolean;
-    // searchParams: { page: string}
-    total?: Listing[]
-    filteredListings?: Listing[]
+  initialItems: Listing[]
+  updatedItems?: Listing[];
+  profile?: boolean;
+  featured?: boolean;
+  total?: Listing[];
+  filteredListings?: Listing[];
 }
 
-const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updatedItems, featured, 
-  // searchParams: { page },
-   total, filteredListings}) => {
+export default function ListingsList({ initialItems, profile, updatedItems, featured, total, filteredListings}: ListingsListProps) {
+
+// const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updatedItems, featured, total, filteredListings}) => {
 
   const itemsTest = useContext(FilterContext)
 
@@ -369,8 +364,7 @@ const ListingsList: React.FC<ListingsListProps> = ({initialItems, profile, updat
   //   ))}
   //   </div>
   //   </>
-  //   )
-  
+  //   )  
 }
 
-export default ListingsList
+// export default ListingsList

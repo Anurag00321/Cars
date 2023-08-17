@@ -13,9 +13,10 @@ interface ListingsProps {
     year: string, price: string, fuel: string, transmission: string}
 }
 
-export const Listings: React.FC<ListingsProps> = async ({searchParams: 
-    { page, make: makeParam, model: modelParam, year: yearParam, price: priceParam, fuel: fuelParam, transmission: transParam
-    }}) => {
+export default async function Listings({ searchParams: 
+    {page, make: makeParam, model: modelParam, year: yearParam, 
+    price: priceParam, fuel: fuelParam, transmission: transParam
+    } }: ListingsProps) {
 
     const pageSize = 6
 
@@ -86,18 +87,18 @@ export const Listings: React.FC<ListingsProps> = async ({searchParams:
     const anyListings = checkListingsLength()
 
     return (
-        <div className="flex flex-col">
-            <Suspense fallback={<LoadingComponent />}>
-                <ListingCard listing={await filteredListings} anyFilters={filters} anyListings={anyListings}/>
-                <div className="flex-2">
-                {!anyListings &&
-                <Pagination currentPage={currentPage} totalPages={totalPages} />
-                }
-                </div>
-            </Suspense>
+        <div className="pt-[64px] md:pt-0">
+            <div className="flex flex-col">
+                <Suspense fallback={<LoadingComponent />}>
+                    <ListingCard listing={await filteredListings} anyFilters={filters} anyListings={anyListings}/>
+                    <div className="flex-2">
+                    {!anyListings &&
+                    <Pagination currentPage={currentPage} totalPages={totalPages} />
+                    }
+                    </div>
+                </Suspense>
+            </div>
         </div>
     )
 
 }
-
-export default Listings

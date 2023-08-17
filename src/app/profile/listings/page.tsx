@@ -4,17 +4,16 @@ import getUserListings from "../../actions/getUserListings";
 import ListingsList from "../../listings/components/ListingsList";
 import LoadingComponent from "@/app/loading";
 
-export const Listings = async () => {
+export default async function Listings() {
+// export const Listings = async () => {
     
     const currentUserListings = await getUserListings()
 
     return (
-        <div>
+        <div className="pt-[64px] md:pt-0">
         <Suspense fallback={<LoadingComponent />}>
             <ListingsList initialItems={currentUserListings} profile={true}/>
         </Suspense>
         </div>
     )
-};
-
-export default Listings
+}

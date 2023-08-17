@@ -12,7 +12,10 @@ interface ListingsListProps {
   initialItems: Listing[];
 }
 
-const Home: React.FC<ListingsListProps> = async () => {
+
+// const Home: React.FC<ListingsListProps> = async () => {
+
+  export default async function Page({initialItems}: ListingsListProps) {
 
   const listings = await getListings();
   const currenUser = await getCurrentUser()
@@ -33,5 +36,3 @@ const Home: React.FC<ListingsListProps> = async () => {
     </main>
   )
 }
-
-export default Home

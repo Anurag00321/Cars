@@ -8,14 +8,20 @@ import ReportCards from "../components/reportCards";
 import getListingsCount from "@/app/actions/getListingsCount";
 import getUsersCount from "@/app/actions/getUsersCount";
 import GetPopularMake from "@/app/actions/getPopularMake";
+import { Suspense } from 'react';
+import LoadingComponent from "@/app/profile/reports/search/loading";
+
+// interface ReportsSearchProps {
+//     searchParams: { query: string }
+// }
+
+// export default async function Search({searchParams: {query}}: ReportsSearchProps) {
 
 interface ReportsSearchProps {
-    searchParams: { query: string }
-}
-
-// export default async function SearchPage({searchParams: {query}}: SearchPageProps) {
-
-export const ReportsSearchPage: React.FC<ReportsSearchProps> = async ({searchParams: {query}}) => {
+    searchParams: { query: string };
+  }
+  
+export default async function Search({ searchParams: { query } }: ReportsSearchProps) {
 
     const listings = await getListings()
     const totalListings = await getListingsCount()
@@ -55,26 +61,27 @@ export const ReportsSearchPage: React.FC<ReportsSearchProps> = async ({searchPar
 
         const currentDate = new Date();
         const dateSub = await subDays(currentDate, +searchQuery!);
-                
+              
         const date = await prisma.listing.findMany({
-            select: {
+          select: {
             createdAt: true,
-            },
-            orderBy: {
+          },
+          orderBy: {
             createdAt: 'desc',
-            },
-            where: {
+          },
+          where: {
             createdAt: {
-                lte: dateSub
+              lte: dateSub
             },
-            },
+          },
         });
-        
+      
         return date;
-    };
+      };      
           
     return (
-        <div>
+        <div className="pt-[64px] md:pt-0">
+            <Suspense fallback={<LoadingComponent />}>
             <form action={GetDateFilter} className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8">
                 <p className="flex-0">Pick time period</p>
                 <select placeholder="Pick period.." name="searchQuery" className="mt-2 flex-2 bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-6 py-2 text-left cursor-default focus:outline-none focus:ring-british-green-4 focus:border-british-green-4 sm:text-sm ">
@@ -90,7 +97,7 @@ export const ReportsSearchPage: React.FC<ReportsSearchProps> = async ({searchPar
                 Submit
                 </button>
             </form>
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto px-6 pt-8">
             <ReportCards 
                 initialItems={listings} 
                 totalListings={filteredListingsCount}
@@ -99,9 +106,7 @@ export const ReportsSearchPage: React.FC<ReportsSearchProps> = async ({searchPar
                 queryData={queryData}
             />  
             </div>
+            </Suspense>
         </div>
     )
-
 }
-
-export default ReportsSearchPage

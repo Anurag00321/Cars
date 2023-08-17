@@ -11,12 +11,14 @@ import { redirect, useSearchParams } from "next/navigation";
 import { subDays } from "date-fns";
 import prisma from "@/app/libs/prismadb";
 import SelectMenuCustom from "../../../../components/selectMenuCustom";
-import LoadingComponent from "@/app/loading";
+import LoadingComponent from "@/app/profile/reports/loading";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import Error from "@/app/error";
 
-export const Reports = async () => {
-    
+// export const Reports = async () => {
+
+export default async function Reports() {
+
     const listings = await getListings()
     const totalListings = await getListingsCount()
     const totalUsers = await getUsersCount()
@@ -77,7 +79,7 @@ export const Reports = async () => {
     }
 
     return (
-        <div>
+        <div className="pt-[64px] md:pt-0">
             <Suspense fallback={<LoadingComponent />}>
             <form action={GetDateFilter} className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8">
                 {/* <input name="searchQuery"></input> */}
@@ -96,7 +98,7 @@ export const Reports = async () => {
                 Submit
                 </button>
             </form>
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto px-6 pt-8">
             <ReportCards 
                 initialItems={listings} 
                 totalListings={totalListings}
@@ -108,6 +110,4 @@ export const Reports = async () => {
             </Suspense>
         </div>
     )
-};
-
-export default Reports
+}

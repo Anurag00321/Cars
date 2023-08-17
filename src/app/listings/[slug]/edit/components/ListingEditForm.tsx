@@ -372,6 +372,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
 
   return (
     <>
+      <div className="pt-[64px] md:pt-0 px-8 md:px-0">
     <DndContext 
     sensors={sensors}
     collisionDetection={closestCenter}
@@ -497,7 +498,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
           {photos.map(photo => <SortableItem key={photo.id} id={photo}/>)}
         </div>
         </SortableContext>
-        <div className='bg-sky-200 mt-[21rem] pl-2 pb-4 md:pb-0 rounded-xl mx-2 sm-md:mx-44 md:mx-72'>
+        <div className='bg-sky-200 mt-[21rem] pl-2 pb-4 md:pb-0 rounded-xl mx-24 md:mx-64'>
           <div className="flex w-full h-full flex-col items-center justify-center gap-y-6">
             <p className='pt-2 font-rubik font-normal text-xl text-blue-800'>Upload Photos</p>
             <CldUploadButton
@@ -527,6 +528,7 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
       </div>
     </div>
     </DndContext>
+    </div>
     </>
   )};
 
