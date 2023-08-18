@@ -17,20 +17,18 @@ interface ListingsListProps {
 export default async function Page({initialItems}: ListingsListProps) {
 
   const listings = await getListings();
-  const currenUser = await getCurrentUser()
+  const currentUser = await getCurrentUser()
   
   return (
-    <main className="bg-beige pt-[64px] md:pt-0">
+    <main className="bg-beige pt-[64px] md:pt-0 h-full">
       <Suspense fallback={<LoadingComponent />}>
-        <Landing currentUser={currenUser!} />
-        <div className="max-w-7xl max-h-lg mx-auto my-auto py-20 sm:px-6 lg:px-6 bg-beige">
-          <div className="px-4 py-4 sm:px-0">
+        <Landing currentUser={currentUser!} />
+          <div className="py-40 md:py-10 lg:py-0 lg:pb-20">
             <div className="h-72" />
             <ListingsFilter initialItems={listings} />
             {/* <p className="pt-8 font-bold text-3xl font-rubik text-british-green-1">Featured listings</p> */}
             <ListingsList initialItems={listings} featured={true} />
           </div>
-        </div>
       </Suspense>
     </main>
   )

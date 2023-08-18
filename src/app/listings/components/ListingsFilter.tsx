@@ -130,20 +130,20 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({ initialItems }) 
 
   return (
     <FilterContext.Provider value={filteredItems}>
-    <div className="absolute xs:top-[20rem] sm:top-[24rem] md:top-[26rem] lg:top-[45%] lg:bottom-10 2xl:bottom-20 mt-6 inset-0 bottom-10 ">
-        <div className="flex absolute inset-0 mx-auto max-w-2xl h-full justify-center bg-british-green-3 bg-opacity-100 rounded-lg shadow-lg">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 max-w-4xl max-h-md px-4 py-8 sm:py-16 sm:pt-24">
+    <div className="absolute xs:top-[19rem] sm:top-[24rem] md:top-[26rem] lg:top-[45%] lg:bottom-10 2xl:bottom-20 mt-6 inset-0 bottom-10 ">
+        <div className="flex mx-auto max-w-2xl justify-center bg-british-green-3 bg-opacity-100 rounded-lg shadow-lg">
+        <div className="grid grid-cols-2 gap-y-4 gap-x-4 max-w-md px-4 py-8 sm:py-16 sm:pt-24">
             <SelectMenu items={uniqueItemsArray} data={uniqueItemsArray} field="make" value={make} onChange={handleMakeChange} onClick={handleMakeChange} />
             <SelectMenu items={uniqueModelsArray} data={uniqueModelsArray} field="model" value={model} onChange={handleModelChange} onClick={handleModelChange} />
             <SelectMenuCustom options={fuelType} field="fuel" value={fuel} onChange={handleFuelChange} />
             <SelectMenuCustom options={transmissionType} field="transmission" value={transmission} onChange={handleTransmissionChange} />
             <SelectMenuCustom options={yearsMap} field="year" value={year} onChange={handleYearChange} />
             <InputField type="text" value={price} placeholder='Price..' onChange={handlePriceChange} />
-            <div className="sm:col-span-2 flex justify-center">
+            <div className="col-span-2 flex justify-center mt-8">
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="text-white focus:ring-4 focus:outline-none max-h-10 focus:ring-bg-orange-4 font-medium rounded-lg text-sm px-8 text-center bg-orange-3 hover:bg-orange-4 dark:focus:ring-orange-4"
+                className="text-white focus:ring-4 focus:outline-none focus:ring-bg-orange-4 font-medium rounded-lg text-sm px-8 py-4 text-center bg-orange-3 hover:bg-orange-4 dark:focus:ring-orange-4"
               >
                 Submit
               </button>

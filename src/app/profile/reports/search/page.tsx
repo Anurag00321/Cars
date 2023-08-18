@@ -82,7 +82,7 @@ export default async function Search({ searchParams: { query } }: ReportsSearchP
     return (
         <div className="pt-[64px] md:pt-0">
             <Suspense fallback={<LoadingComponent />}>
-            <form action={GetDateFilter} className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8">
+            <form action={GetDateFilter} className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8 px-6">
                 <p className="flex-0">Pick time period</p>
                 <select placeholder="Pick period.." name="searchQuery" className="mt-2 flex-2 bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-6 py-2 text-left cursor-default focus:outline-none focus:ring-british-green-4 focus:border-british-green-4 sm:text-sm ">
                     <option value="" disabled selected className="cursor-default select-none relative py-2 pl-3 pr-9">Pick period</option>

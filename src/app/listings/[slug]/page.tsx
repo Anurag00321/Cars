@@ -15,17 +15,33 @@ export default async function Page({
     params: Params;
   }): Promise<JSX.Element | null> {
 
-    // const slugParam = slug
+    const slugParam = params.slug
 
-    const listing = await getListingBySlug(params.slug)
-    const userEmail = await getEmailBySlug(params.slug)
+    console.log('slug page slug:', params.slug)
 
-    if(!listing) {
-        console.log('no listing')
-    }
+    let listing = null;
+    let userEmail = null;
 
-    if(!userEmail) {
-        console.log('no user Email')
+    console.log('slug page slug:', params.slug);
+
+    listing = await getListingBySlug(slugParam);
+    userEmail = await getEmailBySlug(slugParam);
+    try {
+        listing = await getListingBySlug(slugParam);
+        userEmail = await getEmailBySlug(slugParam);
+
+        if (!listing) {
+            console.log('no listing');
+        }
+
+        if (!userEmail) {
+            console.log('no user Email');
+        }
+
+        // Rest of your code...
+
+    } catch (error) {
+        console.log('Error:', error);
     }
 
     return (

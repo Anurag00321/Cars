@@ -38,7 +38,7 @@ export default async function Listings({ searchParams:
             where: {
                 ...(makeParam && { make: { equals: makeParam } }),
                 ...(modelParam && { model: { equals: modelParam } }),
-                ...(yearParam && { year: { lte: yearParam } }),
+                ...(yearParam && { year: { gte: yearParam } }),
                 ...(priceParam && { price: { lte: parseInt(priceParam) } }),
                 ...(fuelParam && { fuel: { equals: fuelParam } }),
                 ...(transParam && { transmission: { equals: transParam } }),
@@ -52,7 +52,7 @@ export default async function Listings({ searchParams:
         where: {
             ...(makeParam && { make: { equals: makeParam } }),
             ...(modelParam && { model: { equals: modelParam } }),
-            ...(yearParam && { year: { lte: yearParam } }),
+            ...(yearParam && { year: { gte: yearParam } }),
             ...(priceParam && { price: { lte: parseInt(priceParam) } }),
             ...(fuelParam && { fuel: { equals: fuelParam } }),
             ...(transParam && { transmission: { equals: transParam } }),

@@ -24,11 +24,13 @@ export default async function RootLayout({
   const currenUser = await getCurrentUser() 
   return (
     <html lang="en">
-      <body>
+      <body className="flex flex-col h-screen justify-between">
         <AuthContext>
         <Suspense fallback={<LoadingComponent />}>
           <Navbar currentUser={currenUser!}/>
+          <div className="mb-auto">
           {children}
+          </div>
           <Footer />
         </Suspense>
         </AuthContext>

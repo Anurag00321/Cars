@@ -16,8 +16,6 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters, an
 
     const [selectedSlug, setSelectedSlug] = useState("")
 
-    console.log(selectedSlug)
-
     useEffect (() => {
             const queryParams = new URLSearchParams('=');
             queryParams.append('slug', selectedSlug);
@@ -42,7 +40,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters, an
       // if there are no listings
     if(anyListings) {
       return (
-        <div className='min-h-screen min-w-full flex items-center justify-center'>
+        <div className='min-h-screen relative min-w-full flex items-center justify-center'>
         <div className="bg-white min-h-full px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
           <div className="max-w-max mx-auto">
             <main className="sm:flex">
@@ -72,7 +70,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({listing, anyFilters, an
     return (
         <>
           <div className="flex flex-col items-center justify-center pt-20">
-          <p className="font-bold text-3xl font-rubik text-gray-900 pb-4">{listingsText}</p>
+          <p className="font-bold text-3xl max-w-xl text-center mx-auto font-rubik text-gray-900 pb-4">{listingsText}</p>
         <div className="flex flex-row flex-wrap	max-w-6xl mx-auto gap-x-20 mb-20">
         {listing?.map((item) => (
           <div 

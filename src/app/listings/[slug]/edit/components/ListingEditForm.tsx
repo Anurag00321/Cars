@@ -400,9 +400,9 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
         </div>
       )}
   </div>
-  <div className="flex justify-center mx-auto sm:justify-end sticky top-0">
+  <div className="flex justify-center mx-auto sm:justify-end sticky top-0 z-10">
       {showSuccess && (
-        <div className="absolute top-0 right-0 p-10 z-10">
+        <div className="absolute top-0 right-0 p-10 pt-20 sm:pt-0 z-10">
           <AlertSuccess />
         </div>
       )}

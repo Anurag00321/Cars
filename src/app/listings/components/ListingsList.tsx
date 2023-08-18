@@ -214,7 +214,7 @@ export default function ListingsList({ initialItems, profile, updatedItems, feat
       {items?.map((item) => (
         <div 
         key={item.id}
-        className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+        className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
           {item.photos.length > 0 ? <img className="h-48 w-full object-cover object-center" src={item.photos[0]} alt="Product Image" />
           : 
           <img className="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1599076311391-28adf17fade5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product Image" />
@@ -222,14 +222,14 @@ export default function ListingsList({ initialItems, profile, updatedItems, feat
           <div className="p-4">
             <h2 
             onClick={() => handleOnClick(item.slug)} 
-            className="mb-2 text-lg font-medium dark:text-white text-gray-900">{item.title}</h2>
-            <h3 className="mb-2 text-md font-medium dark:text-white text-gray-900">{item.year}, {item.fuel}, {item.mileage}</h3>
-            <p className="mb-2 text-base dark:text-gray-300 text-gray-700">{item.body}</p>
+            className="mb-2 text-lg font-medium text-white">{item.title}</h2>
+            <h3 className="mb-2 text-md font-medium text-gray-300 ">{item.year}, {item.fuel}, {item.mileage}</h3>
+            <p className="mb-2 text-base text-white">{item.body}</p>
             <div className="flex items-center justify-between">
-              <p className="mr-2 text-lg font-semibold text-gray-900 dark:text-white justify-items-end ">€{item.price}</p>
+              <p className="mr-2 text-lg font-semibold text-white justify-items-end ">€{item.price}</p>
               <div className="flex">
-              <button onClick={() => handleOnClickEdit(item.slug)}  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 dark:bg-light-green dark:hover:bg-british-green-4 dark:focus:ring-british-green-2">Edit</button>
-              <button onClick={() => handleDelete(item.slug)}  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 md:mr-2 dark:bg-light-green dark:hover:bg-british-green-4 dark:focus:ring-british-green-2">X</button>
+              <button onClick={() => handleOnClickEdit(item.slug)}  className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 bg-light-green hover:bg-british-green-4 focus:ring-british-green-2">Edit</button>
+              <button onClick={() => handleDelete(item.slug)}  className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 md:mr-2 bg-light-green hover:bg-british-green-4 focus:ring-british-green-2">X</button>
               </div>
             </div>
           </div>
@@ -245,20 +245,20 @@ export default function ListingsList({ initialItems, profile, updatedItems, feat
   return (
   <>
   {/* <div className="relative flex flex-col lg:flex-row max-[1074px]:gap-x-10 gap-x-2 xl:gap-x-20 mx-auto"> */}
-  <div className="flex flex-col items-center justify-center pt-28 md:pt-0 xl:pt-0">
-  <p className="pt-32 sm:pt-8 md:pt-16 font-bold text-3xl font-rubik text-gray-900">Featured listings</p>
+  <div className="relative flex flex-col items-center justify-center pt-4">
+  <p className="pt-0 sm:pt-6 md:pt-16 font-bold text-3xl font-rubik text-gray-800">Featured listings</p>
   <div className="relative flex flex-col lg:flex-row gap-x-2 xl:gap-x-20 mx-auto">
   {items.slice(-3)?.map((item) => (
     <div 
     onClick={() => handleOnClick(item.slug)} 
-    key={item.id} className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+    key={item.id} className="cursor-pointer mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-british-green-1 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
       <img className="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1599076311391-28adf17fade5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product Image" />
       <div className="p-4">
-        <h2 className="mb-2 text-lg font-medium dark:text-white text-gray-900">{item.title}</h2>
-        <h3 className="mb-2 text-md font-medium dark:text-white text-gray-900">{item.year}, {item.fuel}, {item.mileage}</h3>
-        <p className="mb-2 text-base dark:text-gray-300 text-gray-700">{item.body}</p>
+        <h2 className="mb-2 text-lg font-medium text-white ">{item.title}</h2>
+        <h3 className="mb-2 text-md font-medium text-gray-300 ">{item.year}, {item.fuel}, {item.mileage}</h3>
+        <p className="mb-2 text-base font-light text-white ">{item.body}</p>
         <div className="flex items-center">
-          <p className="mr-2 text-lg font-semibold text-gray-900 dark:text-white">€{item.price}</p>
+          <p className="mr-2 text-lg font-medium text-gray-200">€{item.price}</p>
         </div>
       </div>
     </div>

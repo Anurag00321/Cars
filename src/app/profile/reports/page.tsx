@@ -81,7 +81,7 @@ export default async function Reports() {
     return (
         <div className="pt-[64px] md:pt-0">
             <Suspense fallback={<LoadingComponent />}>
-            <form action={GetDateFilter} className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8">
+            <form action={GetDateFilter} className="flex flex-wrap items-center h-full max-w-md mx-auto mt-8 px-6">
                 {/* <input name="searchQuery"></input> */}
                 {/* <SelectMenuCustom name="searchQuery" options={dateOptions} /> */}
                 <p className="flex-0 font-rubik font-medium">Pick time period</p>

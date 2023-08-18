@@ -83,6 +83,7 @@ return (
             <div className="relative flex items-center justify-between h-16">
               <div className="relative inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
+              {!sessionStatus &&
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-100 hover:text-white hover:bg-british-green-0 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -91,6 +92,7 @@ return (
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
+                }
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between">
                 <div className="flex-shrink-0 flex items-center">
@@ -106,7 +108,7 @@ return (
                   // unoptimized={true} priority 
                   alt="Logo"
                   onClick={() => router.push('/')}
-                  className="block lg:hidden h-6 w-auto pr-10 cursor-pointer"/>
+                  className={`block lg:hidden h-6 w-auto cursor-pointer ${!sessionStatus ? 'pr-8' : ''}`}/>
                 </div>
                 <div className="hidden sm:flex sm:ml-6">
                   <div className="flex space-x-4">
