@@ -32,14 +32,14 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
     }
   }, [listingEmail])
 
-  const formattedDate = new Intl.DateTimeFormat('en', {
+  const formattedDate = items.length > 0 ? new Intl.DateTimeFormat('en', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric'
-  }).format(new Date(items[0].createdAt));  
-
+  }).format(new Date(items[0].createdAt)) : '';
+  
       // fixes hydration error
     const [isMounted, setIsMounted] = useState(false);
 
