@@ -1,7 +1,7 @@
 import getListings from "../actions/getListings";
 import getListingsCount from "../actions/getListingsCount";
 import ListingsList from "./components/ListingsList"
-import prisma from '../libs/prismadb'
+import {prisma} from '../libs/prismadb'
 import Pagination from "../../../components/pagination";
 import ListingCard from "./components/ListingCard";
 import { Listing } from "@prisma/client";
@@ -27,15 +27,15 @@ export default async function Listings({ searchParams:
     
     const filterData = async () => {
         
-        // if (!currentPage || !pageSize) {
-        //     throw new Error('Invalid currentPage or pageSize values.');
-        // }
+        if (!currentPage || !pageSize) {
+            console.log('Invalid currentPage or pageSize values.');
+        }
 
         const skipCount = (currentPage - 1) * pageSize;
 
-        // if (isNaN(skipCount) || skipCount < 0) {
-        //     throw new Error('Invalid skipCount value.');
-        // }
+        if (isNaN(skipCount) || skipCount < 0) {
+            console.log('Invalid skipCount value.');
+        }
         
         const priceNum = parseInt(priceParam)
 

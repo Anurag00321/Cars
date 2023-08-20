@@ -1,7 +1,5 @@
 // import prismadb from '@/app/libs/prismadb'
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient()
+import { prisma } from '../libs/prismadb'
 
 const getListings = async () => {
 

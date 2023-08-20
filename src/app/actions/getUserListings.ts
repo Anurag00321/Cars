@@ -1,8 +1,6 @@
 // import prismadb from '@/app/libs/prismadb'
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../libs/prismadb'
 import getCurrentUser from './getCurrentUser';
-
-const prisma = new PrismaClient()
 
 const getUserListings = async () => {
 

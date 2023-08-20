@@ -4,9 +4,7 @@
 
 import getCurrentUser from './getCurrentUser';
 // import { getUserEmailData } from "./_actions";
-import { PrismaClient, User } from "@prisma/client";
-
-const prisma = new PrismaClient()
+import { prisma } from '../libs/prismadb'
 
 export const getUserListingsAdmin = async (emailData: any) => {
 
