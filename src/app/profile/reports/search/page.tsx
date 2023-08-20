@@ -1,5 +1,5 @@
 import ListingsList from '@/app/listings/components/ListingsList';
-import prisma from '../../../libs/prismadb'
+import { prisma } from '../../../libs/prismadb'
 import { subDays } from "date-fns";
 import { redirect } from 'next/navigation';
 import InputField from '../../../../../components/inputField';
