@@ -9,7 +9,7 @@ import { createServerContext } from 'react';
 import { headers } from 'next/headers';
 import { redirect, useSearchParams } from "next/navigation";
 import { subDays } from "date-fns";
-import prisma from "@/app/libs/prismadb";
+import { prisma } from "@/app/libs/prismadb";
 import SelectMenuCustom from "../../../../components/selectMenuCustom";
 import LoadingComponent from "@/app/profile/reports/loading";
 import getCurrentUser from "@/app/actions/getCurrentUser";

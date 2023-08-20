@@ -1,7 +1,7 @@
 import getListings from "../actions/getListings";
 import getListingsCount from "../actions/getListingsCount";
 import ListingsList from "./components/ListingsList"
-import {prisma} from '../libs/prismadb'
+import { prisma } from '../libs/prismadb'
 import Pagination from "../../../components/pagination";
 import ListingCard from "./components/ListingCard";
 import { Listing } from "@prisma/client";
@@ -14,7 +14,7 @@ interface ListingsProps {
 }
 
 export default async function Listings({ searchParams: 
-    {page, make: makeParam, model: modelParam, year: yearParam, 
+    {page = "1", make: makeParam, model: modelParam, year: yearParam, 
     price: priceParam, fuel: fuelParam, transmission: transParam
     } }: ListingsProps) {
 
@@ -31,18 +31,22 @@ export default async function Listings({ searchParams:
             console.log('Invalid currentPage or pageSize values.');
         }
 
-        const skipCount = (currentPage - 1) * pageSize;
+        const skipCount = (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : 0)
 
         if (isNaN(skipCount) || skipCount < 0) {
             console.log('Invalid skipCount value.');
         }
+
+        console.log('currentPage:', currentPage)
+        console.log('pageSize:', pageSize)
+        console.log('skipCount:', skipCount)
         
         const priceNum = parseInt(priceParam)
 
-        const totalCount = await prisma.listing.findMany({
-            skip: skipCount,
+        const totalCount = await prisma?.listing.findMany({
+            orderBy: { id: 'desc'},
+            skip: (currentPage - 1) * pageSize,
             take: pageSize,
-            orderBy: { price: 'asc'},
             where: {
                 ...(makeParam && { make: { equals: makeParam } }),
                 ...(modelParam && { model: { equals: modelParam } }),
@@ -56,7 +60,7 @@ export default async function Listings({ searchParams:
         return totalCount
     }
 
-    const listingCount = await prisma.listing.count({
+    const listingCount = await prisma?.listing.count({
         where: {
             ...(makeParam && { make: { equals: makeParam } }),
             ...(modelParam && { model: { equals: modelParam } }),

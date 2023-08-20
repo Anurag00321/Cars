@@ -17,33 +17,16 @@ export default async function Page({
 
     const slugParam = params.slug
 
-    // console.log('slug page slug:', params.slug)
-
-    // let listing = null;
-    // let userEmail = null;
-
-    // console.log('slug page slug:', params.slug);
-
     const listing = await getListingBySlug(slugParam);
     const userEmail = await getEmailBySlug(slugParam);
 
-    // listing = await getListingBySlug(slugParam);
-    // userEmail = await getEmailBySlug(slugParam);
-    // try {
-    //     listing = await getListingBySlug(slugParam);
-    //     userEmail = await getEmailBySlug(slugParam);
+        // if (!listing) {
+        //     console.log('no listing');
+        // }
 
-        if (!listing) {
-            console.log('no listing');
-        }
-
-        if (!userEmail) {
-            console.log('no user Email');
-        }
-
-    // } catch (error) {
-    //     console.log('Error:', error);
-    // }
+        // if (!userEmail) {
+        //     console.log('no user Email');
+        // }
 
     return (
       <div className="pt-[64px] md:pt-0">
