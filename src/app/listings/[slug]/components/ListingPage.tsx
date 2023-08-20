@@ -22,7 +22,15 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
 
   const [items, setItems] = useState(initialItems)
 
-  const userEmail = listingEmail?.email
+  // const userEmail = listingEmail?.email
+
+  const [userEmail, setUserEmail] = useState('')
+
+  useEffect(() => {
+    if(listingEmail !== null) {
+      setUserEmail(listingEmail?.email)
+    }
+  }, [listingEmail])
 
   const formattedDate = new Intl.DateTimeFormat('en', {
     year: 'numeric',
