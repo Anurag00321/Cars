@@ -1,15 +1,9 @@
 import { prisma } from '../libs/prismadb'
-import getCurrentUser from "./getCurrentUser";
 
 const getListingBySlug = async (
   slug: string
 ) => {
   try {
-    const currentUser = await getCurrentUser();
-
-    if (!currentUser?.email) {
-      return null;
-    }
   
     const listing = await prisma.listing.findUnique({
       where: {
@@ -26,16 +20,6 @@ const getListingBySlug = async (
       }
     })
 
-    // const listingData = {
-    //   listing ? [listing] : [],
-    //   listingEmail
-    // }
-
-    // return (listingData);
-    
-    // return listing ? [{ listing, listingEmail }] : [];
-    // return listing ? [[listing], listingEmail] : [];
-    // return { listing, listingEmail };
     return listing ? [listing] : [];
   } catch (error: any) {
     console.log(error)
