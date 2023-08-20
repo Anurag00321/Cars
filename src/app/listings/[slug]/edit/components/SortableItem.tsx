@@ -22,7 +22,7 @@ export const SortableItem = (props: any) => {
   
   return (
     <div className="flex" ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <img className='w-28 h-30 md:w-54 md:h-54 lg:w-60 lg:h-62 border-4 border-dashed border-gray-300' src={props.id}></img>
+      <img className='w-28 h-30 overscroll-none overflow-hidden md:w-54 md:h-54 lg:w-60 lg:h-62 border-4 border-dashed border-gray-300' src={props.id}></img>
     </div>
   );
 }

@@ -488,43 +488,45 @@ export const ListingEditForm: React.FC<EditFormProps> = ({initialItems}) => {
       <InputField label='Power' type="number" value={power} placeholder='Power..' onChange={handlePowerChange} error={(power === '') ? !!inputFieldsError : false}/>
       <InputField label='Price' type="number" value={price} placeholder='Price..' onChange={handlePriceChange} error={(price === '') ? !!inputFieldsError : false}/>
       <div className="sm:col-span-2 md:col-span-2 lg:col-span-3 space-y-8">
-      <InputField label='Title' type="text" value={title} placeholder='Listing title..' onChange={handleTitleChange} error={(title === '') ? !!inputFieldsError : false}/>
-      <InputField label='Description' type="text" value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger error={(description === '') ? !!inputFieldsError : false}/>
-        <SortableContext 
-        items={photos}
-        strategy={horizontalListSortingStrategy}
-        >
-        <div className='flex flex-wrap gap-8 bg-slate-100 px-4 py-6 rounded-md'>
-          {photos.map(photo => <SortableItem key={photo.id} id={photo}/>)}
+        <InputField label='Title' type="text" value={title} placeholder='Listing title..' onChange={handleTitleChange} error={(title === '') ? !!inputFieldsError : false}/>
+        <InputField label='Description' type="text" value={description} placeholder='Description..' onChange={handleDescriptionChange} makeBigger error={(description === '') ? !!inputFieldsError : false}/>
+        <div className='overscroll-none overflow-hidden'>
+          <SortableContext 
+          items={photos}
+          strategy={horizontalListSortingStrategy}
+          >
+          <div className='flex flex-wrap gap-8 bg-slate-100 px-4 py-6 rounded-md'>
+            {photos.map(photo => <SortableItem key={photo.id} id={photo}/>)}
+          </div>
+          </SortableContext>
         </div>
-        </SortableContext>
-        <div className='bg-sky-200 mt-[21rem] pl-2 pb-4 md:pb-0 rounded-xl mx-24 md:mx-64'>
+        <div className='bg-sky-200 mt-[21rem] pl-2 pb-4 md:pb-0 rounded-xl mx-10 sm:mx-24 md:mx-64'>
           <div className="flex w-full h-full flex-col items-center justify-center gap-y-6">
             <p className='pt-2 font-rubik font-normal text-xl text-blue-800'>Upload Photos</p>
             <CldUploadButton
-              options={{ maxFiles: 6 }}
-              onUpload={handleUpload}
-              uploadPreset="yghyzh2p"
-            >
-              <button
-                type="button" 
-                className="text-white flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mb-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                <ArrowUpOnSquareIcon className="h-8 w-8 mr-2 mb-1" aria-hidden="true" />
-                Upload
-              </button>
-            </CldUploadButton>
-          </div>
-          </div>
-        <button
-            onClick={handleSubmit}
-            type="button" 
-            className={`w-full text-white flex items-center justify-center bg-british-green-0 hover:bg-british-green-3 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:focus:ring-blue-800 ${isLoading ? 'cursor-not-allowed opacity-80' : ''}`}
-            disabled={isLoading}
+            options={{ maxFiles: 6 }}
+            onUpload={handleUpload}
+            uploadPreset="yghyzh2p"
           >
-            Submit
-        </button>
-      </div>
+          <button
+            type="button" 
+            className=" text-white flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 mb-4 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+          <ArrowUpOnSquareIcon className="h-8 w-8 mr-2 mb-1" aria-hidden="true" />
+          Upload
+          </button>
+          </CldUploadButton>
+          </div>
+        </div>
+          <button
+              onClick={handleSubmit}
+              type="button" 
+              className={`w-full text-white flex items-center justify-center bg-british-green-0 hover:bg-british-green-3 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-4 md:mr-2 dark:focus:ring-blue-800 ${isLoading ? 'cursor-not-allowed opacity-80' : ''}`}
+              disabled={isLoading}
+            >
+              Submit
+          </button>
+        </div>
       </div>
     </div>
     </DndContext>

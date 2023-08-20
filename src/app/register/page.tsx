@@ -109,7 +109,7 @@ export default function Register(){
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     id="email"
                     disabled={isLoading}
-                    className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                    className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 appearance-none ${
                       emailError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
                     } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
                   />
@@ -126,7 +126,7 @@ export default function Register(){
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     disabled={isLoading}
-                    className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                    className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 appearance-none ${
                       nameError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
                     } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
                   />
@@ -143,7 +143,7 @@ export default function Register(){
                   type={showPassword ? 'text' : 'password'}
                   required
                   disabled={isLoading}
-                  className={`block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                  className={`block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 appearance-none ${
                     passwordError || error ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
                   } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
                 />
@@ -166,7 +166,7 @@ export default function Register(){
                     type={showPassword ? 'text' : 'password'}
                     disabled={isLoading}
                     required
-                    className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                    className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 appearance-none ${
                       passwordConfirmError ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
                     } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
                   />
@@ -176,7 +176,7 @@ export default function Register(){
               <button 
                 onClick={handleRegister}
                 disabled={isLoading}
-                className={`${isLoading ? 'cursor-not-allowed opacity-80' : ''} flex w-full justify-center rounded-md bg-british-green-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-british-green-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}>
+                className={`${isLoading ? 'cursor-not-allowed opacity-80' : ''} flex w-full justify-center rounded-md bg-british-green-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-british-green-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-british-green-1`}>
                   Sign up
               </button>
             </div>

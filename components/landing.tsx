@@ -45,7 +45,7 @@ export const Landing: React.FC<LandingProps> = () => {
                         Say goodbye to the traditional car selling process. 
                         With FlatSix, you can list your used car, attract interested buyers, and seal the deal - all in a few simple steps
                     </p>
-                        <div className="flex justify-center items-center pb-0 sm:pb-12 lg:pb-0 px-6 xl:px-0 sm:block">
+                        <div className="flex justify-center items-center pb-0 sm:pb-12 lg:pb-20 px-6 xl:px-0 sm:block">
                             <button 
                                 onClick={handleCreateOnClick}
                                 className="text-white mt-8 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-6 py-4 text-center sm:mr-4 border border-white bg-transperant hover:bg-british-green-2 dark:focus:ring-british-green-0"

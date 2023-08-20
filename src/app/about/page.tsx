@@ -20,7 +20,7 @@ const About: React.FC = () => {
           </div>
           <Image
             src={aboutPhoto}
-            className="h-[32rem] w-[32rem] object-cover rounded-lg relative"
+            className="h-[26rem] sm:h-[32rem] w-[32rem] object-cover rounded-lg relative"
             alt="Photo for about page"
           />
         </div>

@@ -95,7 +95,7 @@ export default function SignIn(){
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isLoading}
-                  className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                  className={`block  w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 appearance-none ${
                     emailError || error ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
                   } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
                   />
@@ -112,7 +112,7 @@ export default function SignIn(){
                   type={showPassword ? 'text' : 'password'}
                   required
                   disabled={isLoading}
-                  className={`block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ${
+                  className={`block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 appearance-none ${
                     passwordError || error ? 'rounded-md ring-inset-2 ring-2 ring-red-400' : ''
                   } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-british-green-2 sm:text-sm sm:leading-6`}
                 />

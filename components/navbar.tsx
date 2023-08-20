@@ -55,8 +55,7 @@ export const Navbar: React.FC<NavBarProps> = ({currentUser}) => {
       router.prefetch("/signin");
       router.prefetch("/");
     }
-  }, [status, router, sessionStatus, userRole, isAdmin]);
-
+  }, [status, router, sessionStatus, userRole, isAdmin, currentUser]);
   
   const handleLogout = () => {
     signOut()
@@ -190,7 +189,7 @@ return (
                           <a
                             onClick={handleLogout}
                             href=""
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(active ? 'bg-gray-100' : '', 'cursor-pointer block px-4 py-2 text-sm text-gray-700')}
                           >
                             Log out
                           </a>

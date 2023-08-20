@@ -17,18 +17,21 @@ export default async function Page({
 
     const slugParam = params.slug
 
-    console.log('slug page slug:', params.slug)
+    // console.log('slug page slug:', params.slug)
 
-    let listing = null;
-    let userEmail = null;
+    // let listing = null;
+    // let userEmail = null;
 
-    console.log('slug page slug:', params.slug);
+    // console.log('slug page slug:', params.slug);
 
-    listing = await getListingBySlug(slugParam);
-    userEmail = await getEmailBySlug(slugParam);
-    try {
-        listing = await getListingBySlug(slugParam);
-        userEmail = await getEmailBySlug(slugParam);
+    const listing = await getListingBySlug(slugParam);
+    const userEmail = await getEmailBySlug(slugParam);
+
+    // listing = await getListingBySlug(slugParam);
+    // userEmail = await getEmailBySlug(slugParam);
+    // try {
+    //     listing = await getListingBySlug(slugParam);
+    //     userEmail = await getEmailBySlug(slugParam);
 
         if (!listing) {
             console.log('no listing');
@@ -38,11 +41,9 @@ export default async function Page({
             console.log('no user Email');
         }
 
-        // Rest of your code...
-
-    } catch (error) {
-        console.log('Error:', error);
-    }
+    // } catch (error) {
+    //     console.log('Error:', error);
+    // }
 
     return (
       <div className="pt-[64px] md:pt-0">

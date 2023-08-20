@@ -24,6 +24,14 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
 
   const userEmail = listingEmail?.email
 
+  const formattedDate = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  }).format(new Date(items[0].createdAt));  
+
       // fixes hydration error
     const [isMounted, setIsMounted] = useState(false);
 
@@ -42,14 +50,14 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
     {items?.map((item) => (
       <div key={item.id} className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start ">
         <div className="col-span-2">
-        <p className="my-2 font-rubik text-sm font-medium text-gray-600">{item.make}/{item.model}/{item.coupe_type}/Added: {(item.createdAt.toString()).split('GMT+0300 (Eastern European Summer Time)')}</p>
+        <p className="my-2 font-rubik text-sm font-medium text-gray-600">{item.make}/{item.model}/{item.coupe_type}/Added: {formattedDate}</p>
         <h2 className="mb-4 font-rubik text-3xl font-bold text-gray-900">{item.title}</h2>
         </div>
         <p className="ml-2 mt-40 absolute text-lg font-semibold text-gray-900 dark:text-orange-1">€{item.price}</p>
         <ImageGallery listing={items}/>
         <div className="col-span-1 flex flex-col lg:py-20 text-ellipsis">
           <p className="my-6 font-rubik font-bold text-3xl text-gray-800">Summary</p>
-          <div className="grid grid-cols-3 text-md gap-4 font-rubik font-light ">
+          <div className="grid grid-cols-3 text-sm xs:text-md gap-4 font-rubik font-light">
             <p className="">Car type: 
               <span className="text-british-green-4 pl-1 font-bold">{item.coupe_type}</span>
             </p>
@@ -104,7 +112,7 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                  <Menu.Items className="absolute origin-top-left left-0 sm:origin-top-right sm:right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
                     <div className="py-1">
                       <Menu.Item>
                         {({ active }) => (

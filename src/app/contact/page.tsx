@@ -11,7 +11,7 @@ const Contact: React.FC = () => {
         <>
         <Suspense fallback={<LoadingComponent />}>
         <div className="pt-[64px] md:pt-0">
-          <div className="relative bg-gray-100 w-full h-screen">
+          <div className="relative bg-gray-100 w-full min-h-screen">
             <div className="lg:absolute lg:inset-0">
               <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
               <Image 
@@ -21,7 +21,7 @@ const Contact: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="flex h-full items-center relative py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:max-w-7xl lg:mx-auto lg:py-32">
+            <div className="flex h-screen items-center relative py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:max-w-7xl lg:mx-auto lg:py-32">
               <div className="lg:pr-8">
                 <div className="max-w-md mx-auto sm:max-w-lg lg:mx-0 font-rubik">
                   <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Let&apos;s work together</h2>

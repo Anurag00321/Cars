@@ -27,7 +27,15 @@ export default async function Listings({ searchParams:
     
     const filterData = async () => {
         
-        const skipCount = await (currentPage - 1) * pageSize
+        // if (!currentPage || !pageSize) {
+        //     throw new Error('Invalid currentPage or pageSize values.');
+        // }
+
+        const skipCount = (currentPage - 1) * pageSize;
+
+        // if (isNaN(skipCount) || skipCount < 0) {
+        //     throw new Error('Invalid skipCount value.');
+        // }
         
         const priceNum = parseInt(priceParam)
 
