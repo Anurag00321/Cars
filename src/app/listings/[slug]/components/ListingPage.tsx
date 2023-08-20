@@ -32,7 +32,7 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
     }
   }, [listingEmail])
 
-  const formattedDate = items.length > 0 ? new Intl.DateTimeFormat('en', {
+  const formattedDate = items !== null ? new Intl.DateTimeFormat('en', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
