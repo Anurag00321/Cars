@@ -53,7 +53,7 @@ const ListingPage: React.FC<ListingPageProps> = ({initialItems, listingEmail}) =
 
   return (
   <>
-  <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 border border-black border-opacity-10 rounded-xl bg-gray-50">
+  <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 border border-black border-opacity-10 rounded-xl bg-gray-50 appearance-none">
     <div className="">
     {items?.map((item) => (
       <div key={item.id} className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start ">

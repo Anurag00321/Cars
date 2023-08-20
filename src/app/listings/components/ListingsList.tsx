@@ -210,7 +210,7 @@ export default function ListingsList({ initialItems, profile, updatedItems, feat
           </div>
         </Dialog>
       </Transition.Root>
-      <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20">
+      <div className="flex flex-row flex-wrap	max-w-6xl mx-auto mb-20 appearance-none">
       {items?.map((item) => (
         <div 
         key={item.id}
@@ -245,7 +245,7 @@ export default function ListingsList({ initialItems, profile, updatedItems, feat
   return (
   <>
   {/* <div className="relative flex flex-col lg:flex-row max-[1074px]:gap-x-10 gap-x-2 xl:gap-x-20 mx-auto"> */}
-  <div className="relative flex flex-col items-center justify-center pt-4">
+  <div className="relative flex flex-col items-center justify-center pt-4 appearance-none">
   <p className="pt-0 sm:pt-6 md:pt-16 font-bold text-3xl font-rubik text-gray-800">Featured listings</p>
   <div className="relative flex flex-col lg:flex-row gap-x-2 xl:gap-x-20 mx-auto">
   {items.slice(-3)?.map((item) => (
