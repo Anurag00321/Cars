@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import LoadingComponent from "@/app/register/loading";
+import { redirect } from 'next/navigation';
 
 export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +30,8 @@ export default function Register() {
     setError(""),
       setEmailError(""),
       setPasswordError(""),
-      setPasswordConfirmError("");
+      setPasswordConfirmError(""),
+      setNameError("")
   };
 
   const handleRegister = useCallback(async () => {
@@ -55,14 +57,17 @@ export default function Register() {
         setPasswordConfirmError(data.password);
       }
     } finally {
-      if (isLoading == true) {
+      // check if there are any errors - if not the user will be logged in
+      if (isLoading == false && error.length < 1 && emailError.length < 1
+          && nameError.length < 1 && passwordError.length < 1 && passwordConfirmError.length < 1 
+        ) {
+        
         const data = { email, username, password, confirmPassword };
         signIn("credentials", {
           ...data,
-          // redirect: false,
-        });
-        router.push("/");
-        setIsLoading(false);
+          redirect: true,
+          callbackUrl: "/"
+        })
       }
     }
   }, [email, username, password, confirmPassword]);
@@ -77,7 +82,7 @@ export default function Register() {
             </h2>
           </div>
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            {(emailError || passwordError || error) && (
+            {(emailError || passwordError || error || nameError) && (
               <div className="rounded-md bg-red-50 p-4">
                 <div className="flex">
                   <div className="flex-shrink-0">

@@ -31,14 +31,6 @@ export async function POST(request: Request) {
       // return new NextResponse('Missing credentials', { status: 400})
     }
 
-    // if (!email) {
-    //   errorEmail += 'Invalid/missing email address.'
-    // }
-
-    if (!username) {
-      errorUsername += "Please enter a username.";
-    }
-
     if (password !== confirmPassword) {
       errorPassword += "The password confirmation does not match.";
     }
@@ -56,6 +48,30 @@ export async function POST(request: Request) {
       errorPassword = "";
       errorPassword =
         "The password has to be at least 8 characters and match the password confirmation.";
+    }
+
+    const uniqueEmail = await prisma?.user.findUnique({
+      where: {
+        email: email
+      }
+    })
+
+    if (uniqueEmail) {
+      errorEmail = "An account already exists with that name. Please log in."
+    }
+
+    const uniqueUsername = await prisma?.user.findUnique({
+      where: {
+        username: username
+      }
+    })
+
+    if (uniqueUsername) {
+      errorUsername = "Username is already taken. Please choose a different username."
+    }
+
+    if (!username) {
+      errorUsername += "Please enter a username.";
     }
 
     if (
