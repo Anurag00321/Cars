@@ -3,14 +3,14 @@
 
 // import getListingBySlug from "@/app/actions/getListingBySlug";
 // import getListings from "@/app/actions/getListings";
-// import { 
-//     // usePathname, useRouter, 
+// import {
+//     // usePathname, useRouter,
 //     useSearchParams } from 'next/navigation';
 // import { useEffect, useState } from "react";
 // import ListingsList from "../../components/ListingsList";
 
 // export const SlugListingComp = async () => {
-    
+
 //     const searchParams = useSearchParams()
 //     const slug = await searchParams.get(`slug`)
 
@@ -28,7 +28,7 @@
 //     useEffect(() => {
 //         const filteredSlug = items?.filter(item => item.slug == slug);
 //         slug ? setFilteredItems(filteredSlug) : ''
-//     }, [items]);    
+//     }, [items]);
 
 //     const listingBySlug = await getListingBySlug(slug)
 

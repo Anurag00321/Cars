@@ -1,45 +1,44 @@
-'use server'
+"use server";
 
 // import prisma from "@/app/libs/prismadb";
 
-import getCurrentUser from './getCurrentUser';
+import getCurrentUser from "./getCurrentUser";
 // import { getUserEmailData } from "./_actions";
-import { prisma } from '../libs/prismadb'
+import { prisma } from "../libs/prismadb";
 
 export const getUserListingsAdmin = async (emailData: any) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: emailData,
+    },
+    select: {
+      id: true,
+    },
+  });
 
-    const user = await prisma.user.findUnique({
-        where: {
-            email: emailData
+  const userId = user?.id;
+
+  try {
+    const listings = await prisma.listing.findMany({
+      where: {
+        userId: {
+          equals: userId,
         },
-        select: {
-          id: true
-        }
-      })
+      },
+    });
 
-    const userId = user?.id
-    
-    try {
-        const listings = await prisma.listing.findMany({
-            where: {
-                userId: {
-                    equals: userId
-                }
-            },
-        });
+    console.log("test");
 
-        console.log('test')
+    console.log("listings", listings);
 
-        console.log('listings', listings)
+    return listings;
+  } catch (error: any) {
+    console.log(error);
+    return [];
+  }
+};
 
-        return listings;
-    } catch (error: any) {
-        console.log(error)
-        return [];
-    }
-}
-
-export default getUserListingsAdmin
+export default getUserListingsAdmin;
 
 // // import prisma from "@/app/libs/prismadb";
 // import getCurrentUser from './getCurrentUser';
@@ -62,7 +61,7 @@ export default getUserListingsAdmin
 //       })
 
 //     const userId = user?.id
-    
+
 //     try {
 //         const listings = await prisma.listing.findMany({
 //             where: {

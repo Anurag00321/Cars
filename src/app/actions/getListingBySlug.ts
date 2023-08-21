@@ -1,28 +1,25 @@
-import { prisma } from '../libs/prismadb'
+import { prisma } from "../libs/prismadb";
 
-const getListingBySlug = async (
-  slug: string
-) => {
+const getListingBySlug = async (slug: string) => {
   try {
-  
     const listing = await prisma.listing.findUnique({
       where: {
-        slug: slug
+        slug: slug,
       },
     });
-    
+
     const listingEmail = await prisma.user.findUnique({
       where: {
-        id: listing?.userId
+        id: listing?.userId,
       },
       select: {
-        email: true
-      }
-    })
+        email: true,
+      },
+    });
 
     return listing ? [listing] : [];
   } catch (error: any) {
-    console.log(error)
+    console.log(error);
     return null;
   }
 };

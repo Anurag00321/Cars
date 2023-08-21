@@ -7,7 +7,7 @@
 // export const getUsername = async () => {
 //     const { data: session, status } = useSession()
 //     const sessionEmail = session?.user?.email as string
-  
+
 //     if(status == 'authenticated') {
 //       const user = await prisma.user.findUnique({
 //         where: {
@@ -18,7 +18,7 @@
 //         }
 //       })
 //       const username = user?.name
-    
+
 //     return (
 //         username
 //     )

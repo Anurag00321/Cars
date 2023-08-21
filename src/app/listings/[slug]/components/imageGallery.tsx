@@ -1,9 +1,9 @@
-import { Disclosure, RadioGroup, Tab } from '@headlessui/react';
-import { Listing } from '@prisma/client';
-import { useState } from 'react';
+import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
+import { Listing } from "@prisma/client";
+import { useState } from "react";
 
 function classNames(...className: any) {
-  return className.filter(Boolean).join(' ');
+  return className.filter(Boolean).join(" ");
 }
 
 interface ImageGalleryProps {
@@ -14,7 +14,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
   return (
     <>
       <Tab.Group as="div" className="flex flex-col-reverse">
-        <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
+        <div className="mt-6 w-full max-w-2xl mx-auto block lg:max-w-none">
           <Tab.List className="grid grid-cols-4 gap-6">
             {listing.map((item) =>
               item.photos.map((image) => (
@@ -26,19 +26,25 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
                     <>
                       {/* <span className="sr-only">{image.name}</span> */}
                       <span className="absolute inset-0 rounded-md overflow-hidden">
-                        <img src={image} alt="" className="w-full h-full object-center object-cover" />
+                        <img
+                          src={image}
+                          alt=""
+                          className="w-full h-full object-center object-cover"
+                        />
                       </span>
                       <span
                         className={classNames(
-                          selected ? 'ring-british-green-5' : 'ring-transparent',
-                          'absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none'
+                          selected
+                            ? "ring-british-green-5"
+                            : "ring-transparent",
+                          "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none",
                         )}
                         aria-hidden="true"
                       />
                     </>
                   )}
                 </Tab>
-              ))
+              )),
             )}
           </Tab.List>
         </div>
@@ -47,9 +53,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
           {listing.map((item) =>
             item.photos.map((image) => (
               <Tab.Panel key={image}>
-                <img src={image} className="w-full h-full object-center object-cover sm:rounded-lg" />
+                <img
+                  src={image}
+                  className="w-full h-full object-center object-cover sm:rounded-lg"
+                />
               </Tab.Panel>
-            ))
+            )),
           )}
         </Tab.Panels>
       </Tab.Group>

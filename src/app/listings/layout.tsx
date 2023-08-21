@@ -3,18 +3,18 @@ import getListings from "../actions/getListings";
 import ListingsList from "./components/ListingsList";
 
 export default async function ListingsLayout({
-  children
+  children,
 }: {
-  children: React.ReactNode,
+  children: React.ReactNode;
 }) {
   const listings = await getListings();
 
   return (
     <div className="h-full">
-        {/* <ListingsList 
+      {/* <ListingsList 
           initialItems={listings}
         /> */}
-        {children}
-      </div>
+      {children}
+    </div>
   );
 }

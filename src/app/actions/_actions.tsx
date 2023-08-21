@@ -23,7 +23,7 @@
 //     "use server"
 
 //     const searchQuery = formData.get("searchQuery"?.toString())
-    
+
 //     if (searchQuery) {
 //       redirect("/profile/userListings/search?query=" + searchQuery)
 //     }

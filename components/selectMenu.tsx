@@ -1,22 +1,22 @@
-import { Fragment, useState } from 'react';
-import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { Listing } from '@prisma/client';
+import { Fragment, useState } from "react";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { Listing } from "@prisma/client";
 
 function classNames(...className: any) {
-  return className.filter(Boolean).join(' ');
+  return className.filter(Boolean).join(" ");
 }
 
 const Placeholders = [
   {
-    make: 'Make..',
-    model: 'Model..',
-    year: 'Year..',
-    fuel: 'Fuel..',
-    transmission: 'Transmission..',
-    price: 'Price..'
-  }
-]
+    make: "Make..",
+    model: "Model..",
+    year: "Year..",
+    fuel: "Fuel..",
+    transmission: "Transmission..",
+    price: "Price..",
+  },
+];
 
 interface SelectMenuProps {
   data?: Listing[];
@@ -27,8 +27,17 @@ interface SelectMenuProps {
   onClick: (value: string) => void;
 }
 
-export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, value, onChange, onClick }) => {
-  const [selected, setSelected] = useState(value as any || Placeholders?.[0] || data?.[0].id);
+export const SelectMenu: React.FC<SelectMenuProps> = ({
+  data,
+  items,
+  field,
+  value,
+  onChange,
+  onClick,
+}) => {
+  const [selected, setSelected] = useState(
+    (value as any) || Placeholders?.[0] || data?.[0].id,
+  );
   // const [itemsData, setItemsData] = useState(data?.[0] || undefined)
 
   const getFieldContent = (item: Listing, field: keyof Listing) => {
@@ -42,7 +51,8 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
   };
 
   const handleItemClick = (item: Listing | string) => {
-    const selectedValue = typeof item === 'string' ? item : getFieldContent(item as Listing, field);
+    const selectedValue =
+      typeof item === "string" ? item : getFieldContent(item as Listing, field);
     setSelected(selectedValue);
     onChange(selectedValue as string);
     onClick(selectedValue as string);
@@ -54,9 +64,14 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
         <>
           <div className="mt-1 relative">
             <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-british-green-4 focus:border-british-green-4 sm:text-sm">
-              <span className="block truncate">{getFieldContent(selected, field)}</span>
+              <span className="block truncate">
+                {getFieldContent(selected, field)}
+              </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronUpDownIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
               </span>
             </Listbox.Button>
 
@@ -73,8 +88,10 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
                     key={item?.id}
                     className={({ active }) =>
                       classNames(
-                        active ? 'text-white bg-british-green-0' : 'text-gray-900',
-                        'cursor-default select-none relative py-2 pl-3 pr-9'
+                        active
+                          ? "text-white bg-british-green-0"
+                          : "text-gray-900",
+                        "cursor-default select-none relative py-2 pl-3 pr-9",
                       )
                     }
                     value={item}
@@ -82,15 +99,20 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({ data, items, field, valu
                   >
                     {({ selected, active }) => (
                       <>
-                        <span className={classNames(selected ? 'font-semibold' : 'font-normal', 'block truncate')}>
+                        <span
+                          className={classNames(
+                            selected ? "font-semibold" : "font-normal",
+                            "block truncate",
+                          )}
+                        >
                           {getFieldContent(item, field as keyof Listing)}
                         </span>
 
                         {selected ? (
                           <span
                             className={classNames(
-                              active ? 'text-white' : 'text-british-green-0',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
+                              active ? "text-white" : "text-british-green-0",
+                              "absolute inset-y-0 right-0 flex items-center pr-4",
                             )}
                           >
                             <CheckIcon className="h-5 w-5" aria-hidden="true" />

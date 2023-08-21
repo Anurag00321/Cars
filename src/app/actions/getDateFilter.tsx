@@ -4,7 +4,7 @@
 // export const GetDateFilter = async (daysAgo: number) => {
 //   const currentDate = new Date();
 //   const twoWeeksAgo = await subDays(currentDate, 5 | daysAgo);
-  
+
 //   const twoWeeksAgo = currentDate.setDate(currentDate.getDate() - daysAgo)
 //   const twoWeeksAgoString = new Date(twoWeeksAgo)
 
