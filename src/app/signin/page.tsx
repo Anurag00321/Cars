@@ -56,6 +56,16 @@ export default function SignIn() {
       .finally(() => setIsLoading(false));
   };
 
+  const handleTestLogin = () => {
+    setIsLoading(true);
+    signIn("credentials", {
+      email: 'flatsixTest@gmail.com',
+      password: 'testaccount123!',
+      redirect: true,
+      callbackUrl: "/"
+    })
+  }
+
   return (
     <div className="pt-[64px] md:pt-0">
       <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-white">
@@ -139,7 +149,7 @@ export default function SignIn() {
                   </button>
                 </div>
               </div>
-              <div>
+              <div className="flex flex-col gap-y-6 justify-center items-center">
                 <button
                   onClick={handleLogin}
                   disabled={isLoading}
@@ -148,6 +158,15 @@ export default function SignIn() {
                   } flex w-full justify-center rounded-md bg-british-green-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-british-green-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
                 >
                   Log in
+                </button>
+                <button
+                  onClick={handleTestLogin}
+                  disabled={isLoading}
+                  className={`${
+                    isLoading ? "cursor-not-allowed opacity-80" : ""
+                  } flex justify-center rounded-md bg-orange-2 px-3 py-1.5 text-sm font-medium leading-6 text-white shadow-sm hover:bg-orange-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                >
+                  Log in with Test account
                 </button>
               </div>
               <p className="mt-10 text-center text-sm text-gray-500">
