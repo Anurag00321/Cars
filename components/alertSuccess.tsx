@@ -3,7 +3,11 @@
 import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 
-export const AlertSuccess = () => {
+interface AlertProps {
+  field: string
+}
+
+export const AlertSuccess: React.FC<AlertProps> = ({field}) => {
   const [showAlert, setShowAlert] = useState(true);
 
   const dismissAlert = () => {
@@ -21,7 +25,7 @@ export const AlertSuccess = () => {
         </div>
         <div className="ml-3">
           <p className="text-sm font-medium text-green-800">
-            Listing successfully edited
+          Listing successfully edited!
           </p>
         </div>
         <div className="pl-3">

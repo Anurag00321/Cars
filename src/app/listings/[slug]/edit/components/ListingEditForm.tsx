@@ -305,8 +305,8 @@ export const ListingEditForm: React.FC<EditFormProps> = ({ initialItems }) => {
   const handleSubmit = useCallback(async () => {
     console.log("photos", photos);
     setIsLoading(true);
+    setShowSuccess(false)
     resetState();
-
     await axios
       .post("/api/listings/edit", {
         title: `${title}`,
@@ -442,8 +442,8 @@ export const ListingEditForm: React.FC<EditFormProps> = ({ initialItems }) => {
           </div>
           <div className="flex justify-center mx-auto sm:justify-end sticky top-0 z-10">
             {showSuccess && (
-              <div className="absolute top-0 right-0 p-10 pt-20 sm:pt-0 z-10">
-                <AlertSuccess />
+              <div className="absolute top-0 right-0 p-10 pt-20 sm:pt-10 z-10">
+                <AlertSuccess field={"Listing successfully edited!"}/>
               </div>
             )}
           </div>
