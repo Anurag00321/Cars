@@ -1,9 +1,7 @@
 "use client";
 
 import { Listing } from "@prisma/client";
-import { useContext, useState, useEffect, Fragment } from "react";
-import { ListingsFilter, FilterContext } from "../../components/ListingsFilter";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect, Fragment } from "react";
 import ImageGallery from "./imageGallery";
 import { Menu, Transition } from "@headlessui/react";
 
@@ -74,9 +72,6 @@ const ListingPage: React.FC<ListingPageProps> = ({
                   {item.title}
                 </h2>
               </div>
-              <p className="ml-2 mt-40 absolute text-lg font-semibold text-gray-900 dark:text-orange-1">
-                €{item.price}
-              </p>
               <ImageGallery listing={items} />
               <div className="col-span-1 flex flex-col lg:py-20 text-ellipsis">
                 <p className="my-6 font-rubik font-bold text-3xl text-gray-800">
@@ -181,7 +176,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
                                     active
                                       ? "bg-gray-100 text-gray-900"
                                       : "text-gray-700",
-                                    "block px-4 py-2 text-sm cursor-pointer",
+                                    "block px-4 py-2 text-sm cursor-pointer"
                                   )}
                                 >
                                   Email: {`${userEmail}`}

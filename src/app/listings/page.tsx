@@ -36,23 +36,8 @@ export default async function Listings({
   const currentPage = parseInt(page);
 
   const listings = await getListings();
-  // const listingCount = await getListingsCount()
 
   const filterData = async () => {
-    // if (!currentPage || !pageSize) {
-    //     console.log('Invalid currentPage or pageSize values.');
-    // }
-
-    // const skipCount = (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : 0)
-
-    // if (isNaN(skipCount) || skipCount < 0) {
-    //     console.log('Invalid skipCount value.');
-    // }
-
-    // console.log('currentPage:', currentPage)
-    // console.log('pageSize:', pageSize)
-    // console.log('skipCount:', skipCount)
-
     const priceNum = parseInt(priceParam);
 
     const totalCount = await prisma?.listing.findMany({
