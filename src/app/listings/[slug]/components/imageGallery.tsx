@@ -1,6 +1,6 @@
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
+import { Tab } from "@headlessui/react";
 import { Listing } from "@prisma/client";
-import { useState } from "react";
+import Image from "next/image";
 
 function classNames(...className: any) {
   return className.filter(Boolean).join(" ");
@@ -24,11 +24,14 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
                 >
                   {({ selected }) => (
                     <>
-                      {/* <span className="sr-only">{image.name}</span> */}
                       <span className="absolute inset-0 rounded-md overflow-hidden">
-                        <img
+                        <Image
                           src={image}
-                          alt=""
+                          alt="Listing secondary photos"
+                          height={0}
+                          width={0}
+                          sizes="100vw"
+                          objectFit="cover"
                           className="w-full h-full object-center object-cover"
                         />
                       </span>
@@ -37,14 +40,14 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
                           selected
                             ? "ring-british-green-5"
                             : "ring-transparent",
-                          "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none",
+                          "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none"
                         )}
                         aria-hidden="true"
                       />
                     </>
                   )}
                 </Tab>
-              )),
+              ))
             )}
           </Tab.List>
         </div>
@@ -53,12 +56,17 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ listing }) => {
           {listing.map((item) =>
             item.photos.map((image) => (
               <Tab.Panel key={image}>
-                <img
+                <Image
                   src={image}
+                  height={0}
+                  width={0}
+                  sizes="100vw"
+                  objectFit="cover"
                   className="w-full h-full object-center object-cover sm:rounded-lg"
+                  alt="Listing main photo"
                 />
               </Tab.Panel>
-            )),
+            ))
           )}
         </Tab.Panels>
       </Tab.Group>

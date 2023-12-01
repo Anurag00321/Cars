@@ -1,4 +1,3 @@
-import Navbar from "../../../components/navbar";
 import getListings from "../actions/getListings";
 import ListingsList from "./components/ListingsList";
 
