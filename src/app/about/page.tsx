@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import LoadingComponent from "../loading";
-import aboutPhoto from "public/aboutPhoto.jpg";
+import aboutPhoto from "../../../public/aboutPhoto.jpg";
 
 const About: React.FC = () => {
   return (

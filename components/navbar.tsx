@@ -11,7 +11,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import LoadingComponent from "@/app/loading";
 import Image from "next/image";
-import flatsixLogo from "public/flatsixLogo.png";
+import flatsixLogo from "../public/flatsixLogo.png";
 
 interface NavBarProps {
   currentUser: User;
@@ -135,7 +135,7 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                                 ? "bg-british-green-1 text-white"
                                 : "text-gray-100 hover:bg-british-green-1 hover:text-white",
                               "px-3 py-2 rounded-md text-sm font-medium",
-                              sessionStatus ? "hidden" : "",
+                              sessionStatus ? "hidden" : ""
                             )}
                             aria-current={item.current ? "page" : undefined}
                           >
@@ -174,7 +174,7 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                                   href="/profile/listings"
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700",
+                                    "block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
                                   My listings
@@ -189,7 +189,7 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
                                       "block px-4 py-2 text-sm text-gray-700",
-                                      !isAdmin ? "hidden" : "",
+                                      !isAdmin ? "hidden" : ""
                                     )}
                                   >
                                     User listings
@@ -204,7 +204,7 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                                     href="/profile/reports"
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
-                                      "block px-4 py-2 text-sm text-gray-700",
+                                      "block px-4 py-2 text-sm text-gray-700"
                                     )}
                                   >
                                     Reports
@@ -220,7 +220,7 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                                     href=""
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
-                                      "cursor-pointer block px-4 py-2 text-sm text-gray-700",
+                                      "cursor-pointer block px-4 py-2 text-sm text-gray-700"
                                     )}
                                   >
                                     Log out
@@ -247,7 +247,7 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                         item.current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-british-green-0 hover:text-gray-100",
-                        "block px-3 py-2 rounded-md text-base font-medium",
+                        "block px-3 py-2 rounded-md text-base font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}
                     >
