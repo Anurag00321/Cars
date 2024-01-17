@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import LoadingComponent from "@/app/contact/loading";
 import Image from "next/image";
-import contactPhoto from "public/contactPhoto.jpg";
+import contactPhoto from "../../../public/contactPhoto.jpg";
 
 const Contact: React.FC = () => {
   return (

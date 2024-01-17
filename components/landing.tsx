@@ -1,6 +1,6 @@
 "use client";
 
-import landingPhoto from "public/landingPhoto.jpg";
+import landingPhoto from "../public/landingPhoto.jpg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
