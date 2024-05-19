@@ -135,7 +135,7 @@ export const ListingsFilter: React.FC<ListingsFilterProps> = ({
 
   return (
     <FilterContext.Provider value={filteredItems}>
-      <div className="absolute xs:top-[19rem] sm:top-[24rem] md:top-[26rem] lg:top-[45%] lg:bottom-10 2xl:bottom-20 mt-6 inset-0 bottom-10 ">
+      <div className="absolute xs:top-[19rem] sm:top-[24rem] md:top-[26rem] lg:top-[65%] lg:bottom-10 2xl:bottom-20 mt-6 inset-0 bottom-10 ">
         <div className="flex mx-auto max-w-2xl justify-center bg-british-green-3 bg-opacity-100 rounded-lg shadow-lg">
           <div className="grid grid-cols-2 gap-y-4 gap-x-4 max-w-md px-4 py-8 sm:py-16 sm:pt-24">
             <SelectMenu

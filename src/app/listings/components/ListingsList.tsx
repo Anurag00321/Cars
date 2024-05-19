@@ -247,7 +247,7 @@ export default function ListingsList({ initialItems, profile, updatedItems, feat
             <h3 className="mb-2 text-md font-medium text-gray-300 ">{item.year}, {item.fuel}, {item.mileage}</h3>
             <p className="mb-2 text-base text-white">{item.body}</p>
             <div className="flex items-center justify-between">
-              <p className="mr-2 text-lg font-semibold text-white justify-items-end ">€{item.price}</p>
+              <p className="mr-2 text-lg font-semibold text-white justify-items-end ">Rs. {item.price}</p>
               <div className="flex">
               <button onClick={() => handleOnClickEdit(item.slug)}  className="text-white focus:ring-4 focus:outline-none font-bold rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-2 bg-light-green hover:bg-british-green-4 focus:ring-british-green-2">Edit</button>
               <button onClick={() => handleDelete(item.slug)}  className="text-white focus:ring-4 focus:outline-none font-bold rounded-lg text-sm px-3 py-2 text-center mr-2 md:mr-2 bg-light-green hover:bg-british-green-4 focus:ring-british-green-2">X</button>
@@ -282,7 +282,7 @@ export default function ListingsList({ initialItems, profile, updatedItems, feat
         <h3 className="mb-2 text-md font-medium text-gray-300 ">{item.year}, {item.fuel}, {item.mileage}</h3>
         <p className="mb-2 text-base font-light text-white ">{item.body}</p>
         <div className="flex items-center">
-          <p className="mr-2 text-lg font-medium text-gray-200">€{item.price}</p>
+          <p className="mr-2 text-lg font-medium text-gray-200">Rs. {item.price}</p>
         </div>
       </div>
     </div>

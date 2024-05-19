@@ -11,7 +11,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import LoadingComponent from "@/app/loading";
 import Image from "next/image";
-import flatsixLogo from "../public/flatsixLogo.png";
+import cardealerlogo from "../public/cardealerlogo.png";
 
 interface NavBarProps {
   currentUser: User;
@@ -108,18 +108,18 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                     <div className="flex-shrink-0 flex items-center">
                       {/* <p className="cursor-pointer block text-2xl font-semibold whitespace-nowrap dark:text-white" onClick={() => router.push('/')}>FlatSix</p> */}
                       <Image
-                        src={flatsixLogo}
+                        src={cardealerlogo}
                         // unoptimized={true} priority
                         alt="Logo"
                         onClick={() => router.push("/")}
-                        className="hidden lg:block h-6 w-auto cursor-pointer"
+                        className="hidden lg:block h-16 w-36 cursor-pointer"
                       />
                       <Image
-                        src={flatsixLogo}
+                        src={cardealerlogo}
                         // unoptimized={true} priority
                         alt="Logo"
                         onClick={() => router.push("/")}
-                        className={`block lg:hidden h-6 w-auto cursor-pointer ${
+                        className={`block lg:hidden h-16 w-36 cursor-pointer ${
                           !sessionStatus ? "pr-8" : ""
                         }`}
                       />
