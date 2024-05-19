@@ -26,6 +26,8 @@ export const Landing: React.FC<LandingProps> = () => {
 
   const handleCreateOnClick = () => {
     if (status === "authenticated") {
+     
+
       router.push("/listings/create");
     } else {
       router.push("/signin");
@@ -46,15 +48,14 @@ export const Landing: React.FC<LandingProps> = () => {
             Your Car, Your Price, Our Platform
           </p>
           <p className="mt-4 text-sm sm:text-lg font-light px-6 xl:px-0">
-            Say goodbye to the traditional car selling process. With FlatSix,
+            Say goodbye to the traditional car selling process. With CarDealer,
             you can list your used car, attract interested buyers, and seal the
             deal - all in a few simple steps
           </p>
           <div className="flex justify-center items-center pb-0 sm:pb-12 lg:pb-20 px-6 xl:px-0 sm:block">
             <button
               onClick={handleCreateOnClick}
-              className="text-white mt-8 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-md px-6 py-4 text-center sm:mr-4 border border-white bg-transperant hover:bg-british-green-2 dark:focus:ring-british-green-0"
-            >
+              className="mt-8 border border-white rounded-lg px-6 py-4 hover:bg-british-green-2"  >
               Add a listing
             </button>
           </div>

@@ -66,7 +66,7 @@ export const InputField: React.FC<InputField> = ({
         <input
           type={type}
           min={1}
-          max={999999}
+          max={99999999}
           name={label}
           id={label}
           value={value}

@@ -116,6 +116,9 @@ export const GetOptions = () => {
     { id: "37", label: "MINI" },
     { id: "38", label: "Rover" },
     { id: "39", label: "Smart" },
+    {id: "40", label: "Tata"},
+    {id: "41", label: "Mahindra"},
+    {id: "42", label: "Maruti Suzuki"}
   ]);
 
   const [carModels, setCarModel] = useState([
@@ -290,6 +293,16 @@ export const GetOptions = () => {
     { label: "Countryman", id: "168", make: "MINI" },
     { label: "200", id: "169", make: "Rover" },
     { label: "214", id: "170", make: "Rover" },
+    {label: "Tiago", id: "171", make: "Tata"},
+    {label: "Nano", id: "172", make: "Tata"},
+    {label: "Nexon", id: "173", make: "tata"},
+    {label: "Punch", id: "174", make: "Tata"},
+    {label: "Thar", id: "175", make: "Mahindra"},
+    {label: "Bolero", id: "176", make: "Mahindra"},
+    {label: "XUV 700", id: "177", make: "Mahindra"},
+    {label: "Swift", id: "178", make: "Maruti Suzuki"},
+    {label: "Swift Dzire", id: "179", make: "Maruti suzuki"},
+    {label: "WagonR", id: "180", make: "Maruti Suzuki"}
   ]);
 
   return {

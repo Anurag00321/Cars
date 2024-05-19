@@ -119,7 +119,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({
                 <p className="mb-2 text-base text-gray-300">{item.body}</p>
                 <div className="flex items-center">
                   <p className="mr-2 text-lg font-semibold text-white">
-                    €{item.price}
+                    Rs. {item.price}
                   </p>
                 </div>
               </div>
