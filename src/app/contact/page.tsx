@@ -32,11 +32,11 @@ const Contact: React.FC = () => {
                   </p>
                   <h3 className="text-xl font-medium tracking-tight sm:text-2xl mt-6">
                     Email:
-                    <span className="ml-2 font-light">support@flatsix.com</span>
+                    <span className="ml-2 font-light">support@cardealer.com</span>
                   </h3>
                   <h3 className="text-xl font-medium tracking-tight sm:text-2xl mt-6">
                     Phone:
-                    <span className="ml-2 font-light">+11 111 111 111</span>
+                    <span className="ml-2 font-light">+91 1111111111</span>
                   </h3>
                 </div>
               </div>

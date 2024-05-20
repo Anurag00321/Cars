@@ -16,7 +16,7 @@ const About: React.FC = () => {
                 About us
               </h2>
               <h3 className="mt-4 text-xl font-rubik font-medium text-gray-900 sm:mt-3">
-                We are FlatSix, the premier marketplace for buying and selling
+                We are CarDealer, the premier marketplace for buying and selling
                 used cars. List your vehicles easily and connect with potential
                 buyers all around the country.
               </h3>
