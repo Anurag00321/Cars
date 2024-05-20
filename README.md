@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Flatsix - Used Cars Selling Website
 
 ![flatsixLogo7](https://github.com/Vancelott/Flatsix/assets/129599049/1190d29a-c3cc-477d-974d-ba89931178ec)
@@ -99,3 +100,6 @@ View details and images of a specific listing, including car specifications and 
 ## Contributing
 
 Contributions to Flatsix are welcome! If you encounter bugs, have feature suggestions, or want to make improvements, feel free to submit a pull request. Your contributions will help enhance the platform and make it better for everyone.
+=======
+
+>>>>>>> 724d45f043cdad6d3ac4f0cbde5c8926aa0d7fdd

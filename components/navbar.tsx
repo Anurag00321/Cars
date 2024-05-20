@@ -134,7 +134,11 @@ export const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
                               item.current
                                 ? "bg-british-green-1 text-white"
                                 : "text-gray-100 hover:bg-british-green-1 hover:text-white",
+<<<<<<< HEAD
                               "px-3 py-5 rounded-md text-md font-medium",
+=======
+                              "px-3 py-2 rounded-md text-sm font-medium",
+>>>>>>> 724d45f043cdad6d3ac4f0cbde5c8926aa0d7fdd
                               sessionStatus ? "hidden" : ""
                             )}
                             aria-current={item.current ? "page" : undefined}
