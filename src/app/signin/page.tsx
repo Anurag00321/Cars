@@ -59,8 +59,8 @@ export default function SignIn() {
   const handleTestLogin = () => {
     setIsLoading(true);
     signIn("credentials", {
-      email: 'flatsixTest@gmail.com',
-      password: 'testaccount123!',
+      email: 'sanurag4518@gmail.com',
+      password: 'Anurag123',
       redirect: true,
       callbackUrl: "/"
     })
