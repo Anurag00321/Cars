@@ -147,7 +147,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
                   <p className="text-md font-md">{item.body}</p>
                   <div className="pt-8">
                     <p className="mr-2 mt-8 text-xl font-semibold text-orange-4">
-                      €{item.price}
+                      Rs. {item.price}
                     </p>
                     {/* <button className="text-white mt-4 focus:ring-2 focus:outline-none focus:british-green-0 font-medium rounded-lg text-md px-4 py-2 text-center mr-4 md:mr-4 border border-white bg-british-green-1 hover:bg-british-green-2 dark:focus:ring-british-green-0">Contact the seller</button> */}
                     <Menu as="div" className="relative inline-block text-left">
